@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Pixel Labs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=DM+Mono:wght@400;500&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black:  #09070f;
+      --deep:   #0f0a1a;
+      --white:  #f0edf8;
+      --muted:  rgba(240,237,248,0.55);
+      --accent: #b06aff;
+      --grad:   linear-gradient(135deg, #7d03d8 0%, #a757c0 100%);
+      --border: rgba(176,106,255,0.12);
+      --red:    #ff4d4d;
+      --green:  #4dff91;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black); color: var(--white);
+      font-family: 'Inter', sans-serif; font-weight: 300;
+      min-height: 100vh;
+    }
+
+    /* ── LOGIN ─────────────────────────────────────────────── */
+    #login-screen {
+      min-height: 100vh; display: flex;
+      align-items: center; justify-content: center;
+      flex-direction: column; gap: 0;
+      background: radial-gradient(ellipse at 60% 40%, rgba(125,3,216,0.15) 0%, transparent 60%);
+    }
+    .login-box {
+      border: 1px solid var(--border);
+      padding: 3rem 2.5rem; width: 100%; max-width: 400px;
+      background: rgba(15,10,26,0.8); backdrop-filter: blur(12px);
+    }
+    .login-eyebrow {
+      font-family: 'Press Start 2P', monospace; font-size: 0.45rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1.5rem; display: block;
+    }
+    .login-title {
+      font-family: 'Inter', sans-serif; font-weight: 900;
+      font-size: 2rem; letter-spacing: -0.03em;
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .login-sub {
+      font-size: 0.85rem; color: var(--muted); margin-bottom: 2rem;
+    }
+    .field { margin-bottom: 1.2rem; }
+    .field label {
+      display: block; font-family: 'DM Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 0.4rem;
+    }
+    .field input {
+      width: 100%; background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border); color: var(--white);
+      font-family: 'Inter', sans-serif; font-size: 0.95rem;
+      padding: 0.75rem 1rem; outline: none;
+      transition: border-color 0.2s;
+    }
+    .field input:focus { border-color: var(--accent); }
+    .btn-grad {
+      width: 100%; background: var(--grad); color: var(--white);
+      border: none; font-family: 'DM Mono', monospace;
+      font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+      font-weight: 500; padding: 1rem; cursor: pointer;
+      transition: opacity 0.2s, box-shadow 0.2s; margin-top: 0.5rem;
+    }
+    .btn-grad:hover { opacity: 0.85; box-shadow: 0 0 20px rgba(125,3,216,0.4); }
+    .login-error {
+      color: var(--red); font-size: 0.8rem; margin-top: 0.75rem;
+      font-family: 'DM Mono', monospace; display: none;
+    }
+
+    /* ── ADMIN SHELL ───────────────────────────────────────── */
+    #admin-shell { display: none; }
+
+    /* Top bar */
+    .topbar {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(9,7,15,0.92); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar-left { display: flex; align-items: center; gap: 1.5rem; }
+    .topbar-title {
+      font-family: 'Press Start 2P', monospace; font-size: 0.55rem;
+      letter-spacing: 0.1em; color: var(--accent);
+    }
+    .topbar-badge {
+      font-family: 'DM Mono', monospace; font-size: 0.6rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      background: rgba(125,3,216,0.2); border: 1px solid var(--border);
+      color: var(--muted); padding: 0.25rem 0.75rem;
+    }
+    .btn-logout {
+      font-family: 'DM Mono', monospace; font-size: 0.62rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      background: none; border: 1px solid var(--border);
+      color: var(--muted); padding: 0.5rem 1rem; cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-logout:hover { color: var(--red); border-color: var(--red); }
+
+    /* Main layout */
+    .admin-body {
+      display: grid; grid-template-columns: 340px 1fr;
+      gap: 0; min-height: calc(100vh - 57px);
+    }
+
+    /* ── UPLOAD PANEL ──────────────────────────────────────── */
+    .upload-panel {
+      background: var(--deep);
+      border-right: 1px solid var(--border);
+      padding: 2rem;
+      position: sticky; top: 57px;
+      height: calc(100vh - 57px);
+      overflow-y: auto;
+    }
+    .panel-title {
+      font-family: 'Press Start 2P', monospace; font-size: 0.48rem;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);
+      margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;
+    }
+    .panel-title::before {
+      content: ''; display: block; width: 20px; height: 1px; background: var(--grad);
+    }
+
+    .drop-zone {
+      border: 1px dashed rgba(176,106,255,0.3);
+      padding: 2.5rem 1.5rem; text-align: center;
+      cursor: pointer; transition: border-color 0.2s, background 0.2s;
+      margin-bottom: 1.5rem; position: relative;
+    }
+    .drop-zone:hover, .drop-zone.dragover {
+      border-color: var(--accent); background: rgba(176,106,255,0.06);
+    }
+    .drop-zone input[type="file"] {
+      position: absolute; inset: 0; opacity: 0; cursor: pointer;
+    }
+    .drop-icon { font-size: 2rem; margin-bottom: 0.75rem; opacity: 0.5; }
+    .drop-text {
+      font-family: 'DM Mono', monospace; font-size: 0.62rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--muted); line-height: 1.8;
+    }
+    .drop-preview {
+      margin-bottom: 1.5rem; display: none;
+      position: relative; border: 1px solid var(--border);
+    }
+    .drop-preview img, .drop-preview video {
+      width: 100%; max-height: 180px; object-fit: cover; display: block;
+    }
+    .drop-preview-remove {
+      position: absolute; top: 0.5rem; right: 0.5rem;
+      background: rgba(9,7,15,0.8); border: 1px solid var(--border);
+      color: var(--muted); font-size: 0.7rem; width: 26px; height: 26px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: color 0.2s;
+    }
+    .drop-preview-remove:hover { color: var(--red); }
+
+    .upload-fields { display: flex; flex-direction: column; gap: 1rem; }
+    .upload-fields select {
+      width: 100%; background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border); color: var(--white);
+      font-family: 'Inter', sans-serif; font-size: 0.9rem;
+      padding: 0.7rem 1rem; outline: none; transition: border-color 0.2s;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23b06aff' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 1rem center;
+    }
+    .upload-fields select:focus { border-color: var(--accent); }
+    .upload-fields select option { background: #1a0a2e; }
+
+    .btn-upload {
+      width: 100%; background: var(--grad); color: var(--white);
+      border: none; font-family: 'Press Start 2P', monospace;
+      font-size: 0.45rem; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 1rem; cursor: pointer; transition: opacity 0.2s, box-shadow 0.2s;
+      margin-top: 0.5rem;
+    }
+    .btn-upload:hover:not(:disabled) { opacity: 0.85; box-shadow: 0 0 20px rgba(125,3,216,0.4); }
+    .btn-upload:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* Status messages */
+    .status-msg {
+      margin-top: 1rem; padding: 0.75rem 1rem;
+      font-family: 'DM Mono', monospace; font-size: 0.65rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      display: none; line-height: 1.6;
+    }
+    .status-msg.success { background: rgba(77,255,145,0.08); border: 1px solid rgba(77,255,145,0.2); color: var(--green); }
+    .status-msg.error   { background: rgba(255,77,77,0.08);  border: 1px solid rgba(255,77,77,0.2);  color: var(--red); }
+    .status-msg.loading { background: rgba(176,106,255,0.08); border: 1px solid var(--border); color: var(--accent); }
+
+    /* Progress bar */
+    .progress-bar {
+      height: 2px; background: var(--border); margin-top: 1rem; display: none;
+    }
+    .progress-bar-fill {
+      height: 100%; background: var(--grad); width: 0%;
+      transition: width 0.3s;
+    }
+
+    /* ── PORTFOLIO GRID ────────────────────────────────────── */
+    .grid-panel { padding: 2rem; overflow-y: auto; }
+    .grid-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;
+    }
+    .grid-title {
+      font-family: 'Press Start 2P', monospace; font-size: 0.48rem;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .grid-title::before { content: ''; display: block; width: 20px; height: 1px; background: var(--grad); }
+    .item-count {
+      font-family: 'DM Mono', monospace; font-size: 0.62rem;
+      color: var(--muted); letter-spacing: 0.1em;
+    }
+    .filter-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .filter-tab {
+      font-family: 'DM Mono', monospace; font-size: 0.6rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      background: none; border: 1px solid var(--border);
+      color: var(--muted); padding: 0.4rem 0.9rem; cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-tab:hover, .filter-tab.active {
+      border-color: var(--accent); color: var(--accent);
+    }
+
+    .admin-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    .admin-item {
+      border: 1px solid var(--border); position: relative;
+      background: var(--deep); overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .admin-item:hover { border-color: rgba(176,106,255,0.3); }
+    .admin-item-thumb {
+      aspect-ratio: 4/3; overflow: hidden; position: relative;
+    }
+    .admin-item-thumb img,
+    .admin-item-thumb video {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .admin-item-info {
+      padding: 0.75rem 1rem;
+      border-top: 1px solid var(--border);
+    }
+    .admin-item-cat {
+      font-family: 'Press Start 2P', monospace; font-size: 0.38rem;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);
+      margin-bottom: 0.35rem;
+    }
+    .admin-item-title {
+      font-weight: 600; font-size: 0.85rem;
+      letter-spacing: -0.01em; white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis;
+    }
+    .admin-item-actions {
+      display: flex; gap: 0.5rem; padding: 0.5rem 1rem 0.75rem;
+    }
+    .btn-delete {
+      font-family: 'DM Mono', monospace; font-size: 0.58rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      background: none; border: 1px solid rgba(255,77,77,0.2);
+      color: rgba(255,77,77,0.6); padding: 0.35rem 0.75rem; cursor: pointer;
+      transition: all 0.2s; flex: 1;
+    }
+    .btn-delete:hover { border-color: var(--red); color: var(--red); background: rgba(255,77,77,0.06); }
+
+    .empty-grid {
+      grid-column: 1/-1; text-align: center;
+      padding: 5rem 2rem;
+    }
+    .empty-grid-icon { font-size: 3rem; opacity: 0.2; margin-bottom: 1rem; }
+    .empty-grid-text {
+      font-family: 'DM Mono', monospace; font-size: 0.65rem;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+      line-height: 1.8;
+    }
+
+    /* Token settings */
+    .settings-row {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 1.5rem 2rem; border-top: 1px solid var(--border);
+      background: var(--deep);
+    }
+    .settings-row label {
+      font-family: 'DM Mono', monospace; font-size: 0.6rem;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+      white-space: nowrap;
+    }
+    .settings-row input {
+      flex: 1; background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border); color: var(--white);
+      font-family: 'DM Mono', monospace; font-size: 0.65rem;
+      padding: 0.5rem 0.75rem; outline: none; transition: border-color 0.2s;
+    }
+    .settings-row input:focus { border-color: var(--accent); }
+    .btn-save-token {
+      font-family: 'DM Mono', monospace; font-size: 0.6rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      background: var(--grad); color: var(--white); border: none;
+      padding: 0.5rem 1rem; cursor: pointer; white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .btn-save-token:hover { opacity: 0.85; }
+
+    /* Responsive */
+    @media (max-width: 800px) {
+      .admin-body { grid-template-columns: 1fr; }
+      .upload-panel { position: static; height: auto; }
+      .topbar { padding: 1rem 1.5rem; }
+      .grid-panel { padding: 1.5rem; }
+      .upload-panel { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── LOGIN SCREEN ─────────────────────────────────────────── -->
+<div id="login-screen">
+  <div class="login-box">
+    <span class="login-eyebrow">Pixel Labs Admin</span>
+    <h1 class="login-title">Welcome Back</h1>
+    <p class="login-sub">Sign in to manage your portfolio.</p>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="loginPassword" placeholder="Enter password" onkeydown="if(event.key==='Enter')doLogin()" />
+    </div>
+    <button class="btn-grad" onclick="doLogin()">Sign In</button>
+    <p class="login-error" id="loginError">Incorrect password. Try again.</p>
+  </div>
+</div>
+
+<!-- ── ADMIN SHELL ───────────────────────────────────────────── -->
+<div id="admin-shell">
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-title">Pixel Labs</span>
+      <span class="topbar-badge">Portfolio Admin</span>
+    </div>
+    <button class="btn-logout" onclick="doLogout()">Sign Out</button>
+  </div>
+
+  <!-- Token settings bar -->
+  <div class="settings-row">
+    <label>GitHub Token</label>
+    <input type="password" id="ghToken" placeholder="Paste your GitHub personal access token" />
+    <button class="btn-save-token" onclick="saveToken()">Save</button>
+  </div>
+
+  <!-- Admin body -->
+  <div class="admin-body">
+
+    <!-- Upload panel -->
+    <div class="upload-panel">
+      <p class="panel-title">Add New Project</p>
+
+      <div class="drop-zone" id="dropZone">
+        <input type="file" id="fileInput" accept="image/*,video/*" />
+        <div class="drop-icon">⬆</div>
+        <p class="drop-text">Click or drag & drop<br>Image or Video file</p>
+      </div>
+
+      <div class="drop-preview" id="dropPreview">
+        <div class="drop-preview-remove" onclick="clearFile()">✕</div>
+      </div>
+
+      <div class="upload-fields">
+        <div class="field">
+          <label>Project Title</label>
+          <input type="text" id="uploadTitle" placeholder="e.g. Brand Refresh for Acme Co." />
+        </div>
+        <div class="field">
+          <label>Category</label>
+          <select id="uploadCategory">
+            <option value="photography">Photography</option>
+            <option value="graphic-design">Graphic Design</option>
+            <option value="video">Video</option>
+            <option value="web-design">Web Design</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="btn-upload" id="uploadBtn" onclick="uploadItem()">Upload to Portfolio</button>
+
+      <div class="progress-bar" id="progressBar">
+        <div class="progress-bar-fill" id="progressFill"></div>
+      </div>
+      <div class="status-msg" id="statusMsg"></div>
+    </div>
+
+    <!-- Portfolio grid -->
+    <div class="grid-panel">
+      <div class="grid-header">
+        <div>
+          <div class="grid-title">Current Portfolio</div>
+          <div class="item-count" id="itemCount">Loading...</div>
+        </div>
+        <div class="filter-tabs" id="filterTabs">
+          <button class="filter-tab active" data-filter="all">All</button>
+          <button class="filter-tab" data-filter="photography">Photography</button>
+          <button class="filter-tab" data-filter="graphic-design">Graphic Design</button>
+          <button class="filter-tab" data-filter="video">Video</button>
+          <button class="filter-tab" data-filter="web-design">Web Design</button>
+        </div>
+      </div>
+      <div class="admin-grid" id="adminGrid"></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // ── CONFIG ──────────────────────────────────────────────────
+  const REPO_OWNER  = 'PixelLabs-Co';
+  const REPO_NAME   = 'pixelabs-site';
+  const BRANCH      = 'main';
+  const PASSWORD    = 'Nbafan24!';
+  const PROJECTS_PATH = 'projects.json';
+
+  // ── AUTH ────────────────────────────────────────────────────
+  function doLogin() {
+    const pw = document.getElementById('loginPassword').value;
+    if (pw === PASSWORD) {
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('admin-shell').style.display = 'block';
+      const savedToken = localStorage.getItem('pl_gh_token') || '';
+      document.getElementById('ghToken').value = savedToken;
+      loadPortfolio();
+    } else {
+      document.getElementById('loginError').style.display = 'block';
+    }
+  }
+
+  function doLogout() {
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('admin-shell').style.display = 'none';
+    document.getElementById('loginPassword').value = '';
+  }
+
+  function saveToken() {
+    const token = document.getElementById('ghToken').value.trim();
+    localStorage.setItem('pl_gh_token', token);
+    showStatus('Token saved!', 'success');
+    setTimeout(() => hideStatus(), 2000);
+  }
+
+  function getToken() {
+    return document.getElementById('ghToken').value.trim() || localStorage.getItem('pl_gh_token') || '';
+  }
+
+  // ── FILE HANDLING ───────────────────────────────────────────
+  let selectedFile = null;
+  let selectedFileB64 = null;
+
+  const dropZone = document.getElementById('dropZone');
+  const fileInput = document.getElementById('fileInput');
+
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault(); dropZone.classList.remove('dragover');
+    if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
+  });
+  fileInput.addEventListener('change', () => { if (fileInput.files[0]) handleFile(fileInput.files[0]); });
+
+  function handleFile(file) {
+    selectedFile = file;
+    const reader = new FileReader();
+    reader.onload = e => {
+      selectedFileB64 = e.target.result.split(',')[1];
+      const preview = document.getElementById('dropPreview');
+      preview.style.display = 'block';
+      // Remove old media
+      const old = preview.querySelector('img, video');
+      if (old) old.remove();
+      const removeBtn = preview.querySelector('.drop-preview-remove');
+      if (file.type.startsWith('video')) {
+        const vid = document.createElement('video');
+        vid.src = e.target.result; vid.muted = true; vid.controls = true;
+        preview.insertBefore(vid, removeBtn);
+      } else {
+        const img = document.createElement('img');
+        img.src = e.target.result;
+        preview.insertBefore(img, removeBtn);
+      }
+      dropZone.style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function clearFile() {
+    selectedFile = null; selectedFileB64 = null;
+    document.getElementById('dropPreview').style.display = 'none';
+    dropZone.style.display = 'block';
+    fileInput.value = '';
+  }
+
+  // ── GITHUB API ──────────────────────────────────────────────
+  async function ghGet(path) {
+    const res = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}?ref=${BRANCH}`, {
+      headers: { Authorization: `token ${getToken()}`, Accept: 'application/vnd.github.v3+json' }
+    });
+    if (res.status === 404) return null;
+    if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
+    return res.json();
+  }
+
+  async function ghPut(path, contentB64, message, sha) {
+    const body = { message, content: contentB64, branch: BRANCH };
+    if (sha) body.sha = sha;
+    const res = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `token ${getToken()}`,
+        Accept: 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    });
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.message || `GitHub error: ${res.status}`);
+    }
+    return res.json();
+  }
+
+  async function ghDelete(path, message, sha) {
+    const res = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `token ${getToken()}`,
+        Accept: 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ message, sha, branch: BRANCH })
+    });
+    if (!res.ok) throw new Error(`GitHub delete error: ${res.status}`);
+    return res.json();
+  }
+
+  // ── LOAD PORTFOLIO ──────────────────────────────────────────
+  let portfolioItems = [];
+  let projectsSha = null;
+  let activeFilter = 'all';
+
+  async function loadPortfolio() {
+    try {
+      const data = await ghGet(PROJECTS_PATH);
+      if (data) {
+        projectsSha = data.sha;
+        portfolioItems = JSON.parse(atob(data.content.replace(/\n/g, '')));
+      } else {
+        portfolioItems = [];
+        projectsSha = null;
+      }
+    } catch(e) {
+      portfolioItems = [];
+    }
+    renderAdminGrid();
+  }
+
+  // ── UPLOAD ──────────────────────────────────────────────────
+  async function uploadItem() {
+    const title = document.getElementById('uploadTitle').value.trim();
+    const category = document.getElementById('uploadCategory').value;
+    const token = getToken();
+
+    if (!token) { showStatus('Please enter your GitHub token above.', 'error'); return; }
+    if (!selectedFile) { showStatus('Please select a file first.', 'error'); return; }
+    if (!title) { showStatus('Please enter a project title.', 'error'); return; }
+
+    setProgress(0);
+    showStatus('Uploading file to GitHub...', 'loading');
+    document.getElementById('uploadBtn').disabled = true;
+
+    try {
+      // 1. Upload the image/video file
+      const ext = selectedFile.name.split('.').pop();
+      const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 40);
+      const timestamp = Date.now();
+      const filePath = `portfolio-assets/${slug}-${timestamp}.${ext}`;
+
+      setProgress(30);
+      await ghPut(filePath, selectedFileB64, `Add portfolio asset: ${title}`);
+      setProgress(60);
+
+      // 2. Build the public URL for the file
+      const fileUrl = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${filePath}`;
+
+      // 3. Update projects.json
+      const newItem = {
+        id: timestamp,
+        title,
+        category,
+        src: fileUrl,
+        type: selectedFile.type.startsWith('video') ? 'video' : 'image',
+        addedAt: new Date().toISOString()
+      };
+      portfolioItems.unshift(newItem);
+
+      const updatedJson = btoa(unescape(encodeURIComponent(JSON.stringify(portfolioItems, null, 2))));
+      setProgress(85);
+      const result = await ghPut(PROJECTS_PATH, updatedJson, `Add portfolio item: ${title}`, projectsSha);
+      projectsSha = result.content.sha;
+      setProgress(100);
+
+      showStatus(`✓ "${title}" added to portfolio! Live in ~30 seconds.`, 'success');
+      clearFile();
+      document.getElementById('uploadTitle').value = '';
+      renderAdminGrid();
+
+    } catch(err) {
+      showStatus(`Error: ${err.message}`, 'error');
+    } finally {
+      document.getElementById('uploadBtn').disabled = false;
+      setTimeout(() => { setProgress(0); document.getElementById('progressBar').style.display = 'none'; }, 3000);
+    }
+  }
+
+  // ── DELETE ──────────────────────────────────────────────────
+  async function deleteItem(id) {
+    if (!confirm('Remove this item from your portfolio?')) return;
+    const token = getToken();
+    if (!token) { showStatus('Please enter your GitHub token above.', 'error'); return; }
+
+    const item = portfolioItems.find(i => i.id === id);
+    if (!item) return;
+
+    showStatus('Removing item...', 'loading');
+
+    try {
+      // Delete the asset file from GitHub
+      const filePath = item.src.replace(`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/`, '');
+      try {
+        const fileData = await ghGet(filePath);
+        if (fileData) await ghDelete(filePath, `Remove portfolio asset: ${item.title}`, fileData.sha);
+      } catch(e) { /* file may not exist, continue */ }
+
+      // Update projects.json
+      portfolioItems = portfolioItems.filter(i => i.id !== id);
+      const updatedJson = btoa(unescape(encodeURIComponent(JSON.stringify(portfolioItems, null, 2))));
+      const result = await ghPut(PROJECTS_PATH, updatedJson, `Remove portfolio item: ${item.title}`, projectsSha);
+      projectsSha = result.content.sha;
+
+      showStatus(`"${item.title}" removed.`, 'success');
+      renderAdminGrid();
+      setTimeout(() => hideStatus(), 3000);
+
+    } catch(err) {
+      showStatus(`Error: ${err.message}`, 'error');
+    }
+  }
+
+  // ── RENDER GRID ─────────────────────────────────────────────
+  function renderAdminGrid() {
+    const grid = document.getElementById('adminGrid');
+    const filtered = activeFilter === 'all' ? portfolioItems : portfolioItems.filter(i => i.category === activeFilter);
+    const catLabels = { 'photography':'Photography','graphic-design':'Graphic Design','video':'Video','web-design':'Web Design' };
+
+    document.getElementById('itemCount').textContent = `${portfolioItems.length} item${portfolioItems.length !== 1 ? 's' : ''} total`;
+    grid.innerHTML = '';
+
+    if (filtered.length === 0) {
+      grid.innerHTML = `<div class="empty-grid"><div class="empty-grid-icon">◈</div><p class="empty-grid-text">No items yet.<br>Upload your first project →</p></div>`;
+      return;
+    }
+
+    filtered.forEach(item => {
+      const el = document.createElement('div');
+      el.className = 'admin-item';
+      const media = item.type === 'video'
+        ? `<video src="${item.src}" muted loop style="width:100%;height:100%;object-fit:cover;"></video>`
+        : `<img src="${item.src}" alt="${item.title}" />`;
+      el.innerHTML = `
+        <div class="admin-item-thumb">${media}</div>
+        <div class="admin-item-info">
+          <div class="admin-item-cat">${catLabels[item.category] || item.category}</div>
+          <div class="admin-item-title">${item.title}</div>
+        </div>
+        <div class="admin-item-actions">
+          <button class="btn-delete" onclick="deleteItem(${item.id})">✕ Remove</button>
+        </div>`;
+      if (item.type === 'video') {
+        const vid = el.querySelector('video');
+        el.addEventListener('mouseenter', () => vid.play());
+        el.addEventListener('mouseleave', () => { vid.pause(); vid.currentTime = 0; });
+      }
+      grid.appendChild(el);
+    });
+  }
+
+  // Filter tabs
+  document.querySelectorAll('.filter-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeFilter = btn.dataset.filter;
+      renderAdminGrid();
+    });
+  });
+
+  // ── UI HELPERS ──────────────────────────────────────────────
+  function showStatus(msg, type) {
+    const el = document.getElementById('statusMsg');
+    el.textContent = msg; el.className = `status-msg ${type}`; el.style.display = 'block';
+  }
+  function hideStatus() {
+    document.getElementById('statusMsg').style.display = 'none';
+  }
+  function setProgress(pct) {
+    const bar = document.getElementById('progressBar');
+    const fill = document.getElementById('progressFill');
+    if (pct > 0) bar.style.display = 'block';
+    fill.style.width = pct + '%';
+  }
+</script>
+</body>
+</html>

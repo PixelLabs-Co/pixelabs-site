@@ -1119,6 +1119,16 @@
     var items = [];
     var activeFilter = 'all';
 
+    // Load projects from GitHub raw content
+    function loadProjects() {
+      var url = 'https://raw.githubusercontent.com/PixelLabs-Co/pixelabs-site/main/projects.json?cb=' + Date.now();
+      fetch(url)
+        .then(function(r) { return r.ok ? r.json() : []; })
+        .then(function(data) { items = data || []; renderGrid(); })
+        .catch(function() { items = []; renderGrid(); });
+    }
+    loadProjects();
+
     function categoryLabel(cat) {
       var labels = { 'photography': 'Photography', 'graphic-design': 'Graphic Design', 'video': 'Video', 'web-design': 'Web Design' };
       return labels[cat] || cat;
