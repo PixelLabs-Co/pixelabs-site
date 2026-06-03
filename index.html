@@ -248,7 +248,7 @@
     /* ABOUT */
     .about-grid {
       display: grid; grid-template-columns: 1fr 1fr;
-      gap: 5rem; align-items: center;
+      gap: 5rem; align-items: start;
     }
     .about-headline {
       font-family: var(--serif-display);
@@ -296,10 +296,7 @@
       font-family: var(--serif-display); font-size: 10rem; font-weight: 900;
       letter-spacing: -0.05em; color: rgba(125,3,216,0.1); line-height: 1; user-select: none;
     }
-    .about-visual-glow {
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse at center, rgba(125,3,216,0.15) 0%, transparent 70%);
-    }
+    .about-visual-glow { display: none; }
     .about-visual-badge {
       position: absolute; bottom: 2rem; right: 2rem;
       background: var(--grad); color: var(--white);
@@ -459,18 +456,6 @@
       border-bottom: none !important;
       width: auto !important;
       color: var(--white) !important;
-    }
-
-    @media (max-width: 1100px) and (min-width: 901px) {
-      nav { padding: 1.2rem 2rem; }
-      .hero { padding: 9rem 2rem 5rem; }
-      .section { padding: 6rem 2rem; }
-      .hero-headline { font-size: clamp(4rem, 10vw, 9rem); }
-      .services-grid { grid-template-columns: repeat(2, 1fr); }
-      .about-grid { gap: 3rem; }
-      .about-visual { max-width: 300px; }
-      .pricing-row { padding: 1.75rem 2rem; }
-      footer { padding: 2rem 2rem; }
     }
 
     @media (max-width: 900px) {
@@ -671,7 +656,6 @@
         <a href="#contact" class="btn-primary" style="margin-top:1rem; display:inline-block;">Get in Touch</a>
         <div class="about-stat-row">
           <div><div class="stat-num">7+</div><div class="stat-label">Years Experience</div></div>
-          <div><div class="stat-num">3</div><div class="stat-label">Core Disciplines</div></div>
           <div><div class="stat-num">PDX</div><div class="stat-label">Based In</div></div>
         </div>
       </div>
