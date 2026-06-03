@@ -772,13 +772,23 @@
     }
         @media (max-width: 480px)  {    #portfolio-page .portfolio-grid { columns: 1; }    #portfolio-page .empty-state { grid-template-columns: 1fr; }
     }
+
+    .back-btn {
+      font-family: 'DM Mono', monospace; font-size: 0.7rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      background: none; border: 1px solid var(--border);
+      color: var(--muted); padding: 0.55rem 1.1rem;
+      cursor: pointer; transition: color 0.2s, border-color 0.2s;
+      margin-bottom: 2rem; display: inline-block;
+    }
+    .back-btn:hover { color: var(--accent); border-color: var(--accent); }
+
   </style>
 </head>
 <body>
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 
-  <div id="main-page">
   <!-- NAV -->
   <nav>
     <a href="#" class="nav-logo">
@@ -807,6 +817,7 @@
     <a href="mailto:info@pixelabs.co?subject=Start%20a%20Project" class="mobile-drawer-cta drawer-link">Start a Project</a>
   </div>
 
+  <div id="main-page">
   <!-- HERO -->
   <section class="hero">
     <div class="hero-glow"></div>
@@ -981,7 +992,8 @@
   <!-- HERO -->
   <section class="portfolio-hero">
     <div class="hero-glow"></div>
-    <p class="portfolio-eyebrow">Pixel Labs — Selected Work</p>
+    <button onclick="showPage('main')" class="back-btn">← Back</button>
+  <p class="portfolio-eyebrow">Pixel Labs — Selected Work</p>
     <h1 class="portfolio-headline">Our<br><span class="grad-text">Work.</span></h1>
     <p class="portfolio-desc">A collection of graphic design, photography, video, and web projects — built for brands that want to look sharp and move fast.</p>
 
@@ -1095,7 +1107,7 @@
     document.querySelectorAll('a[href="portfolio.html"]').forEach(function(link) {
       link.addEventListener('click', function(e) {
         e.preventDefault();
-        history.pushState(null, '', '#portfolio');
+        try { history.pushState(null, '', '#portfolio'); } catch(e) {}
         showPage('portfolio');
       });
     });
