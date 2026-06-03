@@ -543,203 +543,133 @@
       .services-grid { gap: 1px; }
     }
 
+
     /* ===== PORTFOLIO PAGE STYLES ===== */
     #portfolio-page { display: none; }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --black:  #09070f;
-      --deep:   #0f0a1a;
-      --white:  #f0edf8;
-      --muted:  rgba(240,237,248,0.55);
-      --accent: #b06aff;
-      --accent2:#7d03d8;
-      --border: rgba(176,106,255,0.12);
-      --grad:   linear-gradient(135deg, #7d03d8 0%, #a757c0 100%);
-      --body:   'Inter', sans-serif;
-      --mono:   'DM Mono', monospace;
-    }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--black); color: var(--white);
-      font-family: var(--body); font-weight: 300;
-      overflow-x: hidden; cursor: none;
-    }
-
-    /* Cursor */
-    .cursor { position: fixed; width: 10px; height: 10px; background: var(--accent); border-radius: 50%; pointer-events: none; z-index: 9999; mix-blend-mode: screen; }
-    .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid var(--accent); border-radius: 50%; pointer-events: none; z-index: 9998; opacity: 0.4; transition: width 0.3s, height 0.3s, opacity 0.3s; }
-
-    /* Noise */
+    #portfolio-page /* Cursor */
+    .cursor { position: fixed; width: 10px; height: 10px; background: var(--accent); border-radius: 50%; pointer-events: none; z-index: 9999; mix-blend-mode: screen; }    #portfolio-page .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid var(--accent); border-radius: 50%; pointer-events: none; z-index: 9998; opacity: 0.4; transition: width 0.3s, height 0.3s, opacity 0.3s; }    #portfolio-page /* Noise */
     body::before {
       content: ''; position: fixed; inset: 0;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
       pointer-events: none; z-index: 1000; opacity: 0.5;
-    }
-
-    /* NAV */
+    }    #portfolio-page /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: 1.2rem 3rem;
       border-bottom: 1px solid var(--border);
       background: rgba(9,7,15,0.88); backdrop-filter: blur(14px);
-    }
-    .nav-logo { display: block; height: 36px; width: auto; }
-    .nav-logo svg { height: 100%; width: auto; }
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-links a {
+    }    #portfolio-page .nav-logo { display: block; height: 36px; width: auto; }    #portfolio-page .nav-logo svg { height: 100%; width: auto; }    #portfolio-page .nav-links { display: flex; gap: 2.5rem; list-style: none; }    #portfolio-page .nav-links a {
       font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em;
       text-transform: uppercase; color: rgba(240,237,248,0.45);
       text-decoration: none; transition: color 0.2s;
-    }
-    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
-    .nav-cta {
+    }    #portfolio-page .nav-links a:hover, #portfolio-page .nav-links a.active { color: var(--accent); }    #portfolio-page .nav-cta {
       font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em;
       text-transform: uppercase; font-weight: 500;
       background: var(--grad); color: var(--white);
       border: none; padding: 0.6rem 1.4rem; cursor: none;
       text-decoration: none; transition: opacity 0.2s, box-shadow 0.2s;
-    }
-    .nav-cta:hover { opacity: 0.85; box-shadow: 0 0 20px rgba(125,3,216,0.5); }
-
-    /* Hamburger */
+    }    #portfolio-page .nav-cta:hover { opacity: 0.85; box-shadow: 0 0 20px rgba(125,3,216,0.5); }    #portfolio-page /* Hamburger */
     .nav-hamburger {
       display: none; flex-direction: column; justify-content: center; gap: 5px;
       width: 36px; height: 36px; cursor: pointer; background: none; border: none;
       padding: 4px; z-index: 200;
-    }
-    .nav-hamburger span {
+    }    #portfolio-page .nav-hamburger span {
       display: block; width: 100%; height: 1.5px;
       background: var(--white); border-radius: 2px;
       transition: transform 0.3s, opacity 0.3s;
-    }
-    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
-    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-
-    /* Mobile drawer */
+    }    #portfolio-page .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }    #portfolio-page .nav-hamburger.open span:nth-child(2) { opacity: 0; }    #portfolio-page .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }    #portfolio-page /* Mobile drawer */
     .mobile-drawer {
       display: none; position: fixed; inset: 0; z-index: 90;
       background: rgba(9,7,15,0.97); backdrop-filter: blur(16px);
       flex-direction: column; align-items: center; justify-content: center;
       opacity: 0; pointer-events: none; transition: opacity 0.3s;
-    }
-    .mobile-drawer.open { opacity: 1; pointer-events: all; }
-    .mobile-drawer a {
+    }    #portfolio-page .mobile-drawer.open { opacity: 1; pointer-events: all; }    #portfolio-page .mobile-drawer a {
       font-family: 'Inter', sans-serif; font-weight: 900;
       font-size: clamp(2.5rem, 10vw, 3.5rem); letter-spacing: -0.03em;
       text-transform: uppercase; color: var(--white); text-decoration: none;
       padding: 0.6rem 0; transition: color 0.2s;
       border-bottom: 1px solid var(--border); width: 80%; text-align: center;
-    }
-    .mobile-drawer a:last-child { border-bottom: none; }
-    .mobile-drawer a:hover { color: var(--accent); }
-    .mobile-drawer-cta {
+    }    #portfolio-page .mobile-drawer a:last-child { border-bottom: none; }    #portfolio-page .mobile-drawer a:hover { color: var(--accent); }    #portfolio-page .mobile-drawer-cta {
       margin-top: 2.5rem; background: var(--grad) !important;
       font-size: 0.8rem !important; font-weight: 500 !important;
       letter-spacing: 0.1em !important; padding: 1rem 2.5rem !important;
       border-bottom: none !important; width: auto !important; color: var(--white) !important;
-    }
-
-    /* HERO */
+    }    #portfolio-page /* HERO */
     .portfolio-hero {
       padding: 10rem 3rem 4rem;
       position: relative; overflow: hidden;
-    }
-    .hero-glow {
+    }    #portfolio-page .hero-glow {
       position: absolute; top: -10%; right: -15%; width: 700px; height: 700px;
       background: radial-gradient(circle, rgba(125,3,216,0.18) 0%, transparent 65%);
       pointer-events: none;
-    }
-    .portfolio-eyebrow {
+    }    #portfolio-page .portfolio-eyebrow {
       font-family: 'Press Start 2P', monospace; font-size: 0.5rem;
       letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent);
       margin-bottom: 1.5rem;
       opacity: 0; animation: fadeUp 0.7s 0.1s forwards;
-    }
-    .portfolio-headline {
+    }    #portfolio-page .portfolio-headline {
       font-family: 'Inter', sans-serif; font-weight: 900;
       font-size: clamp(3.5rem, 9vw, 9rem); line-height: 0.88;
       letter-spacing: -0.04em; text-transform: uppercase;
       opacity: 0; animation: fadeUp 0.8s 0.25s forwards;
       margin-bottom: 1.5rem;
-    }
-    .portfolio-headline .grad-text {
+    }    #portfolio-page .portfolio-headline .grad-text {
       background: var(--grad);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
-    }
-    .portfolio-desc {
+    }    #portfolio-page .portfolio-desc {
       max-width: 520px; font-size: 1rem; line-height: 1.7; color: var(--muted);
       opacity: 0; animation: fadeUp 0.8s 0.4s forwards;
       margin-bottom: 3rem;
-    }
-
-    /* FILTER TABS */
+    }    #portfolio-page /* FILTER TABS */
     .filter-row {
       display: flex; gap: 0.5rem; flex-wrap: wrap;
       opacity: 0; animation: fadeUp 0.8s 0.5s forwards;
       margin-bottom: 3rem;
-    }
-    .filter-btn {
+    }    #portfolio-page .filter-btn {
       font-family: 'Press Start 2P', monospace; font-size: 0.45rem;
       letter-spacing: 0.08em; text-transform: uppercase;
       background: none; border: 1px solid var(--border);
       color: var(--muted); padding: 0.65rem 1.2rem;
       cursor: pointer; transition: all 0.2s;
-    }
-    .filter-btn:hover, .filter-btn.active {
+    }    #portfolio-page .filter-btn:hover, #portfolio-page .filter-btn.active {
       border-color: var(--accent); color: var(--accent);
       background: rgba(176,106,255,0.08);
-    }
-    .filter-btn.active {
+    }    #portfolio-page .filter-btn.active {
       background: var(--grad); color: var(--white); border-color: transparent;
       -webkit-text-fill-color: var(--white);
-    }
-
-    /* GRID */
+    }    #portfolio-page /* GRID */
     .portfolio-grid {
       padding: 0 3rem 6rem;
       columns: 3; column-gap: 1.5rem;
-    }
-    .portfolio-item {
+    }    #portfolio-page .portfolio-item {
       break-inside: avoid; margin-bottom: 1.5rem;
       position: relative; overflow: hidden;
       border: 1px solid var(--border);
       cursor: pointer;
       transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .portfolio-item:hover {
+    }    #portfolio-page .portfolio-item:hover {
       transform: translateY(-4px);
       box-shadow: 0 12px 40px rgba(125,3,216,0.25);
-    }
-    .portfolio-item img,
-    .portfolio-item video {
+    }    #portfolio-page .portfolio-item img, #portfolio-page .portfolio-item video {
       width: 100%; display: block;
       transition: transform 0.4s;
-    }
-    .portfolio-item:hover img,
-    .portfolio-item:hover video { transform: scale(1.03); }
-    .portfolio-item-overlay {
+    }    #portfolio-page .portfolio-item:hover img, #portfolio-page .portfolio-item:hover video { transform: scale(1.03); }    #portfolio-page .portfolio-item-overlay {
       position: absolute; inset: 0;
       background: linear-gradient(to top, rgba(9,7,15,0.92) 0%, transparent 55%);
       opacity: 0; transition: opacity 0.3s;
       display: flex; flex-direction: column;
       justify-content: flex-end; padding: 1.5rem;
-    }
-    .portfolio-item:hover .portfolio-item-overlay { opacity: 1; }
-    .item-category {
+    }    #portfolio-page .portfolio-item:hover .portfolio-item-overlay { opacity: 1; }    #portfolio-page .item-category {
       font-family: 'Press Start 2P', monospace; font-size: 0.42rem;
       letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);
       margin-bottom: 0.5rem;
-    }
-    .item-title {
+    }    #portfolio-page .item-title {
       font-family: 'Inter', sans-serif; font-weight: 900;
       font-size: 1.1rem; letter-spacing: -0.02em;
       text-transform: uppercase; color: var(--white);
-    }
-
-    /* Placeholder cards */
+    }    #portfolio-page /* Placeholder cards */
     .placeholder-card {
       background: var(--deep);
       display: flex; flex-direction: column;
@@ -747,94 +677,101 @@
       gap: 1rem; text-align: center;
       padding: 3rem 2rem; min-height: 220px;
       border: 1px dashed rgba(176,106,255,0.2);
-    }
-    .placeholder-icon {
+    }    #portfolio-page .placeholder-icon {
       font-size: 2rem; opacity: 0.3;
-    }
-    .placeholder-label {
+    }    #portfolio-page .placeholder-label {
       font-family: 'Press Start 2P', monospace; font-size: 0.45rem;
       letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
       line-height: 1.8;
-    }
-
-    /* LIGHTBOX */
+    }    #portfolio-page /* LIGHTBOX */
     .lightbox {
       position: fixed; inset: 0; z-index: 500;
       background: rgba(9,7,15,0.96); backdrop-filter: blur(16px);
       display: flex; align-items: center; justify-content: center;
       opacity: 0; pointer-events: none; transition: opacity 0.3s;
-    }
-    .lightbox.open { opacity: 1; pointer-events: all; }
-    .lightbox-inner {
+    }    #portfolio-page .lightbox.open { opacity: 1; pointer-events: all; }    #portfolio-page .lightbox-inner {
       max-width: 90vw; max-height: 90vh; position: relative;
-    }
-    .lightbox-inner img,
-    .lightbox-inner video {
+    }    #portfolio-page .lightbox-inner img, #portfolio-page .lightbox-inner video {
       max-width: 90vw; max-height: 80vh;
       object-fit: contain; display: block;
-    }
-    .lightbox-close {
+    }    #portfolio-page .lightbox-close {
       position: absolute; top: -2.5rem; right: 0;
       background: none; border: none; color: var(--white);
       font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em;
       text-transform: uppercase; cursor: pointer; opacity: 0.6;
       transition: opacity 0.2s;
-    }
-    .lightbox-close:hover { opacity: 1; }
-    .lightbox-caption {
+    }    #portfolio-page .lightbox-close:hover { opacity: 1; }    #portfolio-page .lightbox-caption {
       margin-top: 1rem; text-align: center;
-    }
-    .lightbox-caption .item-category { display: block; margin-bottom: 0.3rem; }
-    .lightbox-caption .item-title { font-size: 1.3rem; }
-    .upload-submit:hover { opacity: 0.85; }
-
-    /* EMPTY STATE */
+    }    #portfolio-page .lightbox-caption .item-category { display: block; margin-bottom: 0.3rem; }    #portfolio-page .lightbox-caption .item-title { font-size: 1.3rem; }    #portfolio-page /* UPLOAD PANEL */
+    .upload-panel {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 200;
+    }    #portfolio-page .upload-toggle {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: var(--grad); border: none;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 1.4rem;
+      box-shadow: 0 4px 24px rgba(125,3,216,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }    #portfolio-page .upload-toggle:hover { transform: scale(1.1); box-shadow: 0 6px 32px rgba(125,3,216,0.6); }    #portfolio-page .upload-drawer {
+      position: absolute; bottom: 64px; right: 0;
+      background: var(--deep); border: 1px solid var(--border);
+      padding: 1.5rem; width: 280px;
+      opacity: 0; pointer-events: none;
+      transform: translateY(10px); transition: opacity 0.25s, transform 0.25s;
+    }    #portfolio-page .upload-drawer.open { opacity: 1; pointer-events: all; transform: translateY(0); }    #portfolio-page .upload-drawer-title {
+      font-family: 'Press Start 2P', monospace; font-size: 0.45rem;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);
+      margin-bottom: 1.2rem;
+    }    #portfolio-page .upload-field { margin-bottom: 1rem; }    #portfolio-page .upload-field label {
+      display: block; font-family: var(--mono); font-size: 0.65rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 0.4rem;
+    }    #portfolio-page .upload-field input[type="text"], #portfolio-page .upload-field select {
+      width: 100%; background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border); color: var(--white);
+      font-family: var(--body); font-size: 0.85rem;
+      padding: 0.5rem 0.75rem; outline: none;
+      transition: border-color 0.2s;
+    }    #portfolio-page .upload-field input[type="text"]:focus, #portfolio-page .upload-field select:focus { border-color: var(--accent); }    #portfolio-page .upload-field select option { background: var(--deep); }    #portfolio-page .upload-drop {
+      border: 1px dashed rgba(176,106,255,0.3);
+      padding: 1.5rem; text-align: center;
+      transition: border-color 0.2s, background 0.2s;
+      margin-bottom: 1rem; cursor: pointer;
+    }    #portfolio-page .upload-drop:hover, #portfolio-page .upload-drop.dragover {
+      border-color: var(--accent); background: rgba(176,106,255,0.06);
+    }    #portfolio-page .upload-drop p {
+      font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted); line-height: 1.8;
+    }    #portfolio-page .upload-drop input[type="file"] {
+      display: none;
+    }    #portfolio-page .upload-submit {
+      width: 100%; background: var(--grad); color: var(--white); border: none;
+      font-family: 'Press Start 2P', monospace; font-size: 0.45rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.85rem; cursor: pointer; transition: opacity 0.2s;
+    }    #portfolio-page .upload-submit:hover { opacity: 0.85; }    #portfolio-page /* EMPTY STATE */
     .empty-state {
       padding: 0 3rem 6rem;
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
-    }
-
-    /* FOOTER */
+    }    #portfolio-page /* FOOTER */
     footer {
       border-top: 1px solid var(--border); padding: 2.5rem 3rem;
       display: flex; align-items: center; justify-content: space-between;
       font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
       text-transform: uppercase; color: rgba(240,237,248,0.3);
-    }
-    footer a { color: rgba(240,237,248,0.3); text-decoration: none; transition: color 0.2s; }
-    footer a:hover { color: var(--accent); }
-    .footer-links { display: flex; gap: 2rem; }
+    }    #portfolio-page footer a { color: rgba(240,237,248,0.3); text-decoration: none; transition: color 0.2s; }    #portfolio-page footer a:hover { color: var(--accent); }    #portfolio-page .footer-links { display: flex; gap: 2rem; }
 
     /* ANIMATIONS */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(28px); }
       to   { opacity: 1; transform: translateY(0); }
-    }
-    .reveal { opacity: 0; transform: translateY(38px); transition: opacity 0.7s, transform 0.7s; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+    }    #portfolio-page .reveal { opacity: 0; transform: translateY(38px); transition: opacity 0.7s, transform 0.7s; }    #portfolio-page .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* RESPONSIVE */
-    @media (max-width: 900px) {
-      .cursor, .cursor-ring { display: none; }
-      body { cursor: auto; }
-      a, button { cursor: pointer; }
-      nav { padding: 1rem 1.5rem; }
-      .nav-links, .nav-cta { display: none; }
-      .nav-hamburger { display: flex; }
-      .mobile-drawer { display: flex; }
-      .nav-logo { height: 28px; }
-      .portfolio-hero { padding: 7rem 1.5rem 3rem; }
-      .portfolio-grid { columns: 2; padding: 0 1.5rem 4rem; }
-      .empty-state { grid-template-columns: repeat(2, 1fr); padding: 0 1.5rem 4rem; }
-      .filter-row { gap: 0.4rem; }
-      footer { flex-direction: column; gap: 1.2rem; text-align: center; padding: 2rem 1.5rem; }
-      .footer-links { flex-wrap: wrap; justify-content: center; }
+        @media (max-width: 900px)  {    #portfolio-page .cursor, #portfolio-page .cursor-ring { display: none; }    #portfolio-page a, #portfolio-page button { cursor: pointer; }    #portfolio-page nav { padding: 1rem 1.5rem; }    #portfolio-page .nav-links, #portfolio-page .nav-cta { display: none; }    #portfolio-page .nav-hamburger { display: flex; }    #portfolio-page .mobile-drawer { display: flex; }    #portfolio-page .nav-logo { height: 28px; }    #portfolio-page .portfolio-hero { padding: 7rem 1.5rem 3rem; }    #portfolio-page .portfolio-grid { columns: 2; padding: 0 1.5rem 4rem; }    #portfolio-page .empty-state { grid-template-columns: repeat(2, 1fr); padding: 0 1.5rem 4rem; }    #portfolio-page .filter-row { gap: 0.4rem; }    #portfolio-page footer { flex-direction: column; gap: 1.2rem; text-align: center; padding: 2rem 1.5rem; }    #portfolio-page .footer-links { flex-wrap: wrap; justify-content: center; }    #portfolio-page .upload-panel { bottom: 1.5rem; right: 1.5rem; }
     }
-    @media (max-width: 480px) {
-      .portfolio-grid { columns: 1; }
-      .empty-state { grid-template-columns: 1fr; }
+        @media (max-width: 480px)  {    #portfolio-page .portfolio-grid { columns: 1; }    #portfolio-page .empty-state { grid-template-columns: 1fr; }
     }
-
   </style>
 </head>
 <body>
@@ -1085,7 +1022,7 @@
     </div>
     <div class="placeholder-card">
       <div class="placeholder-icon">◈</div>
-      <p class="placeholder-label">More work<br>coming soon</p>
+      <p class="placeholder-label">Upload your<br>first project →</p>
     </div>
   </div>
 
@@ -1101,4 +1038,195 @@
     </div>
   </div>
 
->
+  <!-- UPLOAD FAB -->
+  <div class="upload-panel">
+    <div class="upload-drawer" id="uploadDrawer">
+      <p class="upload-drawer-title">Add Project</p>
+      <div class="upload-field">
+        <label>Project Title</label>
+        <input type="text" id="uploadTitle" placeholder="e.g. Brand Refresh for Acme Co." />
+      </div>
+      <div class="upload-field">
+        <label>Category</label>
+        <select id="uploadCategory">
+          <option value="photography">Photography</option>
+          <option value="graphic-design">Graphic Design</option>
+          <option value="video">Video</option>
+          <option value="web-design">Web Design</option>
+        </select>
+      </div>
+      <div class="upload-drop" id="uploadDrop">
+        <input type="file" id="uploadFile" accept="image/*,video/*" />
+        <p>Click or drag & drop<br>Image or Video</p>
+      </div>
+      <button class="upload-submit" id="uploadSubmit">Add to Portfolio</button>
+    </div>
+    <button class="upload-toggle" id="uploadToggle" title="Add project">＋</button>
+  </div>
+  </div><!-- /#portfolio-page -->
+
+  <script>
+
+    // ===== PAGE ROUTING =====
+    function showPage(page) {
+      var mainEl = document.getElementById('main-page');
+      var portEl = document.getElementById('portfolio-page');
+      if (page === 'portfolio') {
+        mainEl.style.display = 'none';
+        portEl.style.display = 'block';
+        document.title = 'Portfolio — Pixel Labs';
+        window.scrollTo(0, 0);
+        renderGrid();
+      } else {
+        mainEl.style.display = '';
+        portEl.style.display = 'none';
+        document.title = 'Pixel Labs — Design That Scales';
+      }
+    }
+
+    function handleRouting() {
+      if (window.location.hash === '#portfolio') {
+        showPage('portfolio');
+      } else {
+        showPage('main');
+      }
+    }
+
+    document.querySelectorAll('a[href="portfolio.html"]').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        history.pushState(null, '', '#portfolio');
+        showPage('portfolio');
+      });
+    });
+
+    window.addEventListener('popstate', handleRouting);
+    handleRouting();
+
+    // ===== PORTFOLIO LOGIC =====
+    var items = [];
+    var activeFilter = 'all';
+
+    function categoryLabel(cat) {
+      var labels = { 'photography': 'Photography', 'graphic-design': 'Graphic Design', 'video': 'Video', 'web-design': 'Web Design' };
+      return labels[cat] || cat;
+    }
+
+    function renderGrid() {
+      var grid = document.getElementById('portfolioGrid');
+      var empty = document.getElementById('emptyState');
+      if (!grid) return;
+      var filtered = activeFilter === 'all' ? items : items.filter(function(i) { return i.category === activeFilter; });
+      grid.innerHTML = '';
+      if (items.length === 0) {
+        empty.style.display = 'grid';
+        grid.style.display = 'none';
+        return;
+      }
+      empty.style.display = 'none';
+      grid.style.display = '';
+      filtered.forEach(function(item) {
+        var el = document.createElement('div');
+        el.className = 'portfolio-item';
+        if (item.type === 'video') {
+          el.innerHTML = '<video src="' + item.src + '" muted loop playsinline></video><div class="portfolio-item-overlay"><div class="item-category">' + categoryLabel(item.category) + '</div><div class="item-title">' + item.title + '</div></div>';
+          var vid = el.querySelector('video');
+          vid.addEventListener('mouseenter', function() { vid.play(); });
+          vid.addEventListener('mouseleave', function() { vid.pause(); vid.currentTime = 0; });
+        } else {
+          el.innerHTML = '<img src="' + item.src + '" alt="' + item.title + '" loading="lazy" /><div class="portfolio-item-overlay"><div class="item-category">' + categoryLabel(item.category) + '</div><div class="item-title">' + item.title + '</div></div>';
+        }
+        el.addEventListener('click', function() { openLightbox(item); });
+        grid.appendChild(el);
+      });
+    }
+
+    // Filter buttons
+    document.querySelectorAll('.filter-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        activeFilter = btn.dataset.filter;
+        renderGrid();
+      });
+    });
+
+    // Lightbox
+    function openLightbox(item) {
+      var lb = document.getElementById('lightbox');
+      var media = document.getElementById('lightboxMedia');
+      document.getElementById('lightboxCategory').textContent = categoryLabel(item.category);
+      document.getElementById('lightboxTitle').textContent = item.title;
+      media.innerHTML = item.type === 'video'
+        ? '<video src="' + item.src + '" controls autoplay style="max-width:90vw;max-height:75vh;"></video>'
+        : '<img src="' + item.src + '" alt="' + item.title + '" />';
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    document.getElementById('lightboxClose').addEventListener('click', function() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+      document.getElementById('lightboxMedia').innerHTML = '';
+    });
+
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if (e.target === document.getElementById('lightbox')) {
+        document.getElementById('lightbox').classList.remove('open');
+        document.body.style.overflow = '';
+        document.getElementById('lightboxMedia').innerHTML = '';
+      }
+    });
+
+    // Hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const drawer = document.getElementById('mobileDrawer');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      drawer.classList.toggle('open');
+      document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+    });
+    document.querySelectorAll('.drawer-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        drawer.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    function animateCursor() {
+      cursor.style.left = (mx - 5) + 'px';
+      cursor.style.top  = (my - 5) + 'px';
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.left = (rx - 18) + 'px';
+      ring.style.top  = (ry - 18) + 'px';
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        ring.style.width = '60px'; ring.style.height = '60px'; ring.style.opacity = '0.7';
+      });
+      el.addEventListener('mouseleave', () => {
+        ring.style.width = '36px'; ring.style.height = '36px'; ring.style.opacity = '0.4';
+      });
+    });
+
+    const reveals = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>
