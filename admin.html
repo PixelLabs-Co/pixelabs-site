@@ -291,33 +291,6 @@
       line-height: 1.8;
     }
 
-    /* Token settings */
-    .settings-row {
-      display: flex; align-items: center; gap: 0.75rem;
-      padding: 1.5rem 2rem; border-top: 1px solid var(--border);
-      background: var(--deep);
-    }
-    .settings-row label {
-      font-family: 'DM Mono', monospace; font-size: 0.6rem;
-      letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
-      white-space: nowrap;
-    }
-    .settings-row input {
-      flex: 1; background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border); color: var(--white);
-      font-family: 'DM Mono', monospace; font-size: 0.65rem;
-      padding: 0.5rem 0.75rem; outline: none; transition: border-color 0.2s;
-    }
-    .settings-row input:focus { border-color: var(--accent); }
-    .btn-save-token {
-      font-family: 'DM Mono', monospace; font-size: 0.6rem;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      background: var(--grad); color: var(--white); border: none;
-      padding: 0.5rem 1rem; cursor: pointer; white-space: nowrap;
-      transition: opacity 0.2s;
-    }
-    .btn-save-token:hover { opacity: 0.85; }
-
     /* Responsive */
     @media (max-width: 800px) {
       .admin-body { grid-template-columns: 1fr; }
@@ -355,13 +328,6 @@
       <span class="topbar-badge">Portfolio Admin</span>
     </div>
     <button class="btn-logout" onclick="doLogout()">Sign Out</button>
-  </div>
-
-  <!-- Token settings bar -->
-  <div class="settings-row">
-    <label>GitHub Token</label>
-    <input type="password" id="ghToken" placeholder="Paste your GitHub personal access token" />
-    <button class="btn-save-token" onclick="saveToken()">Save</button>
   </div>
 
   <!-- Admin body -->
@@ -433,6 +399,7 @@
   const BRANCH      = 'main';
   const PASSWORD    = 'Nbafan24!';
   const PROJECTS_PATH = 'projects.json';
+  const GH_TOKEN = 'PASTE_NEW_TOKEN_HERE';
 
   // ── AUTH ────────────────────────────────────────────────────
   function doLogin() {
@@ -440,8 +407,7 @@
     if (pw === PASSWORD) {
       document.getElementById('login-screen').style.display = 'none';
       document.getElementById('admin-shell').style.display = 'block';
-      const savedToken = localStorage.getItem('pl_gh_token') || '';
-      document.getElementById('ghToken').value = savedToken;
+
       loadPortfolio();
     } else {
       document.getElementById('loginError').style.display = 'block';
@@ -454,16 +420,7 @@
     document.getElementById('loginPassword').value = '';
   }
 
-  function saveToken() {
-    const token = document.getElementById('ghToken').value.trim();
-    localStorage.setItem('pl_gh_token', token);
-    showStatus('Token saved!', 'success');
-    setTimeout(() => hideStatus(), 2000);
-  }
-
-  function getToken() {
-    return document.getElementById('ghToken').value.trim() || localStorage.getItem('pl_gh_token') || '';
-  }
+  function getToken() { return GH_TOKEN; }
 
   // ── FILE HANDLING ───────────────────────────────────────────
   let selectedFile = null;
