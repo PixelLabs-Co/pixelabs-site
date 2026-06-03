@@ -494,8 +494,10 @@
       .service-title { font-size: 1.4rem; }
 
       /* About */
-      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; display: grid; }
+      .about-grid .reveal:first-child { order: 2; }
       .about-visual {
+        order: 1;
         display: block;
         max-width: 260px;
         aspect-ratio: 1/1;
