@@ -1128,7 +1128,7 @@
           var resources = data.resources || [];
           var catTags = ['photography','graphic-design','video','web-design'];
           items = resources.map(function(r) {
-            var cat = (r.tags && r.tags.find(function(t) { return catTags.indexOf(t) !== -1; })) || 'photography';
+            var cat = (r.tags && r.tags.find(function(t) { return t !== 'pixelabs' && catTags.indexOf(t) !== -1; })) || 'photography';
             return {
               src: 'https://res.cloudinary.com/pixellabs/image/upload/' + r.public_id,
               type: r.resource_type === 'video' ? 'video' : 'image',
