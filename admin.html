@@ -380,17 +380,24 @@
       const data = await res.json();
       setProgress(100);
 
-      // Save delete token for later deletion
-      if (data.delete_token) {
-        const tokens = JSON.parse(localStorage.getItem('pl_delete_tokens') || '{}');
-        tokens[data.public_id] = data.delete_token;
-        localStorage.setItem('pl_delete_tokens', JSON.stringify(tokens));
-      }
+      // Immediately add to local grid without waiting for Cloudinary cache
+      const newItem = {
+        public_id: data.public_id,
+        src: `https://res.cloudinary.com/${CLOUD}/image/upload/${data.public_id}`,
+        type: selectedFile.type.startsWith('video') ? 'video' : 'image',
+        title: title,
+        category: category,
+        embed: null,
+        platform: null,
+        tags: [category, 'pixelabs'],
+        created_at: new Date().toISOString()
+      };
+      allItems.unshift(newItem);
+      renderGrid();
 
       showStatus(`✓ "${title}" is live on your portfolio!`, 'success');
       clearFile();
       document.getElementById('uploadTitle').value = '';
-      await loadPortfolio();
 
     } catch(err) {
       showStatus('Error: ' + err.message, 'error');
@@ -569,11 +576,25 @@
 
       const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD}/image/upload`, { method: 'POST', body: fd });
       if (!res.ok) throw new Error('Failed to save video');
+      const vdata = await res.json();
+
+      // Immediately add to local grid
+      allItems.unshift({
+        public_id: vdata.public_id,
+        src: `https://res.cloudinary.com/${CLOUD}/image/upload/${vdata.public_id}`,
+        type: 'image',
+        title: title,
+        category: category,
+        embed: videoData.embed,
+        platform: videoData.platform,
+        tags: [category, 'pixelabs', 'video-link'],
+        created_at: new Date().toISOString()
+      });
+      renderGrid();
 
       showVideoStatus(`✓ "${title}" added to portfolio!`, 'success');
       document.getElementById('videoUrl').value = '';
       document.getElementById('videoTitle').value = '';
-      await loadPortfolio();
 
     } catch(err) {
       showVideoStatus('Error: ' + err.message, 'error');
