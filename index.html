@@ -998,13 +998,16 @@
     <p class="portfolio-desc">A collection of graphic design, photography, video, and web projects — built for brands that want to look sharp and move fast.</p>
 
     <!-- FILTER TABS -->
-    <div class="filter-row" id="filterRow">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1rem;">
+    <div class="filter-row" id="filterRow" style="margin-bottom:0;">
       <button class="filter-btn active" data-filter="all">All</button>
       <button class="filter-btn" data-filter="photography">Photography</button>
       <button class="filter-btn" data-filter="graphic-design">Graphic Design</button>
       <button class="filter-btn" data-filter="video">Video</button>
       <button class="filter-btn" data-filter="web-design">Web Design</button>
     </div>
+    <button onclick="refreshPortfolio()" style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;background:none;border:1px solid var(--border);color:var(--muted);padding:0.5rem 1rem;cursor:pointer;transition:color 0.2s,border-color 0.2s;" onmouseover="this.style.color='var(--accent)';this.style.borderColor='var(--accent)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--border)'">↻ Refresh</button>
+  </div>
   </section>
 
   <!-- PORTFOLIO GRID -->
@@ -1119,10 +1122,19 @@
     var items = [];
     var activeFilter = 'all';
 
+    // Manual refresh
+    function refreshPortfolio() {
+      var btn = document.querySelector('[onclick="refreshPortfolio()"]');
+      if (btn) btn.textContent = '↻ Loading...';
+      loadProjects(function() {
+        if (btn) btn.textContent = '↻ Refresh';
+      });
+    }
+
     // Load projects from Cloudinary by tag
-    function loadProjects() {
+    function loadProjects(callback) {
       var url = 'https://res.cloudinary.com/pixellabs/image/list/pixelabs.json?cb=' + Date.now();
-      fetch(url)
+      fetch(url, { cache: 'no-store' })
         .then(function(r) { return r.ok ? r.json() : { resources: [] }; })
         .then(function(data) {
           var resources = data.resources || [];
@@ -1142,8 +1154,9 @@
           // Filter out items tagged as hidden
           items = items.filter(function(i) { return !i.tags || i.tags.indexOf('pl_hidden') === -1; });
           renderGrid();
+          if (typeof callback === 'function') callback();
         })
-        .catch(function() { items = []; renderGrid(); });
+        .catch(function() { items = []; renderGrid(); if (typeof callback === 'function') callback(); });
     }
     loadProjects();
 
