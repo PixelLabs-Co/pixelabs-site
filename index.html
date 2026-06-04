@@ -1133,7 +1133,9 @@
               src: 'https://res.cloudinary.com/pixellabs/image/upload/' + r.public_id,
               type: r.resource_type === 'video' ? 'video' : 'image',
               title: (r.context && r.context.custom && r.context.custom.title) || r.public_id.split('/').pop(),
-              category: cat
+              category: cat,
+              embed: (r.context && r.context.custom && r.context.custom.embed) || null,
+              tags: r.tags || []
             };
           });
           items.sort(function(a,b) { return new Date(b.created_at) - new Date(a.created_at); });
@@ -1164,7 +1166,10 @@
       filtered.forEach(function(item) {
         var el = document.createElement('div');
         el.className = 'portfolio-item';
-        if (item.type === 'video') {
+        var isVideoLink = item.embed && item.tags && item.tags.indexOf('video-link') !== -1;
+        if (isVideoLink) {
+          el.innerHTML = '<div style="position:relative;"><img src="' + item.src + '" alt="' + item.title + '" loading="lazy" style="width:100%;display:block;" /><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(9,7,15,0.3);"><div style="width:48px;height:48px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:1.2rem;">▶</div></div></div><div class="portfolio-item-overlay"><div class="item-category">' + categoryLabel(item.category) + '</div><div class="item-title">' + item.title + '</div></div>';
+        } else if (item.type === 'video') {
           el.innerHTML = '<video src="' + item.src + '" muted loop playsinline></video><div class="portfolio-item-overlay"><div class="item-category">' + categoryLabel(item.category) + '</div><div class="item-title">' + item.title + '</div></div>';
           var vid = el.querySelector('video');
           vid.addEventListener('mouseenter', function() { vid.play(); });
@@ -1193,9 +1198,14 @@
       var media = document.getElementById('lightboxMedia');
       document.getElementById('lightboxCategory').textContent = categoryLabel(item.category);
       document.getElementById('lightboxTitle').textContent = item.title;
-      media.innerHTML = item.type === 'video'
-        ? '<video src="' + item.src + '" controls autoplay style="max-width:90vw;max-height:75vh;"></video>'
-        : '<img src="' + item.src + '" alt="' + item.title + '" />';
+      var isVideoLink = item.embed && item.tags && item.tags.indexOf('video-link') !== -1;
+      if (isVideoLink) {
+        media.innerHTML = '<iframe src="' + item.embed + '?autoplay=1" style="width:80vw;max-width:900px;height:50vw;max-height:506px;border:none;" allow="autoplay; fullscreen" allowfullscreen></iframe>';
+      } else if (item.type === 'video') {
+        media.innerHTML = '<video src="' + item.src + '" controls autoplay style="max-width:90vw;max-height:75vh;"></video>';
+      } else {
+        media.innerHTML = '<img src="' + item.src + '" alt="' + item.title + '" />';
+      }
       lb.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
