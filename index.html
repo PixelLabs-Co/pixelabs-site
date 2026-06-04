@@ -1119,19 +1119,21 @@
     var items = [];
     var activeFilter = 'all';
 
-    // Load projects from Cloudinary
+    // Load projects from Cloudinary by tag
     function loadProjects() {
-      var url = 'https://res.cloudinary.com/pixellabs/image/list/pixelabs-portfolio.json?cb=' + Date.now();
+      var url = 'https://res.cloudinary.com/pixellabs/image/list/pixelabs.json?cb=' + Date.now();
       fetch(url)
         .then(function(r) { return r.ok ? r.json() : { resources: [] }; })
         .then(function(data) {
           var resources = data.resources || [];
+          var catTags = ['photography','graphic-design','video','web-design'];
           items = resources.map(function(r) {
+            var cat = (r.tags && r.tags.find(function(t) { return catTags.indexOf(t) !== -1; })) || 'photography';
             return {
               src: 'https://res.cloudinary.com/pixellabs/image/upload/' + r.public_id,
-              type: 'image',
+              type: r.resource_type === 'video' ? 'video' : 'image',
               title: (r.context && r.context.custom && r.context.custom.title) || r.public_id.split('/').pop(),
-              category: (r.tags && r.tags[0]) || 'photography'
+              category: cat
             };
           });
           items.sort(function(a,b) { return new Date(b.created_at) - new Date(a.created_at); });
