@@ -1119,12 +1119,24 @@
     var items = [];
     var activeFilter = 'all';
 
-    // Load projects from GitHub raw content
+    // Load projects from Cloudinary
     function loadProjects() {
-      var url = 'https://raw.githubusercontent.com/PixelLabs-Co/pixelabs-site/main/projects.json?cb=' + Date.now();
+      var url = 'https://res.cloudinary.com/pixellabs/image/list/pixelabs-portfolio.json?cb=' + Date.now();
       fetch(url)
-        .then(function(r) { return r.ok ? r.json() : []; })
-        .then(function(data) { items = data || []; renderGrid(); })
+        .then(function(r) { return r.ok ? r.json() : { resources: [] }; })
+        .then(function(data) {
+          var resources = data.resources || [];
+          items = resources.map(function(r) {
+            return {
+              src: 'https://res.cloudinary.com/pixellabs/image/upload/' + r.public_id,
+              type: 'image',
+              title: (r.context && r.context.custom && r.context.custom.title) || r.public_id.split('/').pop(),
+              category: (r.tags && r.tags[0]) || 'photography'
+            };
+          });
+          items.sort(function(a,b) { return new Date(b.created_at) - new Date(a.created_at); });
+          renderGrid();
+        })
         .catch(function() { items = []; renderGrid(); });
     }
     loadProjects();
