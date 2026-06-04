@@ -1166,7 +1166,7 @@
       filtered.forEach(function(item) {
         var el = document.createElement('div');
         el.className = 'portfolio-item';
-        var isVideoLink = item.embed && item.tags && item.tags.indexOf('video-link') !== -1;
+        var isVideoLink = item.embed && item.embed.length > 0;
         if (isVideoLink) {
           el.innerHTML = '<div style="position:relative;"><img src="' + item.src + '" alt="' + item.title + '" loading="lazy" style="width:100%;display:block;" /><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(9,7,15,0.3);"><div style="width:48px;height:48px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:1.2rem;">▶</div></div></div><div class="portfolio-item-overlay"><div class="item-category">' + categoryLabel(item.category) + '</div><div class="item-title">' + item.title + '</div></div>';
         } else if (item.type === 'video') {
@@ -1198,8 +1198,7 @@
       var media = document.getElementById('lightboxMedia');
       document.getElementById('lightboxCategory').textContent = categoryLabel(item.category);
       document.getElementById('lightboxTitle').textContent = item.title;
-      var isVideoLink = item.embed && item.tags && item.tags.indexOf('video-link') !== -1;
-      if (isVideoLink) {
+      if (item.embed) {
         media.innerHTML = '<iframe src="' + item.embed + '?autoplay=1" style="width:80vw;max-width:900px;height:50vw;max-height:506px;border:none;" allow="autoplay; fullscreen" allowfullscreen></iframe>';
       } else if (item.type === 'video') {
         media.innerHTML = '<video src="' + item.src + '" controls autoplay style="max-width:90vw;max-height:75vh;"></video>';
