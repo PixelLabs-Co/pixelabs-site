@@ -341,9 +341,8 @@
       const fd = new FormData();
       fd.append('file', selectedFile);
       fd.append('upload_preset', PRESET);
-      fd.append('folder', FOLDER);
       fd.append('context', `title=${title}|category=${category}`);
-      fd.append('tags', category);
+      fd.append('tags', `${category},pixelabs`);
 
       setProgress(30);
       const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD}/auto/upload`, {
@@ -372,20 +371,19 @@
 
   async function loadPortfolio() {
     try {
-      // Fetch images from Cloudinary folder via search API (unsigned, public)
+      // Fetch by tag 'pixelabs' — all portfolio items
       const res = await fetch(
-        `https://res.cloudinary.com/${CLOUD}/image/list/${FOLDER}.json`
+        `https://res.cloudinary.com/${CLOUD}/image/list/pixelabs.json`
       );
       const data = res.ok ? await res.json() : { resources: [] };
       allItems = (data.resources || []).map(r => ({
         public_id: r.public_id,
         src: `https://res.cloudinary.com/${CLOUD}/image/upload/${r.public_id}`,
-        type: 'image',
+        type: r.resource_type === 'video' ? 'video' : 'image',
         title: (r.context && r.context.custom && r.context.custom.title) || r.public_id.split('/').pop(),
-        category: (r.tags && r.tags[0]) || 'photography',
+        category: (r.tags && r.tags.find(t => ['photography','graphic-design','video','web-design'].includes(t))) || 'photography',
         created_at: r.created_at
       }));
-      // Sort newest first
       allItems.sort((a,b) => new Date(b.created_at) - new Date(a.created_at));
     } catch(e) {
       allItems = [];
