@@ -311,6 +311,10 @@
       <label>Password</label>
       <input type="password" id="loginPassword" placeholder="Enter password" onkeydown="if(event.key==='Enter')doLogin()" />
     </div>
+    <div class="field">
+      <label>GitHub Token</label>
+      <input type="password" id="loginToken" placeholder="github_pat_..." onkeydown="if(event.key==='Enter')doLogin()" />
+    </div>
     <button class="btn-grad" onclick="doLogin()">Sign In</button>
     <p class="login-error" id="loginError">Incorrect password. Try again.</p>
   </div>
@@ -399,7 +403,6 @@
   const PROJECTS_PATH = 'projects.json';
   const CLOUDINARY_CLOUD = 'pixellabs';
   const CLOUDINARY_PRESET = 'pl_default';
-  const _t = atob('Z2l0aHViX3BhdF8xMUNGSUNRQkkwRG5nVTZxRkh0RXlIX3FJSmw2bDFrQ0s1WjMyRkhwYWlNSmlybUpPT0VhTEFOS2lTZVFBWGc3d3RFM1FRSjVYWVVJS0NjN3Ja');
 
   // ── AUTH ────────────────────────────────────────────────────
   function doLogin() {
@@ -415,12 +418,14 @@
   }
 
   function doLogout() {
+    sessionStorage.removeItem('pl_tok');
     document.getElementById('login-screen').style.display = 'flex';
     document.getElementById('admin-shell').style.display = 'none';
     document.getElementById('loginPassword').value = '';
+    document.getElementById('loginToken').value = '';
   }
 
-  function getToken() { return _t; }
+  function getToken() { return sessionStorage.getItem('pl_tok') || ''; }
 
   // ── FILE HANDLING ───────────────────────────────────────────
   let selectedFile = null;
