@@ -1091,7 +1091,6 @@
         portEl.style.display = 'block';
         document.title = 'Portfolio — Pixel Labs';
         window.scrollTo(0, 0);
-        renderGrid();
       } else {
         mainEl.style.display = '';
         portEl.style.display = 'none';
@@ -1107,13 +1106,17 @@
       }
     }
 
-    document.querySelectorAll('a[href="portfolio.html"]').forEach(function(link) {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        try { history.pushState(null, '', '#portfolio'); } catch(e) {}
-        showPage('portfolio');
+    var portfolioLinksAttached = false;
+    if (!portfolioLinksAttached) {
+      portfolioLinksAttached = true;
+      document.querySelectorAll('a[href="portfolio.html"]').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          try { history.pushState(null, '', '#portfolio'); } catch(e) {}
+          showPage('portfolio');
+        });
       });
-    });
+    }
 
     window.addEventListener('popstate', handleRouting);
     handleRouting();
@@ -1139,7 +1142,13 @@
         .then(function(data) {
           var resources = data.resources || [];
           var catTags = ['photography','graphic-design','video','web-design'];
-          items = resources.map(function(r) {
+          // Deduplicate by public_id
+          var seen = {};
+          items = resources.filter(function(r) {
+            if (seen[r.public_id]) return false;
+            seen[r.public_id] = true;
+            return true;
+          }).map(function(r) {
             var cat = (r.context && r.context.custom && r.context.custom.category) || (r.tags && r.tags.find(function(t) { return t !== 'pixelabs' && catTags.indexOf(t) !== -1; })) || 'photography';
             return {
               src: 'https://res.cloudinary.com/pixellabs/image/upload/' + r.public_id,
@@ -1197,10 +1206,10 @@
       });
     }
 
-    // Filter buttons
-    document.querySelectorAll('.filter-btn').forEach(function(btn) {
+    // Filter buttons — scope to portfolio page only
+    document.querySelectorAll('#portfolio-page .filter-btn').forEach(function(btn) {
       btn.addEventListener('click', function() {
-        document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+        document.querySelectorAll('#portfolio-page .filter-btn').forEach(function(b) { b.classList.remove('active'); });
         btn.classList.add('active');
         activeFilter = btn.dataset.filter;
         renderGrid();
