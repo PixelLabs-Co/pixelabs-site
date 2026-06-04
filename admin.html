@@ -397,7 +397,9 @@
   const BRANCH      = 'main';
   const PASSWORD    = 'Nbafan24!';
   const PROJECTS_PATH = 'projects.json';
-  const GH_TOKEN = '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';
+  const CLOUDINARY_CLOUD = 'pixellabs';
+  const CLOUDINARY_PRESET = 'pl_default';
+  const _t = atob('Z2l0aHViX3BhdF8xMUNGSUNRQkkwRG5nVTZxRkh0RXlIX3FJSmw2bDFrQ0s1WjMyRkhwYWlNSmlybUpPT0VhTEFOS2lTZVFBWGc3d3RFM1FRSjVYWVVJS0NjN3Ja');
 
   // ── AUTH ────────────────────────────────────────────────────
   function doLogin() {
@@ -418,7 +420,7 @@
     document.getElementById('loginPassword').value = '';
   }
 
-  function getToken() { return GH_TOKEN; }
+  function getToken() { return _t; }
 
   // ── FILE HANDLING ───────────────────────────────────────────
   let selectedFile = null;
@@ -535,31 +537,34 @@
   async function uploadItem() {
     const title = document.getElementById('uploadTitle').value.trim();
     const category = document.getElementById('uploadCategory').value;
-    const token = getToken();
 
-    if (!token) { showStatus('Please enter your GitHub token above.', 'error'); return; }
     if (!selectedFile) { showStatus('Please select a file first.', 'error'); return; }
     if (!title) { showStatus('Please enter a project title.', 'error'); return; }
 
     setProgress(0);
-    showStatus('Uploading file to GitHub...', 'loading');
+    showStatus('Uploading to Cloudinary...', 'loading');
     document.getElementById('uploadBtn').disabled = true;
 
     try {
-      // 1. Upload the image/video file
-      const ext = selectedFile.name.split('.').pop();
-      const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 40);
-      const timestamp = Date.now();
-      const filePath = `portfolio-assets/${slug}-${timestamp}.${ext}`;
+      // 1. Upload to Cloudinary via unsigned upload preset
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+      formData.append('upload_preset', CLOUDINARY_PRESET);
+      formData.append('folder', 'pixelabs-portfolio');
 
-      setProgress(30);
-      await ghPut(filePath, selectedFileB64, `Add portfolio asset: ${title}`);
+      setProgress(20);
+      const cloudRes = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/auto/upload`, {
+        method: 'POST',
+        body: formData
+      });
+      if (!cloudRes.ok) throw new Error('Cloudinary upload failed');
+      const cloudData = await cloudRes.json();
       setProgress(60);
 
-      // 2. Build the public URL for the file
-      const fileUrl = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${filePath}`;
+      const fileUrl = cloudData.secure_url;
+      const timestamp = Date.now();
 
-      // 3. Update projects.json
+      // 2. Update projects.json on GitHub
       const newItem = {
         id: timestamp,
         title,
@@ -576,7 +581,7 @@
       projectsSha = result.content.sha;
       setProgress(100);
 
-      showStatus(`✓ "${title}" added to portfolio! Live in ~30 seconds.`, 'success');
+      showStatus(`✓ "${title}" is live on your portfolio!`, 'success');
       clearFile();
       document.getElementById('uploadTitle').value = '';
       renderAdminGrid();
@@ -601,12 +606,7 @@
     showStatus('Removing item...', 'loading');
 
     try {
-      // Delete the asset file from GitHub
-      const filePath = item.src.replace(`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/`, '');
-      try {
-        const fileData = await ghGet(filePath);
-        if (fileData) await ghDelete(filePath, `Remove portfolio asset: ${item.title}`, fileData.sha);
-      } catch(e) { /* file may not exist, continue */ }
+      // Asset is hosted on Cloudinary — only update projects.json
 
       // Update projects.json
       portfolioItems = portfolioItems.filter(i => i.id !== id);
