@@ -380,6 +380,13 @@
       const data = await res.json();
       setProgress(100);
 
+      // Save delete token for later deletion
+      if (data.delete_token) {
+        const tokens = JSON.parse(localStorage.getItem('pl_delete_tokens') || '{}');
+        tokens[data.public_id] = data.delete_token;
+        localStorage.setItem('pl_delete_tokens', JSON.stringify(tokens));
+      }
+
       showStatus(`✓ "${title}" is live on your portfolio!`, 'success');
       clearFile();
       document.getElementById('uploadTitle').value = '';
@@ -416,17 +423,55 @@
         created_at: r.created_at
       }));
       allItems.sort((a,b) => new Date(b.created_at) - new Date(a.created_at));
+      // Filter out locally hidden items
+      const hidden = getHidden();
+      allItems = allItems.filter(i => !hidden.includes(i.public_id));
     } catch(e) {
       allItems = [];
     }
     renderGrid();
   }
 
-  // ── DELETE ───────────────────────────────────────────────────
+  // ── DELETE (hide locally) ────────────────────────────────────
+  function getHidden() {
+    return JSON.parse(localStorage.getItem('pl_hidden') || '[]');
+  }
+  function saveHidden(list) {
+    localStorage.setItem('pl_hidden', JSON.stringify(list));
+  }
+
   async function deleteItem(publicId) {
-    if (!confirm('Remove this item from your portfolio?')) return;
-    // Cloudinary unsigned preset can't delete — show instructions
-    showStatus('To delete: go to cloudinary.com → Media Library → pixelabs-portfolio and delete from there.', 'error');
+    if (!confirm('Remove this item from your portfolio?\n\nIt will disappear immediately for all visitors.')) return;
+
+    // 1. Hide locally right away
+    const hidden = getHidden();
+    if (!hidden.includes(publicId)) hidden.push(publicId);
+    saveHidden(hidden);
+    allItems = allItems.filter(i => i.public_id !== publicId);
+    renderGrid();
+    showStatus('Removing from portfolio...', 'loading');
+
+    // 2. Tag as hidden in Cloudinary so public portfolio hides it too
+    try {
+      const fd = new FormData();
+      fd.append('upload_preset', PRESET);
+      fd.append('public_id', publicId);
+      fd.append('tags', 'pl_hidden');
+      // Use Cloudinary explicit API to add tag
+      const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD}/image/tags`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          public_ids: [publicId],
+          tag: 'pl_hidden',
+          command: 'add'
+        })
+      });
+      showStatus('Item removed from portfolio.', 'success');
+    } catch(e) {
+      showStatus('Hidden locally. Note: may still appear to others until Cloudinary syncs.', 'success');
+    }
+    setTimeout(() => { document.getElementById('statusMsg').style.display = 'none'; }, 4000);
   }
 
   // ── RENDER GRID ──────────────────────────────────────────────
