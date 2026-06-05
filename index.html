@@ -206,18 +206,26 @@
     /* MARQUEE */
     .marquee-strip {
       border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-      overflow: hidden; padding: 0.9rem 0;
-      background: rgba(125,3,216,0.04);
+      overflow: hidden; height: 4px; position: relative;
     }
-    .marquee-track {
-      display: flex; gap: 3rem; white-space: nowrap;
-      animation: marquee 24s linear infinite;
+    .marquee-glow {
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(125,3,216,0.0) 10%,
+        rgba(125,3,216,0.6) 30%,
+        rgba(176,106,255,1) 50%,
+        rgba(125,3,216,0.6) 70%,
+        rgba(125,3,216,0.0) 90%,
+        transparent 100%
+      );
+      background-size: 200% 100%;
+      animation: glowSlide 3s ease-in-out infinite;
     }
-    .marquee-item {
-      font-family: 'Press Start 2P', monospace; font-size: 0.7rem;
-      letter-spacing: 0.05em; color: rgba(240,237,248,0.5); flex-shrink: 0;
+    @keyframes glowSlide {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
     }
-    .marquee-item span { color: var(--accent); margin-right: 3rem; }
 
     /* SECTIONS */
     .section { padding: 7rem 3rem; }
@@ -414,10 +422,7 @@
       0%, 100% { opacity: 1; transform: scaleY(1); }
       50%       { opacity: 0.3; transform: scaleY(0.6); }
     }
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
-    }
+
     .reveal {
       opacity: 0; transform: translateY(38px);
       transition: opacity 0.7s ease, transform 0.7s ease;
@@ -508,7 +513,7 @@
       .hero-scroll { display: none; }
 
       /* Marquee */
-      .marquee-item { font-size: 0.55rem; }
+
 
       /* Sections */
       .section { padding: 4rem 1.5rem; }
@@ -862,16 +867,7 @@
 
   <!-- MARQUEE -->
   <div class="marquee-strip">
-    <div class="marquee-track">
-      <span class="marquee-item">EVERY PIXEL MATTERS <span>✦</span></span>
-      <span class="marquee-item">EVERY PIXEL MATTERS <span>✦</span></span>
-      <span class="marquee-item">EVERY PIXEL MATTERS <span>✦</span></span>
-      <span class="marquee-item">EVERY PIXEL MATTERS <span>✦</span></span>
-      <span class="marquee-item">EVERY PIXEL MATTERS <span>✦</span></span>
-      <span class="marquee-item">EVERY PIXEL MATTERS <span>✦</span></span>
-      <span class="marquee-item">EVERY PIXEL MATTERS <span>✦</span></span>
-      <span class="marquee-item">EVERY PIXEL MATTERS <span>✦</span></span>
-    </div>
+    <div class="marquee-glow"></div>
   </div>
 
   <!-- SERVICES -->
