@@ -1151,7 +1151,7 @@
 
     // Load projects from Cloudinary by tag
     function loadProjects(callback) {
-      var url = 'https://res.cloudinary.com/pixellabs/image/list/pixelabs.json?cb=' + Date.now();
+      var url = 'https://res.cloudinary.com/pixellabs/image/list/.json?cb=' + Date.now();
       fetch(url, { cache: 'no-store' })
         .then(function(r) { return r.ok ? r.json() : { resources: [] }; })
         .then(function(data) {
@@ -1177,7 +1177,7 @@
           });
           items.sort(function(a,b) { return new Date(b.created_at) - new Date(a.created_at); });
           // Filter out items tagged as hidden
-          items = items.filter(function(i) { return !i.tags || i.tags.indexOf('pl_hidden') === -1; });
+          items = items.filter(function(i) { return !i.tags || i.tags.length === 0 || i.tags.indexOf('pl_hidden') === -1; });
           renderGrid();
           if (typeof callback === 'function') callback();
         })
