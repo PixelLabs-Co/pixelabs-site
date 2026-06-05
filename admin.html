@@ -415,7 +415,7 @@
     try {
       // Fetch by tag 'pixelabs' — all portfolio items
       const res = await fetch(
-        `https://res.cloudinary.com/${CLOUD}/image/list/pixelabs.json?_=${Date.now()}`,
+        `https://res.cloudinary.com/${CLOUD}/image/list/.json?_=${Date.now()}`,
         { cache: 'no-store' }
       );
       const data = res.ok ? await res.json() : { resources: [] };
