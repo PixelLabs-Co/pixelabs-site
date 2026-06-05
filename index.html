@@ -1151,7 +1151,7 @@
 
     // Load projects from Cloudinary by tag
     function loadProjects(callback) {
-      var url = 'https://res.cloudinary.com/pixellabs/image/list/.json?cb=' + Date.now();
+      var url = 'https://res.cloudinary.com/pixellabs/image/list/pixelabs.json?cb=' + Date.now();
       fetch(url, { cache: 'no-store' })
         .then(function(r) { return r.ok ? r.json() : { resources: [] }; })
         .then(function(data) {
@@ -1160,12 +1160,14 @@
           items = resources.map(function(r) {
             var cat = (r.context && r.context.custom && r.context.custom.category) || (r.tags && r.tags.find(function(t) { return t !== 'pixelabs' && catTags.indexOf(t) !== -1; })) || 'photography';
             return {
+              public_id: r.public_id,
               src: 'https://res.cloudinary.com/pixellabs/image/upload/' + r.public_id,
               type: r.resource_type === 'video' ? 'video' : 'image',
               title: (r.context && r.context.custom && r.context.custom.title) || r.public_id.split('/').pop(),
               category: cat,
               embed: (r.context && r.context.custom && r.context.custom.embed) || null,
-              tags: r.tags || []
+              tags: r.tags || [],
+              created_at: r.created_at
             };
           });
           // Deduplicate by public_id
