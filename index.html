@@ -314,7 +314,7 @@
     }
     .about-visual img {
       width: 100%; height: 100%;
-      object-fit: cover; object-position: center top;
+      object-fit: contain; object-position: center center;
       display: block; position: absolute; inset: 0;
     }
     .about-visual-inner {
@@ -352,7 +352,7 @@
       font-size: clamp(2.5rem, 4.5vw, 4.5rem); font-weight: 900; letter-spacing: -0.03em; text-transform: uppercase; line-height: 0.9;
     }
     .pricing-note {
-      max-width: 340px; font-size: 0.85rem; color: var(--muted); line-height: 1.6;
+      max-width: 520px; font-size: 0.92rem; color: rgba(240,237,248,0.75); line-height: 1.7;
       text-align: right;
     }
     .pricing-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); }
@@ -369,10 +369,11 @@
     }
     .pricing-desc { font-size: 0.84rem; color: var(--muted); }
     .pricing-price {
-      font-family: 'Press Start 2P', monospace; font-size: 0.65rem;
+      font-family: 'Press Start 2P', monospace; font-size: 0.8rem;
       background: var(--grad);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text; white-space: nowrap;
+      filter: brightness(1.3);
     }
 
     /* CTA */
