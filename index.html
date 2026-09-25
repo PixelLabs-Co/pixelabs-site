@@ -343,39 +343,25 @@
       line-height: 1.6;
     }
 
-    /* PRICING */
-    .pricing-section { background: var(--deep); }
-    .pricing-header {
-      display: flex; align-items: flex-end; justify-content: space-between;
-      margin-bottom: 3rem; gap: 2rem;
+    /* PRICING DISCLAIMER */
+    .pricing-disclaimer {
+      margin-top: 3rem; padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+      scroll-margin-top: 6rem;
     }
-    .pricing-headline {
-      font-family: var(--serif-display);
-      font-size: clamp(2.5rem, 4.5vw, 4.5rem); font-weight: 900; letter-spacing: -0.03em; text-transform: uppercase; line-height: 0.9;
-    }
-    .pricing-note {
-      max-width: 520px; font-size: 0.92rem; color: rgba(240,237,248,0.75); line-height: 1.7;
-      text-align: right;
-    }
-    .pricing-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); }
-    .pricing-row {
-      background: var(--deep);
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 2rem 2.5rem; gap: 2rem; transition: background 0.2s;
-    }
-    .pricing-row:hover { background: rgba(125,3,216,0.08); }
-    .pricing-row-left { display: flex; align-items: baseline; gap: 2rem; }
-    .pricing-name {
-      font-family: var(--serif-display); font-size: 1.3rem;
-      font-weight: 900; letter-spacing: -0.02em; text-transform: uppercase;
-    }
-    .pricing-desc { font-size: 0.84rem; color: var(--muted); }
-    .pricing-price {
-      font-family: 'Press Start 2P', monospace; font-size: 0.8rem;
+    .pricing-disclaimer-title {
+      font-family: var(--serif-display); font-weight: 900;
+      font-size: clamp(1.6rem, 3vw, 2.4rem); letter-spacing: -0.02em;
+      text-transform: uppercase; line-height: 1; margin-bottom: 0.75rem;
       background: var(--grad);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text; white-space: nowrap;
-      filter: brightness(1.3);
+      background-clip: text; filter: brightness(1.3);
+      display: inline-block;
+    }
+    .pricing-disclaimer-text {
+      max-width: 640px; font-size: 0.95rem; line-height: 1.7;
+      text-transform: uppercase; letter-spacing: 0.02em;
+      color: rgba(240,237,248,0.85);
     }
 
     /* CTA */
@@ -551,17 +537,6 @@
       .about-stat-row { gap: 2rem; }
       .stat-num { font-size: 2.2rem; }
 
-      /* Pricing */
-      .pricing-section .section { padding: 4rem 1.5rem; }
-      .pricing-header { flex-direction: column; align-items: flex-start; gap: 1rem; margin-bottom: 2rem; }
-      .pricing-note { text-align: left; max-width: 100%; }
-      .pricing-headline { font-size: clamp(2.2rem, 10vw, 3.5rem); }
-      .pricing-row { flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 1.5rem; }
-      .pricing-row-left { flex-direction: column; gap: 0.25rem; }
-      .pricing-name { font-size: 1.15rem; }
-      .pricing-desc { font-size: 0.8rem; }
-      .pricing-price { font-size: 0.9rem; }
-
       /* CTA */
       .cta-section { padding: 5rem 1.5rem; }
       .cta-headline { font-size: clamp(3rem, 14vw, 6rem); }
@@ -678,6 +653,10 @@
         <p class="service-desc">Ongoing design, web updates, and creative help for brands that need consistency and momentum every month.</p>
       </div>
     </div>
+    <div class="pricing-disclaimer reveal" id="pricing">
+      <h2 class="pricing-disclaimer-title">Pricing</h2>
+      <p class="pricing-disclaimer-text">Each project is custom quoted based on scope, timeline, and deliverables. Contact us for your custom quote.</p>
+    </div>
   </section>
 
   <!-- ABOUT -->
@@ -697,51 +676,6 @@
           <div><div class="stat-num">7+</div><div class="stat-label">Years Experience</div></div>
           <div><div class="stat-num">PDX</div><div class="stat-label">Based In</div></div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRICING -->
-  <section class="section pricing-section" id="pricing">
-    <div class="pricing-header reveal">
-      <h2 class="pricing-headline">Creative<br>Services</h2>
-      <p class="pricing-note">Every project is custom quoted based on scope, timeline, and deliverables. These are helpful starting points.</p>
-    </div>
-    <div class="pricing-list reveal">
-      <div class="pricing-row">
-        <div class="pricing-row-left">
-          <span class="pricing-name">Design Projects</span>
-          <span class="pricing-desc">Graphics, flyers, slides, social content, print pieces</span>
-        </div>
-        <span class="pricing-price">From $150</span>
-      </div>
-      <div class="pricing-row">
-        <div class="pricing-row-left">
-          <span class="pricing-name">Campaign Kits</span>
-          <span class="pricing-desc">Launches, events, listings, fundraisers, seasonal promos</span>
-        </div>
-        <span class="pricing-price">From $500</span>
-      </div>
-      <div class="pricing-row">
-        <div class="pricing-row-left">
-          <span class="pricing-name">Brand Identity</span>
-          <span class="pricing-desc">Logo, visual direction, consistent brand presence</span>
-        </div>
-        <span class="pricing-price">From $1,500</span>
-      </div>
-      <div class="pricing-row">
-        <div class="pricing-row-left">
-          <span class="pricing-name">Website Design</span>
-          <span class="pricing-desc">Strategy, design, SEO, mobile-first, launch support</span>
-        </div>
-        <span class="pricing-price">From $2,500</span>
-      </div>
-      <div class="pricing-row">
-        <div class="pricing-row-left">
-          <span class="pricing-name">Monthly Support</span>
-          <span class="pricing-desc">Ongoing design, web updates, campaign & creative help</span>
-        </div>
-        <span class="pricing-price">From $750/mo</span>
       </div>
     </div>
   </section>
