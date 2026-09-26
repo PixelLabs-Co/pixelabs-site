@@ -218,7 +218,7 @@
       position: relative; overflow: hidden;
       aspect-ratio: 4 / 5;
     }
-    .portfolio-card[data-type="web-design"] .portfolio-card-media,
+    .portfolio-card[data-type="website"] .portfolio-card-media,
     .portfolio-card[data-type="video"] .portfolio-card-media { aspect-ratio: 16 / 10; }
     .portfolio-card img {
       width: 100%; height: 100%; object-fit: cover; display: block;
@@ -470,7 +470,7 @@
       .portfolio-grid { grid-template-columns: repeat(2, 1fr); padding: 0 1.5rem 4rem; gap: 1.25rem; }
       .portfolio-empty { padding: 2rem 1.5rem 4rem; }
       .portfolio-card-media,
-      .portfolio-card[data-type="web-design"] .portfolio-card-media,
+      .portfolio-card[data-type="website"] .portfolio-card-media,
       .portfolio-card[data-type="video"] .portfolio-card-media { aspect-ratio: 4/5; }
       .portfolio-card-info { padding: 1.5rem; }
       .portfolio-card-cat { font-size: 0.65rem; margin-bottom: 0.5rem; }
@@ -579,6 +579,17 @@
           to mark a placeholder — remove both once it's real work.
     -->
     <div class="portfolio-grid" id="portfolioGrid">
+      <div class="portfolio-card reveal" data-category="web-design" data-type="website" data-title="Send Slater Six" data-description="Website design for Send Slater Six, a ministry site sharing the Slater family's work training leaders in Africa." data-url="https://www.sendslatersix.com">
+        <div class="portfolio-card-media">
+          <img src="portfolio/sendslatersix-homepage.jpg" alt="Send Slater Six homepage" loading="lazy" />
+          <div class="portfolio-card-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3h7v7M21 3l-9 9M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg></div>
+        </div>
+        <div class="portfolio-card-info">
+          <div class="portfolio-card-cat">Web Design</div>
+          <div class="portfolio-card-title">Send Slater Six</div>
+        </div>
+      </div>
+
       <div class="portfolio-card reveal" data-category="brand-design" data-title="Northcoast Coffee Co. Primary Logo" data-description="Primary logo mark for Northcoast Coffee Co., pairing a forest-and-tideline emblem with a classic serif wordmark.">
         <div class="portfolio-card-media">
           <img src="portfolio/northcoast-coffee-co-logo.jpg" alt="Northcoast Coffee Co. Primary Logo" loading="lazy" />
