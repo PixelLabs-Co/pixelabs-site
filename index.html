@@ -369,6 +369,15 @@
       gap: 2rem; margin-bottom: 2.5rem;
     }
     .pricing-head .btn-primary { flex-shrink: 0; }
+    .pricing-steps { grid-template-columns: repeat(4, 1fr); }
+    .step-top {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      margin-bottom: 1.5rem; position: relative; z-index: 1;
+    }
+    .step-top .service-num { margin-bottom: 0; }
+    .step-glyph { width: 48px; height: 48px; display: block; transition: transform 0.3s; }
+    .service-card:hover .step-glyph { transform: translateY(-3px); }
+    @media (max-width: 1200px) { .pricing-steps { grid-template-columns: repeat(2, 1fr); } }
 
     /* CTA */
     .cta-section {
@@ -669,19 +678,37 @@
         </div>
         <a href="mailto:info@pixelabs.co?subject=Custom%20Quote" class="btn-primary">Get a Custom Quote</a>
       </div>
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="pxGrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="12" y2="12"><stop offset="0" stop-color="#7d03d8"/><stop offset="1" stop-color="#a757c0"/></linearGradient></defs></svg>
       <div class="services-grid pricing-steps">
         <div class="service-card">
-          <div class="service-num">01</div>
+          <div class="step-top">
+            <div class="service-num">01</div>
+            <svg class="step-glyph" viewBox="0 0 12 12" shape-rendering="crispEdges" aria-hidden="true"><g fill="url(#pxGrad)"><rect x="1" y="1" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="8" y="1" width="1" height="1"/><rect x="9" y="1" width="1" height="1"/><rect x="10" y="1" width="1" height="1"/><rect x="1" y="2" width="1" height="1"/><rect x="10" y="2" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="10" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1" fill="#f0edf8"/><rect x="6" y="4" width="1" height="1" fill="#f0edf8"/><rect x="9" y="4" width="1" height="1" fill="#f0edf8"/><rect x="10" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="10" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="10" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/><rect x="6" y="7" width="1" height="1"/><rect x="7" y="7" width="1" height="1"/><rect x="8" y="7" width="1" height="1"/><rect x="9" y="7" width="1" height="1"/><rect x="10" y="7" width="1" height="1"/><rect x="3" y="8" width="1" height="1"/><rect x="4" y="8" width="1" height="1"/><rect x="3" y="9" width="1" height="1"/></g></svg>
+          </div>
           <div class="service-title">Tell Us the Goal</div>
           <p class="service-desc">Share what you're building, who it's for, and when you need it. One-off project or ongoing support—we'll start there.</p>
         </div>
         <div class="service-card">
-          <div class="service-num">02</div>
+          <div class="step-top">
+            <div class="service-num">02</div>
+            <svg class="step-glyph" viewBox="0 0 12 12" shape-rendering="crispEdges" aria-hidden="true"><g fill="url(#pxGrad)"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="6" y="0" width="1" height="1"/><rect x="7" y="0" width="1" height="1"/><rect x="8" y="0" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="8" y="1" width="1" height="1"/><rect x="9" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="8" y="2" width="1" height="1"/><rect x="9" y="2" width="1" height="1"/><rect x="10" y="2" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="10" y="3" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1" fill="#f0edf8"/><rect x="5" y="4" width="1" height="1" fill="#f0edf8"/><rect x="6" y="4" width="1" height="1" fill="#f0edf8"/><rect x="7" y="4" width="1" height="1" fill="#f0edf8"/><rect x="8" y="4" width="1" height="1" fill="#f0edf8"/><rect x="10" y="4" width="1" height="1"/><rect x="2" y="5" width="1" height="1"/><rect x="10" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="4" y="6" width="1" height="1" fill="#f0edf8"/><rect x="5" y="6" width="1" height="1" fill="#f0edf8"/><rect x="6" y="6" width="1" height="1" fill="#f0edf8"/><rect x="7" y="6" width="1" height="1" fill="#f0edf8"/><rect x="8" y="6" width="1" height="1" fill="#f0edf8"/><rect x="10" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="10" y="7" width="1" height="1"/><rect x="2" y="8" width="1" height="1"/><rect x="4" y="8" width="1" height="1" fill="#f0edf8"/><rect x="5" y="8" width="1" height="1" fill="#f0edf8"/><rect x="6" y="8" width="1" height="1" fill="#f0edf8"/><rect x="10" y="8" width="1" height="1"/><rect x="2" y="9" width="1" height="1"/><rect x="10" y="9" width="1" height="1"/><rect x="2" y="10" width="1" height="1"/><rect x="3" y="10" width="1" height="1"/><rect x="4" y="10" width="1" height="1"/><rect x="5" y="10" width="1" height="1"/><rect x="6" y="10" width="1" height="1"/><rect x="7" y="10" width="1" height="1"/><rect x="8" y="10" width="1" height="1"/><rect x="9" y="10" width="1" height="1"/><rect x="10" y="10" width="1" height="1"/></g></svg>
+          </div>
           <div class="service-title">Get Your Quote</div>
           <p class="service-desc">We scope the deliverables and timeline, then send a custom quote built around your project—before any work begins.</p>
         </div>
         <div class="service-card">
-          <div class="service-num">03</div>
+          <div class="step-top">
+            <div class="service-num">03</div>
+            <svg class="step-glyph" viewBox="0 0 12 12" shape-rendering="crispEdges" aria-hidden="true"><g fill="url(#pxGrad)"><rect x="1" y="1" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="8" y="1" width="1" height="1"/><rect x="9" y="1" width="1" height="1"/><rect x="10" y="1" width="1" height="1"/><rect x="1" y="2" width="1" height="1"/><rect x="10" y="2" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="9" y="3" width="1" height="1" fill="#f0edf8"/><rect x="10" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="8" y="4" width="1" height="1" fill="#f0edf8"/><rect x="9" y="4" width="1" height="1" fill="#f0edf8"/><rect x="10" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="3" y="5" width="1" height="1" fill="#f0edf8"/><rect x="7" y="5" width="1" height="1" fill="#f0edf8"/><rect x="8" y="5" width="1" height="1" fill="#f0edf8"/><rect x="10" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="3" y="6" width="1" height="1" fill="#f0edf8"/><rect x="4" y="6" width="1" height="1" fill="#f0edf8"/><rect x="6" y="6" width="1" height="1" fill="#f0edf8"/><rect x="7" y="6" width="1" height="1" fill="#f0edf8"/><rect x="10" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1" fill="#f0edf8"/><rect x="5" y="7" width="1" height="1" fill="#f0edf8"/><rect x="6" y="7" width="1" height="1" fill="#f0edf8"/><rect x="10" y="7" width="1" height="1"/><rect x="1" y="8" width="1" height="1"/><rect x="5" y="8" width="1" height="1" fill="#f0edf8"/><rect x="10" y="8" width="1" height="1"/><rect x="1" y="9" width="1" height="1"/><rect x="10" y="9" width="1" height="1"/><rect x="1" y="10" width="1" height="1"/><rect x="2" y="10" width="1" height="1"/><rect x="3" y="10" width="1" height="1"/><rect x="4" y="10" width="1" height="1"/><rect x="5" y="10" width="1" height="1"/><rect x="6" y="10" width="1" height="1"/><rect x="7" y="10" width="1" height="1"/><rect x="8" y="10" width="1" height="1"/><rect x="9" y="10" width="1" height="1"/><rect x="10" y="10" width="1" height="1"/></g></svg>
+          </div>
+          <div class="service-title">Approve Your Quote</div>
+          <p class="service-desc">Review the scope, timeline, and price. Once it looks right, approve the quote and we'll lock in your project.</p>
+        </div>
+        <div class="service-card">
+          <div class="step-top">
+            <div class="service-num">04</div>
+            <svg class="step-glyph" viewBox="0 0 12 12" shape-rendering="crispEdges" aria-hidden="true"><g fill="url(#pxGrad)"><rect x="6" y="0" width="1" height="1"/><rect x="7" y="0" width="1" height="1"/><rect x="8" y="0" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="5" y="2" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="8" y="4" width="1" height="1"/><rect x="9" y="4" width="1" height="1"/><rect x="5" y="5" width="1" height="1" fill="#f0edf8"/><rect x="6" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="4" y="6" width="1" height="1" fill="#f0edf8"/><rect x="5" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1" fill="#f0edf8"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/><rect x="2" y="8" width="1" height="1" fill="#f0edf8"/><rect x="3" y="8" width="1" height="1"/><rect x="4" y="8" width="1" height="1"/><rect x="2" y="9" width="1" height="1"/><rect x="3" y="9" width="1" height="1"/><rect x="1" y="10" width="1" height="1"/><rect x="2" y="10" width="1" height="1"/></g></svg>
+          </div>
           <div class="service-title">We Get to Work</div>
           <p class="service-desc">Sharp, consistent visuals delivered fast—designed to look good and actually work across every platform.</p>
         </div>
