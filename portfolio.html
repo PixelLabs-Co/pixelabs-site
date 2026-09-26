@@ -656,18 +656,20 @@
          youtubeId: the YouTube video ID, e.g. "dQw4w9WgXcQ" (type: "video" only)
          sample: true marks it as a placeholder (shows a SAMPLE tag) — remove
                  this line once it's real work.
+         date: "YYYY-MM-DD", the day this was added. Newest date shows
+                 first, on every tab — use today's date for new uploads.
        ============================================================ */
     const PORTFOLIO_ITEMS = [
-      { category: 'brand-design', title: 'Brand Identity — Sample 01', description: 'Placeholder brand design entry. Replace with a real project: logo, brand guide pages, or mockups.', image: 'portfolio/brand-design-1.jpg', sample: true },
-      { category: 'brand-design', title: 'Brand Identity — Sample 02', description: 'Placeholder brand design entry.', image: 'portfolio/brand-design-2.jpg', sample: true },
-      { category: 'graphic-design', title: 'Graphic Design — Sample 01', description: 'Placeholder graphic design entry. Replace with a flyer, social post, or print piece.', image: 'portfolio/graphic-design-1.jpg', sample: true },
-      { category: 'graphic-design', title: 'Graphic Design — Sample 02', description: 'Placeholder graphic design entry.', image: 'portfolio/graphic-design-2.jpg', sample: true },
-      { category: 'web-design', title: 'Web Design — Sample 01', description: 'Placeholder website entry. Replace the image with a real screenshot and add the live URL.', image: 'portfolio/web-design-1.jpg', type: 'website', url: '#', sample: true },
-      { category: 'web-design', title: 'Web Design — Sample 02', description: 'Placeholder website entry.', image: 'portfolio/web-design-2.jpg', type: 'website', url: '#', sample: true },
-      { category: 'video', title: 'Travel Maui', type: 'video', youtubeId: 'dJkl4D4vLn0' },
-      { category: 'video', title: 'Welcome to Pixel Labs', type: 'video', youtubeId: 'qwxjg__--AI' },
-      { category: 'photography', title: 'Photography — Sample 01', description: 'Placeholder photography entry. Replace with a real shoot.', image: 'portfolio/photography-1.jpg', sample: true },
-      { category: 'photography', title: 'Photography — Sample 02', description: 'Placeholder photography entry.', image: 'portfolio/photography-2.jpg', sample: true },
+      { category: 'brand-design', title: 'Brand Identity — Sample 01', description: 'Placeholder brand design entry. Replace with a real project: logo, brand guide pages, or mockups.', image: 'portfolio/brand-design-1.jpg', sample: true, date: '2026-09-25' },
+      { category: 'brand-design', title: 'Brand Identity — Sample 02', description: 'Placeholder brand design entry.', image: 'portfolio/brand-design-2.jpg', sample: true, date: '2026-09-25' },
+      { category: 'graphic-design', title: 'Graphic Design — Sample 01', description: 'Placeholder graphic design entry. Replace with a flyer, social post, or print piece.', image: 'portfolio/graphic-design-1.jpg', sample: true, date: '2026-09-25' },
+      { category: 'graphic-design', title: 'Graphic Design — Sample 02', description: 'Placeholder graphic design entry.', image: 'portfolio/graphic-design-2.jpg', sample: true, date: '2026-09-25' },
+      { category: 'web-design', title: 'Web Design — Sample 01', description: 'Placeholder website entry. Replace the image with a real screenshot and add the live URL.', image: 'portfolio/web-design-1.jpg', type: 'website', url: '#', sample: true, date: '2026-09-25' },
+      { category: 'web-design', title: 'Web Design — Sample 02', description: 'Placeholder website entry.', image: 'portfolio/web-design-2.jpg', type: 'website', url: '#', sample: true, date: '2026-09-25' },
+      { category: 'photography', title: 'Photography — Sample 01', description: 'Placeholder photography entry. Replace with a real shoot.', image: 'portfolio/photography-1.jpg', sample: true, date: '2026-09-25' },
+      { category: 'photography', title: 'Photography — Sample 02', description: 'Placeholder photography entry.', image: 'portfolio/photography-2.jpg', sample: true, date: '2026-09-25' },
+      { category: 'video', title: 'Travel Maui', type: 'video', youtubeId: 'dJkl4D4vLn0', date: '2026-09-26' },
+      { category: 'video', title: 'Welcome to Pixel Labs', type: 'video', youtubeId: 'qwxjg__--AI', date: '2026-09-26' },
     ];
 
     const CATEGORY_LABELS = {
@@ -694,7 +696,12 @@
         grid.innerHTML = '<p class="portfolio-empty">Work coming soon.</p>';
         return;
       }
-      grid.innerHTML = PORTFOLIO_ITEMS.map((item, i) => {
+      // Newest first, on every tab — items without a date sort last.
+      const ordered = PORTFOLIO_ITEMS
+        .map((item, i) => ({ item, i }))
+        .sort((a, b) => (b.item.date || '').localeCompare(a.item.date || ''));
+
+      grid.innerHTML = ordered.map(({ item, i }) => {
         const type = item.type || 'image';
         const thumb = type === 'video' && item.youtubeId ? videoThumb(item.youtubeId) : item.image;
         const badge = type === 'website' ? `<div class="portfolio-card-badge">${ICONS.website}</div>`
