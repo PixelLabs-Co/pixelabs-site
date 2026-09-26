@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio | Pixel Labs</title>
+  <meta name="description" content="Selected work from Pixel Labs — brand design, graphic design, web design, video, and photography for clients in Portland, OR and beyond." />
+  <link rel="canonical" href="https://www.pixelabs.co/portfolio.html" />
+
+  <!-- Open Graph / iMessage sharing -->
+  <meta property="og:title" content="Portfolio | Pixel Labs" />
+  <meta property="og:description" content="Selected work from Pixel Labs — brand design, graphic design, web design, video, and photography." />
+  <meta property="og:image" content="https://www.pixelabs.co/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://www.pixelabs.co/portfolio.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Pixel Labs" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter/X card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Portfolio | Pixel Labs" />
+  <meta name="twitter:description" content="Selected work from Pixel Labs — brand design, graphic design, web design, video, and photography." />
+  <meta name="twitter:image" content="https://www.pixelabs.co/og-image.png" />
+
+  <!-- Browser theme color (purple) -->
+  <meta name="theme-color" content="#7d03d8" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #09070f;
+      --deep:    #0f0a1a;
+      --white:   #f0edf8;
+      --muted:   rgba(240,237,248,0.55);
+      --accent:  #b06aff;
+      --accent2: #7d03d8;
+      --border:  rgba(176,106,255,0.12);
+      --grad: linear-gradient(135deg, #7d03d8 0%, #a757c0 100%);
+      --serif-display: 'Inter', sans-serif;
+      --body: 'Inter', sans-serif;
+      --mono: 'DM Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--body);
+      font-weight: 300;
+      text-transform: uppercase;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* Cursor */
+    .cursor {
+      position: fixed; width: 10px; height: 10px;
+      background: var(--accent); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      mix-blend-mode: screen;
+    }
+    .cursor-ring {
+      position: fixed; width: 36px; height: 36px;
+      border: 1px solid var(--accent); border-radius: 50%;
+      pointer-events: none; z-index: 9998; opacity: 0.4;
+      transition: width 0.3s, height 0.3s, opacity 0.3s;
+    }
+
+    /* Noise */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 1000; opacity: 0.5;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1.5rem;
+      padding: 1.2rem 3rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(9,7,15,0.88);
+      backdrop-filter: blur(14px);
+    }
+    .nav-logo { display: block; height: 36px; width: auto; flex-shrink: 0; }
+    .nav-logo img { height: 100%; width: auto; display: block; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-family: var(--mono); font-size: 0.8rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(240,237,248,0.6); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+    .nav-cta {
+      font-family: var(--mono); font-size: 0.78rem;
+      letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500;
+      background: var(--grad); color: var(--white);
+      border: none; padding: 0.85rem 1.8rem;
+      cursor: none; text-decoration: none; white-space: nowrap; flex-shrink: 0;
+      transition: opacity 0.2s, box-shadow 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.85; box-shadow: 0 0 20px rgba(125,3,216,0.5); }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--grad); color: var(--white);
+      font-family: var(--mono); font-size: 0.82rem;
+      letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500;
+      padding: 1.15rem 2.4rem; text-decoration: none; border: none; cursor: pointer;
+      transition: box-shadow 0.2s, opacity 0.2s;
+    }
+    .btn-primary:hover { box-shadow: 0 4px 30px rgba(125,3,216,0.55); opacity: 0.9; }
+    .btn-ghost {
+      display: inline-block;
+      border: 1px solid rgba(176,106,255,0.3); color: var(--accent);
+      font-family: var(--mono); font-size: 0.82rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 1.15rem 2.4rem; text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--accent); background: rgba(176,106,255,0.08); }
+    .hero-cta-group { display: flex; gap: 1rem; align-items: center; flex-shrink: 0; }
+
+    .section { padding: 7rem 3rem; }
+    .section-label {
+      font-family: 'Press Start 2P', monospace; font-size: 0.7rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 3rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .section-label::before { content: ''; display: block; width: 28px; height: 1px; background: var(--grad); }
+    .cta-label { justify-content: center; }
+
+    /* PORTFOLIO INTRO */
+    .portfolio-hero {
+      padding: 9rem 3rem 3rem;
+      position: relative; overflow: hidden;
+    }
+    .portfolio-hero-glow {
+      position: absolute; top: -20%; right: -10%;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(125,3,216,0.16) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .portfolio-headline {
+      font-family: var(--serif-display);
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      font-weight: 900; line-height: 0.92; letter-spacing: -0.03em; text-transform: uppercase;
+      margin-bottom: 1.5rem; position: relative;
+    }
+    .portfolio-headline .grad-text {
+      background: var(--grad);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; padding-right: 0.06em; display: inline-block;
+    }
+    .portfolio-sub {
+      max-width: 620px; font-size: 1.05rem; line-height: 1.7; color: var(--muted);
+      position: relative;
+    }
+
+    /* TABS */
+    .portfolio-tabs {
+      display: flex; flex-wrap: wrap; gap: 0.85rem;
+      padding: 0 3rem 3rem;
+    }
+    .portfolio-tab {
+      font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted);
+      background: none; border: 1px solid var(--border);
+      padding: 0.75rem 1.4rem; cursor: pointer;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .portfolio-tab:hover { border-color: var(--accent); color: var(--white); }
+    .portfolio-tab.active {
+      background: var(--grad); border-color: transparent; color: var(--white);
+    }
+
+    /* GRID */
+    .portfolio-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; padding: 0 3rem 7rem;
+    }
+    .portfolio-card {
+      position: relative; overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--deep);
+      cursor: pointer;
+      aspect-ratio: 4 / 5;
+      transition: transform 0.2s;
+    }
+    .portfolio-card.is-hidden { display: none; }
+    .portfolio-card:hover { transform: translateY(-4px); }
+    .portfolio-card[data-type="web-design"], .portfolio-card[data-type="video"] { aspect-ratio: 16 / 10; }
+    .portfolio-card img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.4s;
+    }
+    .portfolio-card:hover img { transform: scale(1.05); }
+    .portfolio-card-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(9,7,15,0.92) 0%, rgba(9,7,15,0.1) 55%, transparent 100%);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 1.4rem;
+    }
+    .portfolio-card-cat {
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em;
+      color: var(--accent); margin-bottom: 0.4rem;
+    }
+    .portfolio-card-title {
+      font-family: var(--serif-display); font-size: 1.15rem; font-weight: 900;
+      letter-spacing: -0.01em; text-transform: uppercase; line-height: 1.1;
+    }
+    .portfolio-card-badge {
+      position: absolute; top: 1rem; right: 1rem;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(9,7,15,0.7); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--white);
+    }
+    .portfolio-card-badge svg { width: 16px; height: 16px; }
+    .portfolio-sample-tag {
+      position: absolute; top: 1rem; left: 1rem;
+      font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.1em;
+      background: rgba(9,7,15,0.7); border: 1px solid var(--border);
+      color: var(--muted); padding: 0.35rem 0.6rem;
+    }
+    .portfolio-empty {
+      grid-column: 1 / -1; text-align: center; padding: 4rem 0;
+      color: var(--muted); font-size: 0.95rem;
+    }
+
+    /* LIGHTBOX */
+    .lightbox-overlay {
+      position: fixed; inset: 0; z-index: 300;
+      background: rgba(9,7,15,0.92); backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 2rem;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .lightbox-overlay.open { opacity: 1; pointer-events: all; }
+    .lightbox-card {
+      position: relative; width: 100%; max-width: 900px; max-height: 90vh;
+      overflow-y: auto;
+      background: var(--black); border: 1px solid var(--border);
+      transform: translateY(20px); transition: transform 0.3s ease;
+    }
+    .lightbox-overlay.open .lightbox-card { transform: translateY(0); }
+    .lightbox-media { width: 100%; background: var(--deep); display: block; }
+    .lightbox-media img { width: 100%; height: auto; display: block; }
+    .lightbox-video-frame { position: relative; width: 100%; aspect-ratio: 16/9; }
+    .lightbox-video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .lightbox-body { padding: 2rem 2.5rem 2.5rem; }
+    .lightbox-cat { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.6rem; }
+    .lightbox-title {
+      font-family: var(--serif-display); font-size: 1.8rem; font-weight: 900;
+      letter-spacing: -0.02em; text-transform: uppercase; line-height: 1.05; margin-bottom: 0.75rem;
+    }
+    .lightbox-desc { font-size: 0.92rem; line-height: 1.7; color: var(--muted); margin-bottom: 1.5rem; }
+    .lightbox-close {
+      position: absolute; top: 1.2rem; right: 1.2rem; z-index: 2;
+      width: 36px; height: 36px; background: rgba(9,7,15,0.7); border: 1px solid var(--border);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+    .lightbox-close span { position: absolute; width: 16px; height: 1.5px; background: var(--white); }
+    .lightbox-close span:first-child { transform: rotate(45deg); }
+    .lightbox-close span:last-child { transform: rotate(-45deg); }
+    .lightbox-close:hover span { background: var(--accent); }
+
+    /* CTA */
+    .cta-section { padding: 8rem 3rem; text-align: center; position: relative; overflow: hidden; }
+    .cta-glow {
+      position: absolute; bottom: -30%; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(125,3,216,0.14) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .cta-headline {
+      font-family: var(--serif-display);
+      font-size: clamp(3.5rem, 9vw, 9rem); font-weight: 900; letter-spacing: -0.04em; text-transform: uppercase; line-height: 0.88;
+      margin-bottom: 2.5rem;
+    }
+    .cta-headline .grad-text {
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; padding-right: 0.06em; display: inline-block;
+    }
+    .cta-headline .outline {
+      font-family: 'Inter', sans-serif; font-weight: 900;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; padding-right: 0.06em; display: inline-block;
+    }
+    .cta-sub { font-size: 1.05rem; color: var(--muted); margin-bottom: 3rem; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 3rem;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; column-gap: 2rem;
+      font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: rgba(240,237,248,0.5);
+    }
+    footer a { color: rgba(240,237,248,0.5); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--accent); }
+    .footer-brand { display: flex; flex-direction: column; align-items: center; gap: 0.9rem; justify-self: center; }
+    .footer-logo { height: 26px; width: auto; display: block; opacity: 0.85; }
+    .footer-links { display: flex; gap: 2rem; justify-self: start; }
+    .footer-location { justify-self: end; }
+
+    /* CONTACT MODAL (same as homepage) */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 310;
+      background: rgba(9,7,15,0.85); backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 2rem;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal-card {
+      position: relative;
+      width: 100%; max-width: 560px; max-height: 90vh; overflow-y: auto;
+      background: var(--black); border: 1px solid var(--border);
+      padding: 3rem;
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+    .modal-overlay.open .modal-card { transform: translateY(0); }
+    .modal-close {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      width: 32px; height: 32px; background: none; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .modal-close span { position: absolute; width: 18px; height: 1.5px; background: var(--white); }
+    .modal-close span:first-child { transform: rotate(45deg); }
+    .modal-close span:last-child { transform: rotate(-45deg); }
+    .modal-close:hover span { background: var(--accent); }
+    .modal-title {
+      font-family: var(--serif-display); font-size: 2rem; font-weight: 900;
+      letter-spacing: -0.02em; text-transform: uppercase; line-height: 1;
+      margin-bottom: 0.75rem;
+    }
+    .modal-sub { font-size: 0.9rem; line-height: 1.6; color: var(--muted); margin-bottom: 2rem; }
+    .form-row { margin-bottom: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; }
+    .form-row label {
+      font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .form-required { color: var(--muted); opacity: 0.6; text-transform: none; letter-spacing: 0; }
+    .form-row-split { flex-direction: row; gap: 1.5rem; }
+    .form-row-split .form-row { flex: 1; margin-bottom: 0; }
+    .form-row input, .form-row select, .form-row textarea {
+      background: var(--deep); border: 1px solid var(--border); color: var(--white);
+      font-family: var(--body); font-size: 0.95rem;
+      padding: 0.85rem 1rem; width: 100%;
+      transition: border-color 0.2s;
+    }
+    .form-row input:focus, .form-row select:focus, .form-row textarea:focus { outline: none; border-color: var(--accent); }
+    .form-row textarea { resize: vertical; min-height: 100px; }
+    .form-row select { cursor: pointer; }
+    .modal-submit { width: 100%; border: none; cursor: pointer; margin-top: 0.5rem; }
+    .modal-fallback { font-size: 0.8rem; color: var(--muted); text-align: center; margin-top: 1.2rem; }
+    .modal-fallback a { color: var(--accent); text-decoration: none; }
+    .modal-fallback a:hover { text-decoration: underline; }
+    .modal-success-title {
+      font-family: var(--serif-display); font-size: 1.8rem; font-weight: 900;
+      text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 0.75rem;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ANIMATIONS */
+    .reveal { opacity: 0; transform: translateY(38px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column; justify-content: center; gap: 5px;
+      width: 36px; height: 36px; cursor: pointer; background: none; border: none;
+      padding: 4px; z-index: 200;
+    }
+    .nav-hamburger span { display: block; width: 100%; height: 1.5px; background: var(--white); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    .mobile-drawer {
+      display: none;
+      position: fixed; inset: 0; z-index: 90;
+      background: rgba(9,7,15,0.97); backdrop-filter: blur(16px);
+      flex-direction: column; align-items: center; justify-content: center; gap: 0;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    }
+    .mobile-drawer.open { opacity: 1; pointer-events: all; }
+    .mobile-drawer a {
+      font-family: 'Inter', sans-serif; font-weight: 900;
+      font-size: clamp(2rem, 8vw, 3rem);
+      letter-spacing: -0.03em; text-transform: uppercase; color: var(--white);
+      text-decoration: none; padding: 0.5rem 0; transition: color 0.2s;
+      border-bottom: 1px solid var(--border); width: 80%; text-align: center;
+    }
+    .mobile-drawer a:last-child { border-bottom: none; }
+    .mobile-drawer a:hover { color: var(--accent); }
+    .mobile-drawer-cta {
+      margin-top: 2rem;
+      background: var(--grad) !important;
+      font-size: 0.8rem !important; font-weight: 500 !important; letter-spacing: 0.1em !important;
+      padding: 1rem 2.5rem !important; border-bottom: none !important; width: auto !important; color: var(--white) !important;
+    }
+
+    @media (min-width: 901px) and (max-width: 1080px) {
+      nav { padding: 1.2rem 1.5rem; gap: 1rem; }
+      .nav-links { gap: 1.1rem; }
+      .nav-links a { font-size: 0.7rem; }
+      .nav-cta { font-size: 0.68rem; padding: 0.8rem 1.2rem; }
+    }
+
+    @media (max-width: 900px) {
+      .cursor, .cursor-ring { display: none; }
+      body { cursor: auto; }
+      a, button { cursor: pointer; }
+
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .nav-hamburger { display: flex; }
+      .mobile-drawer { display: flex; }
+      .nav-logo { height: 28px; }
+
+      .portfolio-hero { padding: 7rem 1.5rem 2rem; }
+      .portfolio-tabs { padding: 0 1.5rem 2rem; }
+      .portfolio-grid { grid-template-columns: 1fr; padding: 0 1.5rem 4rem; gap: 1.25rem; }
+      .portfolio-card, .portfolio-card[data-type="web-design"], .portfolio-card[data-type="video"] { aspect-ratio: 4/5; }
+
+      .cta-section { padding: 5rem 1.5rem; text-align: left; }
+      .cta-headline { font-size: clamp(3rem, 14vw, 6rem); }
+      .cta-sub { font-size: 0.95rem; }
+      .cta-section .hero-cta-group { flex-direction: column; align-items: flex-start; }
+      .cta-section .btn-primary, .cta-section .btn-ghost { width: 100%; max-width: 320px; text-align: center; }
+      .cta-label { justify-content: flex-start; }
+
+      footer { display: flex; flex-direction: column; gap: 1.2rem; text-align: center; padding: 2rem 1.5rem; }
+      .footer-brand { order: 1; }
+      .footer-links { order: 2; flex-wrap: wrap; justify-content: center; gap: 1.2rem; justify-self: unset; }
+      .footer-location { order: 3; justify-self: unset; }
+
+      .modal-overlay { padding: 0; align-items: flex-end; }
+      .modal-card { max-width: 100%; max-height: 92vh; padding: 2.5rem 1.5rem 2rem; }
+      .form-row-split { flex-direction: column; gap: 1.25rem; }
+      .form-row-split .form-row { margin-bottom: 0; }
+
+      .lightbox-body { padding: 1.5rem; }
+      .lightbox-title { font-size: 1.4rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+      body { cursor: auto; }
+      .cursor, .cursor-ring { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo"><img src="logo-mark.png" alt="Pixel Labs"></a>
+    <ul class="nav-links">
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="portfolio.html" class="active">Portfolio</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#pricing">Pricing</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <a href="mailto:info@pixelabs.co?subject=Start%20a%20Project" class="nav-cta contact-trigger" data-intent="project" data-source="Portfolio nav bar">Start a Project</a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <a href="index.html#services" class="drawer-link">Services</a>
+    <a href="portfolio.html" class="drawer-link">Portfolio</a>
+    <a href="index.html#about" class="drawer-link">About</a>
+    <a href="index.html#pricing" class="drawer-link">Pricing</a>
+    <a href="index.html#contact" class="drawer-link">Contact</a>
+    <a href="mailto:info@pixelabs.co?subject=Start%20a%20Project" class="mobile-drawer-cta drawer-link contact-trigger" data-intent="project" data-source="Portfolio mobile menu">Start a Project</a>
+  </div>
+
+  <div id="main-page">
+    <!-- PORTFOLIO INTRO -->
+    <section class="portfolio-hero">
+      <div class="portfolio-hero-glow"></div>
+      <p class="section-label reveal">Selected Work</p>
+      <h1 class="portfolio-headline reveal">Our <span class="grad-text">Portfolio</span></h1>
+      <p class="portfolio-sub reveal">A look at brand, design, web, video, and photo work made for real clients. Filter by category to browse.</p>
+    </section>
+
+    <!-- TABS -->
+    <div class="portfolio-tabs reveal" id="portfolioTabs">
+      <button class="portfolio-tab active" data-filter="all">All</button>
+      <button class="portfolio-tab" data-filter="brand-design">Brand Design</button>
+      <button class="portfolio-tab" data-filter="graphic-design">Graphic Design</button>
+      <button class="portfolio-tab" data-filter="web-design">Web Design</button>
+      <button class="portfolio-tab" data-filter="video">Video</button>
+      <button class="portfolio-tab" data-filter="photography">Photography</button>
+    </div>
+
+    <!-- GRID -->
+    <div class="portfolio-grid" id="portfolioGrid"></div>
+
+    <!-- CTA -->
+    <section class="cta-section" id="contact">
+      <div class="cta-glow"></div>
+      <p class="section-label cta-label reveal">Let's Talk</p>
+      <h2 class="cta-headline reveal">Like What You <span class="outline">See?</span></h2>
+      <p class="cta-sub reveal">Let's build something that belongs in this portfolio next.</p>
+      <div class="hero-cta-group reveal" style="justify-content:center;">
+        <a href="mailto:info@pixelabs.co?subject=Start%20a%20Project" class="btn-primary contact-trigger" data-intent="project" data-source="Portfolio bottom CTA">Start a Project</a>
+        <a href="mailto:info@pixelabs.co?subject=Custom%20Quote" class="btn-ghost contact-trigger" data-intent="quote" data-source="Portfolio bottom CTA">Get a Custom Quote</a>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-links">
+        <a href="index.html#services">Services</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#pricing">Pricing</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+      <div class="footer-brand">
+        <img src="logo-mark.png" alt="Pixel Labs" class="footer-logo" />
+        <span>© 2026 Pixel Labs. All rights reserved.</span>
+      </div>
+      <span class="footer-location">Portland, OR</span>
+    </footer>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox-overlay" id="lightbox" aria-hidden="true">
+    <div class="lightbox-card" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle">
+      <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Close">
+        <span></span><span></span>
+      </button>
+      <div class="lightbox-media" id="lightboxMedia"></div>
+      <div class="lightbox-body">
+        <p class="lightbox-cat" id="lightboxCat"></p>
+        <h3 class="lightbox-title" id="lightboxTitle"></h3>
+        <p class="lightbox-desc" id="lightboxDesc"></p>
+        <a href="#" class="btn-primary" id="lightboxLink" style="display:none;" target="_blank" rel="noopener">Visit Live Site</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT MODAL -->
+  <div class="modal-overlay" id="contactModal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button type="button" class="modal-close" id="modalClose" aria-label="Close">
+        <span></span><span></span>
+      </button>
+      <div class="modal-body" id="modalBody">
+        <p class="section-label" style="margin-bottom:1.2rem;">Let's Talk</p>
+        <h3 class="modal-title" id="modalTitle">Start a Project</h3>
+        <p class="modal-sub" id="modalSub">Tell us a bit about what you need, and we'll follow up by email.</p>
+        <form id="contactForm" action="https://formspree.io/f/xzezawzq" method="POST">
+          <input type="hidden" name="_subject" id="formSubject" value="New Project Inquiry — pixelabs.co" />
+          <input type="hidden" name="Inquiry Type" id="formIntentField" value="Start a Project" />
+          <input type="hidden" name="Sent From" id="formSourceField" value="" />
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+          <div class="form-row form-row-split">
+            <div class="form-row">
+              <label for="cf-first-name">First Name <span class="form-required">(required)</span></label>
+              <input type="text" id="cf-first-name" name="First Name" required autocomplete="given-name" />
+            </div>
+            <div class="form-row">
+              <label for="cf-last-name">Last Name <span class="form-required">(required)</span></label>
+              <input type="text" id="cf-last-name" name="Last Name" required autocomplete="family-name" />
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="cf-org">Business/Organization</label>
+            <input type="text" id="cf-org" name="Business/Organization" autocomplete="organization" />
+          </div>
+          <div class="form-row">
+            <label for="cf-email">Email <span class="form-required">(required)</span></label>
+            <input type="email" id="cf-email" name="Email" required autocomplete="email" />
+          </div>
+          <div class="form-row">
+            <label for="cf-service">What kind of project are you looking to accomplish? <span class="form-required">(required)</span></label>
+            <select id="cf-service" name="Project Type" required>
+              <option value="" disabled selected>Select one</option>
+              <option>Graphic Design</option>
+              <option>Brand Identity</option>
+              <option>Web Design</option>
+              <option>Photo & Video</option>
+              <option>Campaign Kits</option>
+              <option>Monthly Support</option>
+              <option>Not Sure Yet</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="cf-timeline">Ideal timeline for project completion</label>
+            <input type="text" id="cf-timeline" name="Timeline" placeholder="A launch date, next month, or still figuring it out" />
+          </div>
+          <div class="form-row">
+            <label for="cf-message">Tell us about your project <span class="form-required">(required)</span></label>
+            <textarea id="cf-message" name="Message" rows="4" required placeholder="What are you looking to create, and who's it for? Any existing brand assets (logo, colors, fonts)? Your budget range, and links to any designs or examples you like."></textarea>
+          </div>
+          <button type="submit" class="btn-primary modal-submit" id="modalSubmit">Send Message</button>
+          <p class="modal-fallback">Or email us directly at <a href="mailto:info@pixelabs.co">info@pixelabs.co</a></p>
+        </form>
+        <div class="modal-success" id="modalSuccess" hidden>
+          <p class="modal-success-title">Message Sent.</p>
+          <p class="modal-sub">Thanks for reaching out—we'll get back to you soon.</p>
+        </div>
+        <div class="modal-error" id="modalError" hidden>
+          <p class="modal-sub">Something went wrong. Please try again, or email us directly at <a href="mailto:info@pixelabs.co">info@pixelabs.co</a>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ============================================================
+       PORTFOLIO DATA
+       To add new work: copy an object below and fill it in.
+       Fields:
+         category: "brand-design" | "graphic-design" | "web-design" | "video" | "photography"
+         title: string shown on the card and in the lightbox
+         description: string shown in the lightbox (optional)
+         image: path to a JPG/PNG in the /portfolio folder (not needed for video)
+         type: "image" (default) | "website" | "video"
+         url: live site link (type: "website" only)
+         youtubeId: the YouTube video ID, e.g. "dQw4w9WgXcQ" (type: "video" only)
+         sample: true marks it as a placeholder (shows a SAMPLE tag) — remove
+                 this line once it's real work.
+       ============================================================ */
+    const PORTFOLIO_ITEMS = [
+      { category: 'brand-design', title: 'Brand Identity — Sample 01', description: 'Placeholder brand design entry. Replace with a real project: logo, brand guide pages, or mockups.', image: 'portfolio/brand-design-1.jpg', sample: true },
+      { category: 'brand-design', title: 'Brand Identity — Sample 02', description: 'Placeholder brand design entry.', image: 'portfolio/brand-design-2.jpg', sample: true },
+      { category: 'graphic-design', title: 'Graphic Design — Sample 01', description: 'Placeholder graphic design entry. Replace with a flyer, social post, or print piece.', image: 'portfolio/graphic-design-1.jpg', sample: true },
+      { category: 'graphic-design', title: 'Graphic Design — Sample 02', description: 'Placeholder graphic design entry.', image: 'portfolio/graphic-design-2.jpg', sample: true },
+      { category: 'web-design', title: 'Web Design — Sample 01', description: 'Placeholder website entry. Replace the image with a real screenshot and add the live URL.', image: 'portfolio/web-design-1.jpg', type: 'website', url: '#', sample: true },
+      { category: 'web-design', title: 'Web Design — Sample 02', description: 'Placeholder website entry.', image: 'portfolio/web-design-2.jpg', type: 'website', url: '#', sample: true },
+      { category: 'video', title: 'Video — Sample 01', description: 'Placeholder video entry. Replace with a real YouTube link and it will play right in the lightbox.', image: 'portfolio/video-1.jpg', type: 'video', sample: true },
+      { category: 'video', title: 'Video — Sample 02', description: 'Placeholder video entry.', image: 'portfolio/video-2.jpg', type: 'video', sample: true },
+      { category: 'photography', title: 'Photography — Sample 01', description: 'Placeholder photography entry. Replace with a real shoot.', image: 'portfolio/photography-1.jpg', sample: true },
+      { category: 'photography', title: 'Photography — Sample 02', description: 'Placeholder photography entry.', image: 'portfolio/photography-2.jpg', sample: true },
+    ];
+
+    const CATEGORY_LABELS = {
+      'brand-design': 'Brand Design',
+      'graphic-design': 'Graphic Design',
+      'web-design': 'Web Design',
+      'video': 'Video',
+      'photography': 'Photography'
+    };
+
+    const ICONS = {
+      website: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3h7v7M21 3l-9 9M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg>',
+      video: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>'
+    };
+
+    const grid = document.getElementById('portfolioGrid');
+
+    function videoThumb(id) {
+      return `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+    }
+
+    function renderGrid() {
+      if (!PORTFOLIO_ITEMS.length) {
+        grid.innerHTML = '<p class="portfolio-empty">Work coming soon.</p>';
+        return;
+      }
+      grid.innerHTML = PORTFOLIO_ITEMS.map((item, i) => {
+        const type = item.type || 'image';
+        const thumb = type === 'video' && item.youtubeId ? videoThumb(item.youtubeId) : item.image;
+        const badge = type === 'website' ? `<div class="portfolio-card-badge">${ICONS.website}</div>`
+                    : type === 'video' ? `<div class="portfolio-card-badge">${ICONS.video}</div>`
+                    : '';
+        const sampleTag = item.sample ? '<span class="portfolio-sample-tag">Sample</span>' : '';
+        const imgTag = thumb ? `<img src="${thumb}" alt="${item.title}" loading="lazy" />` : '';
+        return `
+          <div class="portfolio-card reveal" data-category="${item.category}" data-type="${type}" data-index="${i}">
+            ${imgTag}
+            ${sampleTag}
+            ${badge}
+            <div class="portfolio-card-overlay">
+              <div class="portfolio-card-cat">${CATEGORY_LABELS[item.category] || item.category}</div>
+              <div class="portfolio-card-title">${item.title}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      grid.querySelectorAll('.portfolio-card').forEach(card => {
+        card.addEventListener('click', () => openLightbox(PORTFOLIO_ITEMS[+card.dataset.index]));
+        card.addEventListener('mouseenter', () => ringHover(true));
+        card.addEventListener('mouseleave', () => ringHover(false));
+      });
+
+      observeReveals();
+    }
+
+    // Tabs
+    document.querySelectorAll('.portfolio-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.portfolio-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const filter = tab.dataset.filter;
+        document.querySelectorAll('.portfolio-card').forEach(card => {
+          const match = filter === 'all' || card.dataset.category === filter;
+          card.classList.toggle('is-hidden', !match);
+        });
+      });
+    });
+
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lightboxClose = document.getElementById('lightboxClose');
+    const lightboxMedia = document.getElementById('lightboxMedia');
+    const lightboxCat = document.getElementById('lightboxCat');
+    const lightboxTitle = document.getElementById('lightboxTitle');
+    const lightboxDesc = document.getElementById('lightboxDesc');
+    const lightboxLink = document.getElementById('lightboxLink');
+    let lastFocusedLightbox = null;
+
+    function openLightbox(item) {
+      const type = item.type || 'image';
+      lightboxCat.textContent = CATEGORY_LABELS[item.category] || item.category;
+      lightboxTitle.textContent = item.title;
+      lightboxDesc.textContent = item.description || '';
+
+      if (type === 'video' && item.youtubeId) {
+        lightboxMedia.innerHTML = `<div class="lightbox-video-frame"><iframe src="https://www.youtube.com/embed/${item.youtubeId}?autoplay=1" title="${item.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
+      } else if (type === 'video') {
+        lightboxMedia.innerHTML = `<div class="lightbox-video-frame" style="display:flex;align-items:center;justify-content:center;color:var(--muted);font-family:var(--mono);font-size:0.8rem;">Sample placeholder — add a YouTube link to play here.</div>`;
+      } else if (item.image) {
+        lightboxMedia.innerHTML = `<img src="${item.image}" alt="${item.title}" />`;
+      } else {
+        lightboxMedia.innerHTML = '';
+      }
+
+      if (type === 'website' && item.url) {
+        lightboxLink.style.display = 'inline-block';
+        lightboxLink.href = item.url;
+      } else {
+        lightboxLink.style.display = 'none';
+        lightboxLink.href = '#';
+      }
+
+      lastFocusedLightbox = document.activeElement;
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      lightboxMedia.innerHTML = '';
+      if (lastFocusedLightbox) lastFocusedLightbox.focus();
+    }
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+    });
+
+    // Hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const drawer = document.getElementById('mobileDrawer');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      drawer.classList.toggle('open');
+      document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+    });
+    document.querySelectorAll('.drawer-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        drawer.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Custom cursor
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    function animateCursor() {
+      cursor.style.left = (mx - 5) + 'px';
+      cursor.style.top  = (my - 5) + 'px';
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.left = (rx - 18) + 'px';
+      ring.style.top  = (ry - 18) + 'px';
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+    function ringHover(on) {
+      ring.style.width = on ? '60px' : '36px';
+      ring.style.height = on ? '60px' : '36px';
+      ring.style.opacity = on ? '0.7' : '0.4';
+    }
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => ringHover(true));
+      el.addEventListener('mouseleave', () => ringHover(false));
+    });
+
+    // Reveal-on-scroll
+    function observeReveals() {
+      const reveals = document.querySelectorAll('.reveal:not(.visible)');
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach((e, i) => {
+          if (e.isIntersecting) {
+            setTimeout(() => e.target.classList.add('visible'), i * 60);
+            obs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      reveals.forEach(el => obs.observe(el));
+    }
+
+    renderGrid();
+    observeReveals();
+
+    // Contact modal
+    const modal = document.getElementById('contactModal');
+    const modalClose = document.getElementById('modalClose');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalSub = document.getElementById('modalSub');
+    const modalSubmit = document.getElementById('modalSubmit');
+    const contactForm = document.getElementById('contactForm');
+    const modalSuccess = document.getElementById('modalSuccess');
+    const modalError = document.getElementById('modalError');
+    const formSubject = document.getElementById('formSubject');
+    const formIntentField = document.getElementById('formIntentField');
+    const formSourceField = document.getElementById('formSourceField');
+    let lastFocused = null;
+
+    const copy = {
+      project: {
+        title: 'Start a Project',
+        sub: "Tell us a bit about what you need, and we'll follow up by email.",
+        subject: 'New Project Inquiry — pixelabs.co',
+        intent: 'Start a Project'
+      },
+      quote: {
+        title: 'Get a Custom Quote',
+        sub: "Share the details and we'll send back a custom quote.",
+        subject: 'New Quote Request — pixelabs.co',
+        intent: 'Get a Custom Quote'
+      }
+    };
+
+    function openModal(intentKey, source) {
+      const c = copy[intentKey] || copy.project;
+      modalTitle.textContent = c.title;
+      modalSub.textContent = c.sub;
+      formSubject.value = c.subject;
+      formIntentField.value = c.intent;
+      formSourceField.value = source || '';
+      contactForm.hidden = false;
+      modalSuccess.hidden = true;
+      modalError.hidden = true;
+      modalSubmit.disabled = false;
+      modalSubmit.textContent = 'Send Message';
+      lastFocused = document.activeElement;
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => document.getElementById('cf-first-name').focus(), 100);
+    }
+
+    function closeModal() {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (lastFocused) lastFocused.focus();
+    }
+
+    document.querySelectorAll('.contact-trigger').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal(el.dataset.intent, el.dataset.source);
+      });
+    });
+
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+    });
+
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      modalSubmit.disabled = true;
+      modalSubmit.textContent = 'Sending…';
+      try {
+        const res = await fetch(contactForm.action, {
+          method: 'POST',
+          body: new FormData(contactForm),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          contactForm.hidden = true;
+          modalSuccess.hidden = false;
+          contactForm.reset();
+        } else {
+          throw new Error('Submission failed');
+        }
+      } catch (err) {
+        modalError.hidden = false;
+        modalSubmit.disabled = false;
+        modalSubmit.textContent = 'Send Message';
+      }
+    });
+  </script>
+</body>
+</html>
