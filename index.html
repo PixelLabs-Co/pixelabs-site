@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pixel Labs — Design That Scales</title>
+  <meta name="description" content="Pixel Labs is a creative freelance studio in Portland, OR — graphic design, brand identity, web design, photography, and video that actually work." />
+  <link rel="canonical" href="https://www.pixelabs.co/" />
 
   <!-- Open Graph / iMessage sharing -->
   <meta property="og:title" content="Pixel Labs — Design That Scales" />
@@ -29,6 +31,26 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <!-- Structured data for local search -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Pixel Labs",
+    "url": "https://www.pixelabs.co",
+    "image": "https://www.pixelabs.co/og-image.png",
+    "description": "A creative freelance studio based in Portland, OR. Graphic design, brand identity, web design, photography, and video.",
+    "email": "info@pixelabs.co",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Portland",
+      "addressRegion": "OR",
+      "addressCountry": "US"
+    },
+    "areaServed": "Portland, OR"
+  }
+  </script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -592,6 +614,20 @@
     @media (max-width: 480px) {
       .hero-headline { font-size: clamp(3rem, 18vw, 5rem); }
       .services-grid { gap: 1px; }
+    }
+
+    /* Respect the OS-level "reduce motion" setting */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .hero-eyebrow, .hero-headline, .hero-sub-row, .hero-scroll { opacity: 1; }
+      .reveal { opacity: 1; transform: none; }
+      body { cursor: auto; }
+      .cursor, .cursor-ring { display: none; }
     }
 
 
