@@ -425,6 +425,7 @@
     }
     footer a { color: rgba(240,237,248,0.5); text-decoration: none; transition: color 0.2s; }
     footer a:hover { color: var(--accent); }
+    .footer-brand { display: flex; flex-direction: column; align-items: center; gap: 0.9rem; }
     .footer-logo { height: 26px; width: auto; display: block; opacity: 0.85; }
     .footer-bottom {
       width: 100%; display: flex; align-items: center; justify-content: space-between;
@@ -769,9 +770,11 @@
 
   <!-- FOOTER -->
   <footer>
-    <img src="logo-mark.png" alt="Pixel Labs" class="footer-logo" />
-    <div class="footer-bottom">
+    <div class="footer-brand">
+      <img src="logo-mark.png" alt="Pixel Labs" class="footer-logo" />
       <span>© 2026 Pixel Labs. All rights reserved.</span>
+    </div>
+    <div class="footer-bottom">
       <div class="footer-links">
         <a href="#services">Services</a>
         <a href="#about">About</a>
