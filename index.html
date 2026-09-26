@@ -364,6 +364,11 @@
       text-transform: uppercase; letter-spacing: 0.02em;
       color: var(--muted);
     }
+    .pricing-head {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 2rem; margin-bottom: 2.5rem;
+    }
+    .pricing-head .btn-primary { flex-shrink: 0; }
 
     /* CTA */
     .cta-section {
@@ -516,6 +521,8 @@
 
       /* Services */
       .services-grid { grid-template-columns: 1fr; }
+      .pricing-head { flex-direction: column; align-items: flex-start; }
+      .pricing-head .btn-primary { width: 100%; text-align: center; }
       .service-card { padding: 2rem 1.5rem; }
       .service-title { font-size: 1.4rem; }
 
@@ -655,8 +662,30 @@
       </div>
     </div>
     <div class="pricing-disclaimer reveal" id="pricing">
-      <h2 class="pricing-disclaimer-title">Pricing</h2>
-      <p class="pricing-disclaimer-text">Each project is custom quoted based on scope, timeline, and deliverables. Contact us for your custom quote.</p>
+      <div class="pricing-head">
+        <div>
+          <h2 class="pricing-disclaimer-title">Pricing</h2>
+          <p class="pricing-disclaimer-text">Every brand is different, so every project is custom quoted based on scope, timeline, and deliverables. No one-size-fits-all packages—just a clear price for the work you actually need.</p>
+        </div>
+        <a href="mailto:info@pixelabs.co?subject=Custom%20Quote" class="btn-primary">Get a Custom Quote</a>
+      </div>
+      <div class="services-grid pricing-steps">
+        <div class="service-card">
+          <div class="service-num">01</div>
+          <div class="service-title">Tell Us the Goal</div>
+          <p class="service-desc">Share what you're building, who it's for, and when you need it. One-off project or ongoing support—we'll start there.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-num">02</div>
+          <div class="service-title">Get Your Quote</div>
+          <p class="service-desc">We scope the deliverables and timeline, then send a custom quote built around your project—before any work begins.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-num">03</div>
+          <div class="service-title">We Get to Work</div>
+          <p class="service-desc">Sharp, consistent visuals delivered fast—designed to look good and actually work across every platform.</p>
+        </div>
+      </div>
     </div>
   </section>
 
