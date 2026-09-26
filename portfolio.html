@@ -546,7 +546,132 @@
     </div>
 
     <!-- GRID -->
-    <div class="portfolio-grid" id="portfolioGrid"></div>
+    <!--
+      To add new work: copy a .portfolio-card block below and edit it.
+      Newest work goes at the TOP of this list.
+        data-category: brand-design | graphic-design | web-design | video | photography
+        data-type: image (default, omit it) | website | video
+        data-title / data-description: shown on the card and in the lightbox
+        For an image: put the file in /portfolio and reference it in the <img src>.
+        For a website: same as image, plus data-url set to the live site link.
+        For a video: no <img>/media div contents needed except the play button —
+          set data-youtube-id to the video's ID (the part after youtu.be/ or v=).
+        Add class "portfolio-sample" + a <span class="portfolio-sample-tag">Sample</span>
+          to mark a placeholder — remove both once it's real work.
+    -->
+    <div class="portfolio-grid" id="portfolioGrid">
+      <div class="portfolio-card reveal" data-category="video" data-type="video" data-title="Travel Maui" data-youtube-id="dJkl4D4vLn0">
+        <div class="portfolio-card-media">
+          <img src="https://img.youtube.com/vi/dJkl4D4vLn0/hqdefault.jpg" alt="Travel Maui" loading="lazy" />
+          <div class="portfolio-card-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
+        <div class="portfolio-card-info">
+          <div class="portfolio-card-cat">Video</div>
+          <div class="portfolio-card-title">Travel Maui</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card reveal" data-category="video" data-type="video" data-title="Welcome to Pixel Labs" data-youtube-id="qwxjg__--AI">
+        <div class="portfolio-card-media">
+          <img src="https://img.youtube.com/vi/qwxjg__--AI/hqdefault.jpg" alt="Welcome to Pixel Labs" loading="lazy" />
+          <div class="portfolio-card-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
+        <div class="portfolio-card-info">
+          <div class="portfolio-card-cat">Video</div>
+          <div class="portfolio-card-title">Welcome to Pixel Labs</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card reveal portfolio-sample" data-category="brand-design" data-title="Brand Identity — Sample 01" data-description="Placeholder brand design entry. Replace with a real project: logo, brand guide pages, or mockups.">
+        <div class="portfolio-card-media">
+          <img src="portfolio/brand-design-1.jpg" alt="Brand Identity — Sample 01" loading="lazy" />
+          <span class="portfolio-sample-tag">Sample</span>
+        </div>
+        <div class="portfolio-card-info">
+          <div class="portfolio-card-cat">Brand Design</div>
+          <div class="portfolio-card-title">Brand Identity — Sample 01</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card reveal portfolio-sample" data-category="brand-design" data-title="Brand Identity — Sample 02" data-description="Placeholder brand design entry.">
+        <div class="portfolio-card-media">
+          <img src="portfolio/brand-design-2.jpg" alt="Brand Identity — Sample 02" loading="lazy" />
+          <span class="portfolio-sample-tag">Sample</span>
+        </div>
+        <div class="portfolio-card-info">
+          <div class="portfolio-card-cat">Brand Design</div>
+          <div class="portfolio-card-title">Brand Identity — Sample 02</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card reveal portfolio-sample" data-category="graphic-design" data-title="Graphic Design — Sample 01" data-description="Placeholder graphic design entry. Replace with a flyer, social post, or print piece.">
+        <div class="portfolio-card-media">
+          <img src="portfolio/graphic-design-1.jpg" alt="Graphic Design — Sample 01" loading="lazy" />
+          <span class="portfolio-sample-tag">Sample</span>
+        </div>
+        <div class="portfolio-card-info">
+          <div class="portfolio-card-cat">Graphic Design</div>
+          <div class="portfolio-card-title">Graphic Design — Sample 01</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card reveal portfolio-sample" data-category="graphic-design" data-title="Graphic Design — Sample 02" data-description="Placeholder graphic design entry.">
+        <div class="portfolio-card-media">
+          <img src="portfolio/graphic-design-2.jpg" alt="Graphic Design — Sample 02" loading="lazy" />
+          <span class="portfolio-sample-tag">Sample</span>
+        </div>
+        <div class="portfolio-card-info">
+          <div class="portfolio-card-cat">Graphic Design</div>
+          <div class="portfolio-card-title">Graphic Design — Sample 02</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card reveal portfolio-sample" data-category="web-design" data-type="website" data-title="Web Design — Sample 01" data-description="Placeholder website entry. Replace the image with a real screenshot and add the live URL." data-url="#">
+        <div class="portfolio-card-media">
+          <img src="portfolio/web-design-1.jpg" alt="Web Design — Sample 01" loading="lazy" />
+          <span class="portfolio-sample-tag">Sample</span>
+          <div class="portfolio-card-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3h7v7M21 3l-9 9M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg></div>
+        </div>
+        <div class="portfolio-card-info">
+          <div class="portfolio-card-cat">Web Design</div>
+          <div class="portfolio-card-title">Web Design — Sample 01</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card reveal portfolio-sample" data-category="web-design" data-type="website" data-title="Web Design — Sample 02" data-description="Placeholder website entry." data-url="#">
+        <div class="portfolio-card-media">
+          <img src="portfolio/web-design-2.jpg" alt="Web Design — Sample 02" loading="lazy" />
+          <span class="portfolio-sample-tag">Sample</span>
+          <div class="portfolio-card-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3h7v7M21 3l-9 9M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg></div>
+        </div>
+        <div class="portfolio-card-info">
+          <div class="portfolio-card-cat">Web Design</div>
+          <div class="portfolio-card-title">Web Design — Sample 02</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card reveal portfolio-sample" data-category="photography" data-title="Photography — Sample 01" data-description="Placeholder photography entry. Replace with a real shoot.">
+        <div class="portfolio-card-media">
+          <img src="portfolio/photography-1.jpg" alt="Photography — Sample 01" loading="lazy" />
+          <span class="portfolio-sample-tag">Sample</span>
+        </div>
+        <div class="portfolio-card-info">
+          <div class="portfolio-card-cat">Photography</div>
+          <div class="portfolio-card-title">Photography — Sample 01</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card reveal portfolio-sample" data-category="photography" data-title="Photography — Sample 02" data-description="Placeholder photography entry.">
+        <div class="portfolio-card-media">
+          <img src="portfolio/photography-2.jpg" alt="Photography — Sample 02" loading="lazy" />
+          <span class="portfolio-sample-tag">Sample</span>
+        </div>
+        <div class="portfolio-card-info">
+          <div class="portfolio-card-cat">Photography</div>
+          <div class="portfolio-card-title">Photography — Sample 02</div>
+        </div>
+      </div>
+    </div>
 
     <!-- CTA -->
     <section class="cta-section" id="contact">
@@ -662,34 +787,10 @@
   </div>
 
   <script>
-    /* ============================================================
-       PORTFOLIO DATA
-       To add new work: copy an object below and fill it in.
-       Fields:
-         category: "brand-design" | "graphic-design" | "web-design" | "video" | "photography"
-         title: string shown on the card and in the lightbox
-         description: string shown in the lightbox (optional)
-         image: path to a JPG/PNG in the /portfolio folder (not needed for video)
-         type: "image" (default) | "website" | "video"
-         url: live site link (type: "website" only)
-         youtubeId: the YouTube video ID, e.g. "dQw4w9WgXcQ" (type: "video" only)
-         sample: true marks it as a placeholder (shows a SAMPLE tag) — remove
-                 this line once it's real work.
-         date: "YYYY-MM-DD", the day this was added. Newest date shows
-                 first, on every tab — use today's date for new uploads.
-       ============================================================ */
-    const PORTFOLIO_ITEMS = [
-      { category: 'brand-design', title: 'Brand Identity — Sample 01', description: 'Placeholder brand design entry. Replace with a real project: logo, brand guide pages, or mockups.', image: 'portfolio/brand-design-1.jpg', sample: true, date: '2026-09-25' },
-      { category: 'brand-design', title: 'Brand Identity — Sample 02', description: 'Placeholder brand design entry.', image: 'portfolio/brand-design-2.jpg', sample: true, date: '2026-09-25' },
-      { category: 'graphic-design', title: 'Graphic Design — Sample 01', description: 'Placeholder graphic design entry. Replace with a flyer, social post, or print piece.', image: 'portfolio/graphic-design-1.jpg', sample: true, date: '2026-09-25' },
-      { category: 'graphic-design', title: 'Graphic Design — Sample 02', description: 'Placeholder graphic design entry.', image: 'portfolio/graphic-design-2.jpg', sample: true, date: '2026-09-25' },
-      { category: 'web-design', title: 'Web Design — Sample 01', description: 'Placeholder website entry. Replace the image with a real screenshot and add the live URL.', image: 'portfolio/web-design-1.jpg', type: 'website', url: '#', sample: true, date: '2026-09-25' },
-      { category: 'web-design', title: 'Web Design — Sample 02', description: 'Placeholder website entry.', image: 'portfolio/web-design-2.jpg', type: 'website', url: '#', sample: true, date: '2026-09-25' },
-      { category: 'photography', title: 'Photography — Sample 01', description: 'Placeholder photography entry. Replace with a real shoot.', image: 'portfolio/photography-1.jpg', sample: true, date: '2026-09-25' },
-      { category: 'photography', title: 'Photography — Sample 02', description: 'Placeholder photography entry.', image: 'portfolio/photography-2.jpg', sample: true, date: '2026-09-25' },
-      { category: 'video', title: 'Travel Maui', type: 'video', youtubeId: 'dJkl4D4vLn0', date: '2026-09-26' },
-      { category: 'video', title: 'Welcome to Pixel Labs', type: 'video', youtubeId: 'qwxjg__--AI', date: '2026-09-26' },
-    ];
+    // The portfolio cards themselves live as real HTML in the page (see the
+    // comment above the grid) so search engines and AI crawlers that don't
+    // run JavaScript can still read every title/category. This script only
+    // adds interactivity on top: tab filtering and the lightbox.
 
     const CATEGORY_LABELS = {
       'brand-design': 'Brand Design',
@@ -699,58 +800,11 @@
       'photography': 'Photography'
     };
 
-    const ICONS = {
-      website: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3h7v7M21 3l-9 9M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg>',
-      video: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>'
-    };
-
-    const grid = document.getElementById('portfolioGrid');
-
-    function videoThumb(id) {
-      return `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
-    }
-
-    function renderGrid() {
-      if (!PORTFOLIO_ITEMS.length) {
-        grid.innerHTML = '<p class="portfolio-empty">Work coming soon.</p>';
-        return;
-      }
-      // Newest first, on every tab — items without a date sort last.
-      const ordered = PORTFOLIO_ITEMS
-        .map((item, i) => ({ item, i }))
-        .sort((a, b) => (b.item.date || '').localeCompare(a.item.date || ''));
-
-      grid.innerHTML = ordered.map(({ item, i }) => {
-        const type = item.type || 'image';
-        const thumb = type === 'video' && item.youtubeId ? videoThumb(item.youtubeId) : item.image;
-        const badge = type === 'website' ? `<div class="portfolio-card-badge">${ICONS.website}</div>`
-                    : type === 'video' ? `<div class="portfolio-card-play">${ICONS.video}</div>`
-                    : '';
-        const sampleTag = item.sample ? '<span class="portfolio-sample-tag">Sample</span>' : '';
-        const imgTag = thumb ? `<img src="${thumb}" alt="${item.title}" loading="lazy" />` : '';
-        return `
-          <div class="portfolio-card reveal" data-category="${item.category}" data-type="${type}" data-index="${i}">
-            <div class="portfolio-card-media">
-              ${imgTag}
-              ${sampleTag}
-              ${badge}
-            </div>
-            <div class="portfolio-card-info">
-              <div class="portfolio-card-cat">${CATEGORY_LABELS[item.category] || item.category}</div>
-              <div class="portfolio-card-title">${item.title}</div>
-            </div>
-          </div>
-        `;
-      }).join('');
-
-      grid.querySelectorAll('.portfolio-card').forEach(card => {
-        card.addEventListener('click', () => openLightbox(PORTFOLIO_ITEMS[+card.dataset.index]));
-        card.addEventListener('mouseenter', () => ringHover(true));
-        card.addEventListener('mouseleave', () => ringHover(false));
-      });
-
-      observeReveals();
-    }
+    document.querySelectorAll('.portfolio-card').forEach(card => {
+      card.addEventListener('click', () => openLightbox(card));
+      card.addEventListener('mouseenter', () => ringHover(true));
+      card.addEventListener('mouseleave', () => ringHover(false));
+    });
 
     // Tabs
     document.querySelectorAll('.portfolio-tab').forEach(tab => {
@@ -775,25 +829,28 @@
     const lightboxLink = document.getElementById('lightboxLink');
     let lastFocusedLightbox = null;
 
-    function openLightbox(item) {
-      const type = item.type || 'image';
-      lightboxCat.textContent = CATEGORY_LABELS[item.category] || item.category;
-      lightboxTitle.textContent = item.title;
-      lightboxDesc.textContent = item.description || '';
+    function openLightbox(card) {
+      const d = card.dataset;
+      const type = d.type || 'image';
+      const img = card.querySelector('img');
 
-      if (type === 'video' && item.youtubeId) {
-        lightboxMedia.innerHTML = `<div class="lightbox-video-frame"><iframe src="https://www.youtube.com/embed/${item.youtubeId}?autoplay=1" title="${item.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
+      lightboxCat.textContent = CATEGORY_LABELS[d.category] || d.category;
+      lightboxTitle.textContent = d.title;
+      lightboxDesc.textContent = d.description || '';
+
+      if (type === 'video' && d.youtubeId) {
+        lightboxMedia.innerHTML = `<div class="lightbox-video-frame"><iframe src="https://www.youtube.com/embed/${d.youtubeId}?autoplay=1" title="${d.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
       } else if (type === 'video') {
         lightboxMedia.innerHTML = `<div class="lightbox-video-frame" style="display:flex;align-items:center;justify-content:center;color:var(--muted);font-family:var(--mono);font-size:0.8rem;">Sample placeholder — add a YouTube link to play here.</div>`;
-      } else if (item.image) {
-        lightboxMedia.innerHTML = `<img src="${item.image}" alt="${item.title}" />`;
+      } else if (img) {
+        lightboxMedia.innerHTML = `<img src="${img.getAttribute('src')}" alt="${d.title}" />`;
       } else {
         lightboxMedia.innerHTML = '';
       }
 
-      if (type === 'website' && item.url) {
+      if (type === 'website' && d.url) {
         lightboxLink.style.display = 'inline-block';
-        lightboxLink.href = item.url;
+        lightboxLink.href = d.url;
       } else {
         lightboxLink.style.display = 'none';
         lightboxLink.href = '#';
@@ -874,7 +931,6 @@
       reveals.forEach(el => obs.observe(el));
     }
 
-    renderGrid();
     observeReveals();
 
     // Contact modal

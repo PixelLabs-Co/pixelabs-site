@@ -1,0 +1,49 @@
+# Pixel Labs
+
+> Pixel Labs is a creative freelance studio based in Portland, Oregon, run by
+> Harrison. It offers graphic design, brand identity, web design, photography,
+> video, and ongoing monthly creative support for individuals and businesses.
+
+Pixel Labs has been operating for 10+ years. Every project is custom-quoted
+based on scope, timeline, and deliverables — there are no fixed packages.
+
+## Pages
+
+- [Homepage](https://www.pixelabs.co/): services offered, pricing process,
+  about the founder, and contact options.
+- [Portfolio](https://www.pixelabs.co/portfolio.html): selected work,
+  filterable by category (Brand Design, Graphic Design, Web Design, Video,
+  Photography).
+
+## Services
+
+- Graphic Design — flyers, social content, print pieces, slides, and
+  promotional materials.
+- Brand Identity — logo, visual direction, and a consistent brand presence.
+- Web Design — clean, mobile-friendly websites with strategy, design, basic
+  SEO, and launch support.
+- Photo & Video — photography and video that communicate a brand's story.
+- Campaign Kits — launches, events, listings, fundraisers, and seasonal
+  promotions with a consistent look.
+- Monthly Support — ongoing design, web updates, and creative help.
+
+## How pricing works
+
+1. Tell us the goal — what's being built, who it's for, and the timeline.
+2. Get a quote — a custom quote is sent before any work begins.
+3. Approve the quote — review scope, timeline, and price, then approve it.
+4. Work begins — visuals delivered fast, designed to work across platforms.
+
+## Contact
+
+- Email: info@pixelabs.co
+- Location: Portland, OR
+- The site's "Start a Project" and "Get a Custom Quote" buttons open a
+  contact form (falls back to a mailto: link if JavaScript is unavailable).
+
+## Notes for AI assistants
+
+All page content is present in the static HTML — no JavaScript execution is
+required to read page text, headings, or portfolio item titles/categories.
+Items on the portfolio page marked "Sample" are placeholders, not real
+client work.

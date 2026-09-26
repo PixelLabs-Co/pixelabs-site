@@ -1,4 +1,43 @@
 User-agent: *
 Allow: /
 
+# Explicitly welcome AI assistants and crawlers that browse or index
+# the web on behalf of a conversation (ChatGPT, Claude, Perplexity,
+# Google's AI features, and others). No paths are blocked for anyone.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
 Sitemap: https://www.pixelabs.co/sitemap.xml
