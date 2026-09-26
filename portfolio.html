@@ -571,11 +571,15 @@
           set data-youtube-id to the video's ID (the part after youtu.be/ or v=).
         Add class "portfolio-sample" + a <span class="portfolio-sample-tag">Sample</span>
           to mark a placeholder — remove both once it's real work.
+        Replacing an existing image's content? Give the new file a new name
+          (e.g. add "-v2") instead of overwriting the old filename — browsers
+          cache images by URL, so reusing the same filename can keep showing
+          the old version for a while even after publishing.
     -->
     <div class="portfolio-grid" id="portfolioGrid">
       <div class="portfolio-card reveal" data-category="web-design" data-type="website" data-title="Send Slater Six" data-description="Website design for Send Slater Six, a ministry site sharing the Slater family's work training leaders in Africa." data-url="https://www.sendslatersix.com">
         <div class="portfolio-card-media">
-          <img src="portfolio/sendslatersix-homepage.jpg" alt="Send Slater Six homepage" loading="lazy" />
+          <img src="portfolio/sendslatersix-homepage-v2.jpg" alt="Send Slater Six homepage" loading="lazy" />
           <div class="portfolio-card-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3h7v7M21 3l-9 9M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg></div>
         </div>
         <div class="portfolio-card-info">
