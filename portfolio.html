@@ -619,7 +619,7 @@
     <div class="portfolio-grid" id="portfolioGrid">
       <div class="portfolio-card reveal" data-category="web-design" data-type="website" data-title="Send Slater Six" data-description="Website design for Send Slater Six, a ministry site sharing the Slater family's work training leaders in Africa." data-url="https://www.sendslatersix.com">
         <div class="portfolio-card-media">
-          <img src="portfolio/sendslatersix-homepage-v2.jpg" alt="Send Slater Six homepage" loading="lazy" />
+          <img src="portfolio/sendslatersix-homepage-v3.jpg" alt="Send Slater Six homepage" loading="lazy" />
           <div class="portfolio-card-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3h7v7M21 3l-9 9M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg></div>
         </div>
         <div class="portfolio-card-info">
@@ -630,7 +630,7 @@
 
       <div class="portfolio-card reveal" data-category="graphic-design" data-title="Northcoast Coffee Co. Primary Logo" data-description="Primary logo mark for Northcoast Coffee Co., pairing a forest-and-tideline emblem with a classic serif wordmark.">
         <div class="portfolio-card-media">
-          <img src="portfolio/northcoast-coffee-co-logo.jpg" alt="Northcoast Coffee Co. Primary Logo" loading="lazy" />
+          <img src="portfolio/northcoast-coffee-co-logo-v2.jpg" alt="Northcoast Coffee Co. Primary Logo" loading="lazy" />
         </div>
         <div class="portfolio-card-info">
           <div class="portfolio-card-cat">Graphic Design</div>
@@ -640,7 +640,7 @@
 
       <div class="portfolio-card reveal" data-category="brand-design" data-title="Northcoast Coffee Co." data-description="Brand identity for Northcoast Coffee Co., including logo, cup and packaging design, and social promo graphics.">
         <div class="portfolio-card-media">
-          <img src="portfolio/northcoast-coffee-co.jpg" alt="Northcoast Coffee Co." loading="lazy" />
+          <img src="portfolio/northcoast-coffee-co-v2.jpg" alt="Northcoast Coffee Co." loading="lazy" />
         </div>
         <div class="portfolio-card-info">
           <div class="portfolio-card-cat">Brand Design</div>
@@ -902,22 +902,24 @@
     // Custom cursor
     const cursor = document.getElementById('cursor');
     const ring = document.getElementById('cursorRing');
-    let mx = 0, my = 0, rx = 0, ry = 0;
-    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-    function animateCursor() {
-      cursor.style.left = (mx - 5) + 'px';
-      cursor.style.top  = (my - 5) + 'px';
-      rx += (mx - rx) * 0.12;
-      ry += (my - ry) * 0.12;
-      ring.style.left = (rx - 18) + 'px';
-      ring.style.top  = (ry - 18) + 'px';
-      requestAnimationFrame(animateCursor);
-    }
-    animateCursor();
     function ringHover(on) {
       ring.style.width = on ? '60px' : '36px';
       ring.style.height = on ? '60px' : '36px';
       ring.style.opacity = on ? '0.7' : '0.4';
+    }
+    if (window.matchMedia('(min-width: 901px)').matches) {
+      let mx = 0, my = 0, rx = 0, ry = 0;
+      document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+      function animateCursor() {
+        cursor.style.left = (mx - 5) + 'px';
+        cursor.style.top  = (my - 5) + 'px';
+        rx += (mx - rx) * 0.12;
+        ry += (my - ry) * 0.12;
+        ring.style.left = (rx - 18) + 'px';
+        ring.style.top  = (ry - 18) + 'px';
+        requestAnimationFrame(animateCursor);
+      }
+      animateCursor();
     }
     document.querySelectorAll('a, button').forEach(el => {
       el.addEventListener('mouseenter', () => ringHover(true));
@@ -1021,6 +1023,7 @@
         if (res.ok) {
           contactForm.hidden = true;
           modalSuccess.hidden = false;
+          modalError.hidden = true;
           contactForm.reset();
         } else {
           throw new Error('Submission failed');
