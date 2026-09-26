@@ -81,6 +81,7 @@
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
+      gap: 1.5rem;
       padding: 1.2rem 3rem;
       border-bottom: 1px solid var(--border);
       background: rgba(9,7,15,0.88);
@@ -90,6 +91,7 @@
       display: block;
       height: 36px;
       width: auto;
+      flex-shrink: 0;
     }
     .nav-logo img { height: 100%; width: auto; display: block; }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
@@ -105,7 +107,7 @@
       letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500;
       background: var(--grad); color: var(--white);
       border: none; padding: 0.85rem 1.8rem;
-      cursor: none; text-decoration: none;
+      cursor: none; text-decoration: none; white-space: nowrap; flex-shrink: 0;
       transition: opacity 0.2s, box-shadow 0.2s;
     }
     .nav-cta:hover { opacity: 0.85; box-shadow: 0 0 20px rgba(125,3,216,0.5); }
@@ -497,6 +499,15 @@
       border-bottom: none !important;
       width: auto !important;
       color: var(--white) !important;
+    }
+
+    /* Squeeze zone: nav text/button no longer fit desktop-comfortable, but the
+       mobile hamburger menu hasn't kicked in yet. */
+    @media (min-width: 901px) and (max-width: 1080px) {
+      nav { padding: 1.2rem 1.5rem; gap: 1rem; }
+      .nav-links { gap: 1.1rem; }
+      .nav-links a { font-size: 0.7rem; }
+      .nav-cta { font-size: 0.68rem; padding: 0.8rem 1.2rem; }
     }
 
     @media (max-width: 900px) {
