@@ -426,6 +426,8 @@
     footer a { color: rgba(240,237,248,0.5); text-decoration: none; transition: color 0.2s; }
     footer a:hover { color: var(--accent); }
     .footer-links { display: flex; gap: 2rem; }
+    .footer-brand { display: flex; align-items: center; gap: 0.85rem; }
+    .footer-logo { height: 22px; width: auto; display: block; opacity: 0.85; }
 
     /* ANIMATIONS */
     @keyframes fadeUp {
@@ -578,6 +580,7 @@
 
       /* Footer */
       footer { flex-direction: column; gap: 1.2rem; text-align: center; padding: 2rem 1.5rem; }
+      .footer-brand { flex-direction: column; gap: 0.6rem; }
       .footer-links { flex-wrap: wrap; justify-content: center; gap: 1.2rem; }
     }
 
@@ -764,7 +767,10 @@
 
   <!-- FOOTER -->
   <footer>
-    <span>© 2026 Pixel Labs. All rights reserved.</span>
+    <div class="footer-brand">
+      <img src="logo-mark.png" alt="Pixel Labs" class="footer-logo" />
+      <span>© 2026 Pixel Labs. All rights reserved.</span>
+    </div>
     <div class="footer-links">
       <a href="#services">Services</a>
       <a href="#about">About</a>
