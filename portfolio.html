@@ -231,6 +231,18 @@
       color: var(--white);
     }
     .portfolio-card-badge svg { width: 16px; height: 16px; }
+    .portfolio-card-play {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 76px; height: 76px; border-radius: 50%;
+      background: var(--grad); box-shadow: 0 4px 30px rgba(125,3,216,0.5);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--white); transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .portfolio-card-play svg { width: 28px; height: 28px; margin-left: 3px; }
+    .portfolio-card:hover .portfolio-card-play {
+      transform: translate(-50%, -50%) scale(1.08);
+      box-shadow: 0 4px 40px rgba(125,3,216,0.7);
+    }
     .portfolio-sample-tag {
       position: absolute; top: 1rem; left: 1rem;
       font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.1em;
@@ -712,7 +724,7 @@
         const type = item.type || 'image';
         const thumb = type === 'video' && item.youtubeId ? videoThumb(item.youtubeId) : item.image;
         const badge = type === 'website' ? `<div class="portfolio-card-badge">${ICONS.website}</div>`
-                    : type === 'video' ? `<div class="portfolio-card-badge">${ICONS.video}</div>`
+                    : type === 'video' ? `<div class="portfolio-card-play">${ICONS.video}</div>`
                     : '';
         const sampleTag = item.sample ? '<span class="portfolio-sample-tag">Sample</span>' : '';
         const imgTag = thumb ? `<img src="${thumb}" alt="${item.title}" loading="lazy" />` : '';
