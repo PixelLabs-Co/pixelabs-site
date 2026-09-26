@@ -45,5 +45,4 @@ based on scope, timeline, and deliverables — there are no fixed packages.
 
 All page content is present in the static HTML — no JavaScript execution is
 required to read page text, headings, or portfolio item titles/categories.
-Items on the portfolio page marked "Sample" are placeholders, not real
-client work.
+Every item on the portfolio page is real client work.

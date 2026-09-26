@@ -200,6 +200,19 @@
       transition: transform 0.2s;
     }
     .portfolio-card.is-hidden { display: none; }
+    .portfolio-empty {
+      padding: 3rem 3rem 8rem;
+      text-align: center;
+    }
+    .portfolio-empty p {
+      font-family: var(--mono); font-size: 0.9rem; color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+    .portfolio-empty a {
+      color: var(--accent2); text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .portfolio-empty a:hover { color: var(--white); }
     .portfolio-card:hover { transform: translateY(-4px); }
     .portfolio-card-media {
       position: relative; overflow: hidden;
@@ -455,6 +468,7 @@
       .portfolio-hero { padding: 7rem 1.5rem 2rem; }
       .portfolio-tabs { padding: 0.75rem 1.5rem 2rem; }
       .portfolio-grid { grid-template-columns: repeat(2, 1fr); padding: 0 1.5rem 4rem; gap: 1.25rem; }
+      .portfolio-empty { padding: 2rem 1.5rem 4rem; }
       .portfolio-card-media,
       .portfolio-card[data-type="web-design"] .portfolio-card-media,
       .portfolio-card[data-type="video"] .portfolio-card-media { aspect-ratio: 4/5; }
@@ -597,95 +611,10 @@
         </div>
       </div>
 
-      <div class="portfolio-card reveal portfolio-sample" data-category="brand-design" data-title="Brand Identity — Sample 01" data-description="Placeholder brand design entry. Replace with a real project: logo, brand guide pages, or mockups.">
-        <div class="portfolio-card-media">
-          <img src="portfolio/brand-design-1.jpg" alt="Brand Identity — Sample 01" loading="lazy" />
-          <span class="portfolio-sample-tag">Sample</span>
-        </div>
-        <div class="portfolio-card-info">
-          <div class="portfolio-card-cat">Brand Design</div>
-          <div class="portfolio-card-title">Brand Identity — Sample 01</div>
-        </div>
-      </div>
+    </div>
 
-      <div class="portfolio-card reveal portfolio-sample" data-category="brand-design" data-title="Brand Identity — Sample 02" data-description="Placeholder brand design entry.">
-        <div class="portfolio-card-media">
-          <img src="portfolio/brand-design-2.jpg" alt="Brand Identity — Sample 02" loading="lazy" />
-          <span class="portfolio-sample-tag">Sample</span>
-        </div>
-        <div class="portfolio-card-info">
-          <div class="portfolio-card-cat">Brand Design</div>
-          <div class="portfolio-card-title">Brand Identity — Sample 02</div>
-        </div>
-      </div>
-
-      <div class="portfolio-card reveal portfolio-sample" data-category="graphic-design" data-title="Graphic Design — Sample 01" data-description="Placeholder graphic design entry. Replace with a flyer, social post, or print piece.">
-        <div class="portfolio-card-media">
-          <img src="portfolio/graphic-design-1.jpg" alt="Graphic Design — Sample 01" loading="lazy" />
-          <span class="portfolio-sample-tag">Sample</span>
-        </div>
-        <div class="portfolio-card-info">
-          <div class="portfolio-card-cat">Graphic Design</div>
-          <div class="portfolio-card-title">Graphic Design — Sample 01</div>
-        </div>
-      </div>
-
-      <div class="portfolio-card reveal portfolio-sample" data-category="graphic-design" data-title="Graphic Design — Sample 02" data-description="Placeholder graphic design entry.">
-        <div class="portfolio-card-media">
-          <img src="portfolio/graphic-design-2.jpg" alt="Graphic Design — Sample 02" loading="lazy" />
-          <span class="portfolio-sample-tag">Sample</span>
-        </div>
-        <div class="portfolio-card-info">
-          <div class="portfolio-card-cat">Graphic Design</div>
-          <div class="portfolio-card-title">Graphic Design — Sample 02</div>
-        </div>
-      </div>
-
-      <div class="portfolio-card reveal portfolio-sample" data-category="web-design" data-type="website" data-title="Web Design — Sample 01" data-description="Placeholder website entry. Replace the image with a real screenshot and add the live URL." data-url="#">
-        <div class="portfolio-card-media">
-          <img src="portfolio/web-design-1.jpg" alt="Web Design — Sample 01" loading="lazy" />
-          <span class="portfolio-sample-tag">Sample</span>
-          <div class="portfolio-card-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3h7v7M21 3l-9 9M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg></div>
-        </div>
-        <div class="portfolio-card-info">
-          <div class="portfolio-card-cat">Web Design</div>
-          <div class="portfolio-card-title">Web Design — Sample 01</div>
-        </div>
-      </div>
-
-      <div class="portfolio-card reveal portfolio-sample" data-category="web-design" data-type="website" data-title="Web Design — Sample 02" data-description="Placeholder website entry." data-url="#">
-        <div class="portfolio-card-media">
-          <img src="portfolio/web-design-2.jpg" alt="Web Design — Sample 02" loading="lazy" />
-          <span class="portfolio-sample-tag">Sample</span>
-          <div class="portfolio-card-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3h7v7M21 3l-9 9M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg></div>
-        </div>
-        <div class="portfolio-card-info">
-          <div class="portfolio-card-cat">Web Design</div>
-          <div class="portfolio-card-title">Web Design — Sample 02</div>
-        </div>
-      </div>
-
-      <div class="portfolio-card reveal portfolio-sample" data-category="photography" data-title="Photography — Sample 01" data-description="Placeholder photography entry. Replace with a real shoot.">
-        <div class="portfolio-card-media">
-          <img src="portfolio/photography-1.jpg" alt="Photography — Sample 01" loading="lazy" />
-          <span class="portfolio-sample-tag">Sample</span>
-        </div>
-        <div class="portfolio-card-info">
-          <div class="portfolio-card-cat">Photography</div>
-          <div class="portfolio-card-title">Photography — Sample 01</div>
-        </div>
-      </div>
-
-      <div class="portfolio-card reveal portfolio-sample" data-category="photography" data-title="Photography — Sample 02" data-description="Placeholder photography entry.">
-        <div class="portfolio-card-media">
-          <img src="portfolio/photography-2.jpg" alt="Photography — Sample 02" loading="lazy" />
-          <span class="portfolio-sample-tag">Sample</span>
-        </div>
-        <div class="portfolio-card-info">
-          <div class="portfolio-card-cat">Photography</div>
-          <div class="portfolio-card-title">Photography — Sample 02</div>
-        </div>
-      </div>
+    <div class="portfolio-empty" id="portfolioEmpty" style="display:none;">
+      <p>New work in this category is on the way — check back soon, or <a href="mailto:info@pixelabs.co?subject=Start%20a%20Project" class="contact-trigger" data-intent="project" data-source="Portfolio empty state">get in touch</a> to start a project.</p>
     </div>
 
     <!-- CTA -->
@@ -822,15 +751,19 @@
     });
 
     // Tabs
+    const portfolioEmpty = document.getElementById('portfolioEmpty');
     document.querySelectorAll('.portfolio-tab').forEach(tab => {
       tab.addEventListener('click', () => {
         document.querySelectorAll('.portfolio-tab').forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
         const filter = tab.dataset.filter;
+        let visibleCount = 0;
         document.querySelectorAll('.portfolio-card').forEach(card => {
           const match = filter === 'all' || card.dataset.category === filter;
           card.classList.toggle('is-hidden', !match);
+          if (match) visibleCount++;
         });
+        portfolioEmpty.style.display = visibleCount === 0 ? 'block' : 'none';
       });
     });
 
