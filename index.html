@@ -468,6 +468,76 @@
     .footer-links { display: flex; gap: 2rem; justify-self: start; }
     .footer-location { justify-self: end; }
 
+    /* CONTACT MODAL */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 300;
+      background: rgba(9,7,15,0.85); backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 2rem;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal-card {
+      position: relative;
+      width: 100%; max-width: 560px; max-height: 90vh; overflow-y: auto;
+      background: var(--black); border: 1px solid var(--border);
+      padding: 3rem;
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+    .modal-overlay.open .modal-card { transform: translateY(0); }
+    .modal-close {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      width: 32px; height: 32px; background: none; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .modal-close span {
+      position: absolute; width: 18px; height: 1.5px; background: var(--white);
+    }
+    .modal-close span:first-child { transform: rotate(45deg); }
+    .modal-close span:last-child { transform: rotate(-45deg); }
+    .modal-close:hover span { background: var(--accent); }
+    .modal-title {
+      font-family: var(--serif-display); font-size: 2rem; font-weight: 900;
+      letter-spacing: -0.02em; text-transform: uppercase; line-height: 1;
+      margin-bottom: 0.75rem;
+    }
+    .modal-sub { font-size: 0.9rem; line-height: 1.6; color: var(--muted); margin-bottom: 2rem; }
+    .form-row { margin-bottom: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; }
+    .form-row label {
+      font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .form-row input, .form-row select, .form-row textarea {
+      background: var(--deep); border: 1px solid var(--border); color: var(--white);
+      font-family: var(--body); font-size: 0.95rem;
+      padding: 0.85rem 1rem; width: 100%;
+      transition: border-color 0.2s;
+    }
+    .form-row input:focus, .form-row select:focus, .form-row textarea:focus {
+      outline: none; border-color: var(--accent);
+    }
+    .form-row textarea { resize: vertical; min-height: 100px; }
+    .form-row select { cursor: pointer; }
+    .modal-submit { width: 100%; border: none; cursor: pointer; margin-top: 0.5rem; }
+    .modal-fallback {
+      font-size: 0.8rem; color: var(--muted); text-align: center; margin-top: 1.2rem;
+    }
+    .modal-fallback a { color: var(--accent); text-decoration: none; }
+    .modal-fallback a:hover { text-decoration: underline; }
+    .modal-success-title {
+      font-family: var(--serif-display); font-size: 1.8rem; font-weight: 900;
+      text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 0.75rem;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    @media (max-width: 900px) {
+      .modal-overlay { padding: 0; align-items: flex-end; }
+      .modal-card { max-width: 100%; max-height: 92vh; padding: 2.5rem 1.5rem 2rem; }
+    }
+
     /* ANIMATIONS */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(30px); }
@@ -666,7 +736,7 @@
       <li><a href="#pricing">Pricing</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <a href="mailto:info@pixelabs.co?subject=Start%20a%20Project" class="nav-cta">Start a Project</a>
+    <a href="mailto:info@pixelabs.co?subject=Start%20a%20Project" class="nav-cta contact-trigger" data-intent="project" data-source="Nav bar">Start a Project</a>
     <button class="nav-hamburger" id="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
@@ -678,7 +748,7 @@
     <a href="#about" class="drawer-link">About</a>
     <a href="#pricing" class="drawer-link">Pricing</a>
     <a href="#contact" class="drawer-link">Contact</a>
-    <a href="mailto:info@pixelabs.co?subject=Start%20a%20Project" class="mobile-drawer-cta drawer-link">Start a Project</a>
+    <a href="mailto:info@pixelabs.co?subject=Start%20a%20Project" class="mobile-drawer-cta drawer-link contact-trigger" data-intent="project" data-source="Mobile menu">Start a Project</a>
   </div>
 
   <div id="main-page">
@@ -751,7 +821,7 @@
           <h3 class="pricing-disclaimer-title">Pricing</h3>
           <p class="pricing-disclaimer-text">Every brand is different, so every project is custom quoted based on scope, timeline, and deliverables. No one-size-fits-all packages—just a clear price for the work you actually need.</p>
         </div>
-        <a href="mailto:info@pixelabs.co?subject=Custom%20Quote" class="btn-primary">Get a Custom Quote</a>
+        <a href="mailto:info@pixelabs.co?subject=Custom%20Quote" class="btn-primary contact-trigger" data-intent="quote" data-source="Pricing section">Get a Custom Quote</a>
       </div>
       <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="pxGrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="12" y2="12"><stop offset="0" stop-color="#7d03d8"/><stop offset="1" stop-color="#a757c0"/></linearGradient></defs></svg>
       <div class="services-grid pricing-steps">
@@ -820,8 +890,8 @@
     </h2>
     <p class="cta-sub reveal">Reach out and let's figure out the best way to bring it to life.</p>
     <div class="hero-cta-group reveal" style="justify-content:center;">
-      <a href="mailto:info@pixelabs.co?subject=Start%20a%20Project" class="btn-primary">Start a Project</a>
-      <a href="mailto:info@pixelabs.co?subject=Custom%20Quote" class="btn-ghost">Get a Custom Quote</a>
+      <a href="mailto:info@pixelabs.co?subject=Start%20a%20Project" class="btn-primary contact-trigger" data-intent="project" data-source="Bottom CTA">Start a Project</a>
+      <a href="mailto:info@pixelabs.co?subject=Custom%20Quote" class="btn-ghost contact-trigger" data-intent="quote" data-source="Bottom CTA">Get a Custom Quote</a>
     </div>
   </section>
 
@@ -840,6 +910,60 @@
     <span class="footer-location">Portland, OR</span>
   </footer>
   </div><!-- /#main-page -->
+
+  <!-- CONTACT MODAL -->
+  <div class="modal-overlay" id="contactModal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button type="button" class="modal-close" id="modalClose" aria-label="Close">
+        <span></span><span></span>
+      </button>
+      <div class="modal-body" id="modalBody">
+        <p class="section-label" style="margin-bottom:1.2rem;">Let's Talk</p>
+        <h3 class="modal-title" id="modalTitle">Start a Project</h3>
+        <p class="modal-sub" id="modalSub">Tell us a bit about what you need, and we'll follow up by email.</p>
+        <form id="contactForm" action="https://formspree.io/f/xzezawzq" method="POST">
+          <input type="hidden" name="_subject" id="formSubject" value="New Project Inquiry — pixelabs.co" />
+          <input type="hidden" name="Inquiry Type" id="formIntentField" value="Start a Project" />
+          <input type="hidden" name="Sent From" id="formSourceField" value="" />
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+          <div class="form-row">
+            <label for="cf-name">Name</label>
+            <input type="text" id="cf-name" name="Name" required autocomplete="name" />
+          </div>
+          <div class="form-row">
+            <label for="cf-email">Email</label>
+            <input type="email" id="cf-email" name="Email" required autocomplete="email" />
+          </div>
+          <div class="form-row">
+            <label for="cf-service">Project Type</label>
+            <select id="cf-service" name="Project Type">
+              <option value="">Select one (optional)</option>
+              <option>Graphic Design</option>
+              <option>Brand Identity</option>
+              <option>Web Design</option>
+              <option>Photo & Video</option>
+              <option>Campaign Kit</option>
+              <option>Monthly Support</option>
+              <option>Not Sure Yet</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="cf-message">Tell Us About Your Project</label>
+            <textarea id="cf-message" name="Message" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="btn-primary modal-submit" id="modalSubmit">Send Message</button>
+          <p class="modal-fallback">Or email us directly at <a href="mailto:info@pixelabs.co">info@pixelabs.co</a></p>
+        </form>
+        <div class="modal-success" id="modalSuccess" hidden>
+          <p class="modal-success-title">Message Sent.</p>
+          <p class="modal-sub">Thanks for reaching out—we'll get back to you soon.</p>
+        </div>
+        <div class="modal-error" id="modalError" hidden>
+          <p class="modal-sub">Something went wrong. Please try again, or email us directly at <a href="mailto:info@pixelabs.co">info@pixelabs.co</a>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
   <script>
@@ -893,6 +1017,99 @@
       });
     }, { threshold: 0.1 });
     reveals.forEach(el => obs.observe(el));
+
+    // Contact modal
+    const modal = document.getElementById('contactModal');
+    const modalClose = document.getElementById('modalClose');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalSub = document.getElementById('modalSub');
+    const modalSubmit = document.getElementById('modalSubmit');
+    const contactForm = document.getElementById('contactForm');
+    const modalBody = document.getElementById('modalBody');
+    const modalSuccess = document.getElementById('modalSuccess');
+    const modalError = document.getElementById('modalError');
+    const formSubject = document.getElementById('formSubject');
+    const formIntentField = document.getElementById('formIntentField');
+    const formSourceField = document.getElementById('formSourceField');
+    let lastFocused = null;
+
+    const copy = {
+      project: {
+        title: 'Start a Project',
+        sub: "Tell us a bit about what you need, and we'll follow up by email.",
+        subject: 'New Project Inquiry — pixelabs.co',
+        intent: 'Start a Project'
+      },
+      quote: {
+        title: 'Get a Custom Quote',
+        sub: "Share the details and we'll send back a custom quote.",
+        subject: 'New Quote Request — pixelabs.co',
+        intent: 'Get a Custom Quote'
+      }
+    };
+
+    function openModal(intentKey, source) {
+      const c = copy[intentKey] || copy.project;
+      modalTitle.textContent = c.title;
+      modalSub.textContent = c.sub;
+      formSubject.value = c.subject;
+      formIntentField.value = c.intent;
+      formSourceField.value = source || '';
+      contactForm.hidden = false;
+      modalSuccess.hidden = true;
+      modalError.hidden = true;
+      modalSubmit.disabled = false;
+      modalSubmit.textContent = 'Send Message';
+      lastFocused = document.activeElement;
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => document.getElementById('cf-name').focus(), 100);
+    }
+
+    function closeModal() {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (lastFocused) lastFocused.focus();
+    }
+
+    document.querySelectorAll('.contact-trigger').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal(el.dataset.intent, el.dataset.source);
+      });
+    });
+
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+    });
+
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      modalSubmit.disabled = true;
+      modalSubmit.textContent = 'Sending…';
+      try {
+        const res = await fetch(contactForm.action, {
+          method: 'POST',
+          body: new FormData(contactForm),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          contactForm.hidden = true;
+          modalSuccess.hidden = false;
+          contactForm.reset();
+        } else {
+          throw new Error('Submission failed');
+        }
+      } catch (err) {
+        modalError.hidden = false;
+        modalSubmit.disabled = false;
+        modalSubmit.textContent = 'Send Message';
+      }
+    });
   </script>
 </body>
 </html>
