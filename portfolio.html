@@ -133,9 +133,8 @@
       background: rgba(14,6,36,0.88);
       backdrop-filter: blur(14px);
     }
-    .nav-logo { display: flex; align-items: center; gap: 0.65rem; height: 36px; flex-shrink: 0; text-decoration: none; }
-    .nav-logo-icon { height: 30px; width: 30px; display: block; flex-shrink: 0; }
-    .nav-logo-text { font-family: var(--serif-display); font-weight: 800; font-size: 1.2rem; letter-spacing: -0.01em; color: var(--white); white-space: nowrap; text-transform: none; }
+        .nav-logo { display: block; height: 34px; width: auto; flex-shrink: 0; }
+    .nav-logo img { height: 100%; width: auto; display: block; }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a {
       font-family: var(--mono); font-size: 0.8rem;
@@ -378,13 +377,7 @@
     footer a { color: rgba(245,238,255,0.5); text-decoration: none; transition: color 0.2s; }
     footer a:hover { color: var(--accent); }
     .footer-brand { display: flex; flex-direction: column; align-items: center; gap: 0.9rem; justify-self: center; }
-    .footer-brand-row { display: flex; align-items: center; gap: 0.5rem; }
-    .footer-logo-icon { height: 22px; width: 22px; display: block; opacity: 0.85; }
-    .footer-logo-text {
-      font-family: var(--serif-display); font-weight: 800; font-size: 0.95rem;
-      letter-spacing: -0.01em; color: var(--white); opacity: 0.85;
-      text-transform: none;
-    }
+        .footer-logo { height: 24px; width: auto; display: block; opacity: 0.9; }
     .footer-links { display: flex; gap: 2rem; justify-self: start; }
     .footer-location { justify-self: end; }
 
@@ -507,9 +500,7 @@
       .nav-cta { display: none; }
       .nav-hamburger { display: flex; }
       .mobile-drawer { display: flex; }
-      .nav-logo { height: 28px; }
-      .nav-logo-icon { height: 24px; width: 24px; }
-      .nav-logo-text { font-size: 1.02rem; }
+      .nav-logo { height: 26px; }
 
       .portfolio-hero { padding: 7rem 1.5rem 2rem; }
       .portfolio-tabs { padding: 0.75rem 1.5rem 2rem; }
@@ -564,7 +555,7 @@
 
   <!-- NAV -->
   <nav>
-    <a href="index.html" class="nav-logo"><img src="logo-icon-v2.png" alt="" class="nav-logo-icon"><span class="nav-logo-text">pixel labs</span></a>
+    <a href="index.html" class="nav-logo"><img src="logo-lockup.png" alt="Pixel Labs"></a>
     <ul class="nav-links">
       <li><a href="index.html#services">Services</a></li>
       <li><a href="portfolio.html" class="active">Portfolio</a></li>
@@ -738,10 +729,7 @@
         <a href="index.html#contact">Contact</a>
       </div>
       <div class="footer-brand">
-        <div class="footer-brand-row">
-          <img src="logo-icon-v2.png" alt="" class="footer-logo-icon" />
-          <span class="footer-logo-text">pixel labs</span>
-        </div>
+        <img src="logo-lockup.png" alt="Pixel Labs" class="footer-logo" />
         <span>© 2026 Pixel Labs. All rights reserved.</span>
       </div>
       <span class="footer-location">Portland, OR</span>
