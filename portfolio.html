@@ -96,7 +96,6 @@
       color: var(--white);
       font-family: var(--body);
       font-weight: 400;
-      text-transform: uppercase;
       overflow-x: hidden;
       cursor: none;
     }
@@ -138,14 +137,14 @@
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a {
       font-family: var(--mono); font-size: 0.8rem;
-      letter-spacing: 0.12em; text-transform: uppercase;
+      letter-spacing: 0.12em;
       color: rgba(245,238,255,0.6); text-decoration: none;
       transition: color 0.2s;
     }
     .nav-links a:hover, .nav-links a.active { color: var(--accent); }
     .nav-cta {
       font-family: var(--mono); font-size: 0.78rem;
-      letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500;
+      letter-spacing: 0.12em; font-weight: 500;
       background: var(--grad); color: var(--white);
       border: none; padding: 0.85rem 1.8rem;
       cursor: none; text-decoration: none; white-space: nowrap; flex-shrink: 0;
@@ -157,7 +156,7 @@
       display: inline-block;
       background: var(--grad); color: var(--white);
       font-family: var(--mono); font-size: 0.82rem;
-      letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500;
+      letter-spacing: 0.12em; font-weight: 500;
       padding: 1.15rem 2.4rem; text-decoration: none; border: none; cursor: pointer;
       transition: box-shadow 0.2s, opacity 0.2s;
     }
@@ -166,7 +165,7 @@
       display: inline-block;
       border: 1px solid rgba(201,162,255,0.3); color: var(--accent);
       font-family: var(--mono); font-size: 0.82rem;
-      letter-spacing: 0.12em; text-transform: uppercase;
+      letter-spacing: 0.12em;
       padding: 1.15rem 2.4rem; text-decoration: none;
       transition: border-color 0.2s, background 0.2s;
     }
@@ -176,7 +175,7 @@
     .section { padding: 7rem 3rem; }
     .section-label {
       font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--accent); margin-bottom: 3rem;
+      color: var(--accent); margin-bottom: 3rem;
       display: flex; align-items: center; gap: 1rem;
     }
     .section-label::before { content: ''; display: block; width: 28px; height: 1px; background: var(--grad); }
@@ -196,7 +195,7 @@
     .portfolio-headline {
       font-family: var(--serif-display);
       font-size: clamp(2.8rem, 6vw, 5.5rem);
-      font-weight: 900; line-height: 0.92; letter-spacing: -0.03em; text-transform: uppercase;
+      font-weight: 900; line-height: 0.92; letter-spacing: -0.03em;
       margin-bottom: 1.5rem; position: relative;
     }
     .portfolio-headline .grad-text {
@@ -216,7 +215,7 @@
     }
     .portfolio-tab {
       font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--muted);
+      color: var(--muted);
       background: none; border: 1px solid var(--border);
       padding: 0.75rem 1.4rem; cursor: pointer;
       transition: border-color 0.2s, color 0.2s, background 0.2s;
@@ -271,7 +270,7 @@
     }
     .portfolio-card-title {
       font-family: var(--serif-display); font-size: 1.15rem; font-weight: 900;
-      letter-spacing: -0.01em; text-transform: uppercase; line-height: 1.15;
+      letter-spacing: -0.01em; line-height: 1.15;
     }
     .portfolio-card-badge {
       position: absolute; top: 1rem; right: 1rem;
@@ -329,7 +328,7 @@
     .lightbox-cat { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.6rem; }
     .lightbox-title {
       font-family: var(--serif-display); font-size: 1.8rem; font-weight: 900;
-      letter-spacing: -0.02em; text-transform: uppercase; line-height: 1.05; margin-bottom: 0.75rem;
+      letter-spacing: -0.02em; line-height: 1.05; margin-bottom: 0.75rem;
     }
     .lightbox-desc { font-size: 0.92rem; line-height: 1.7; color: var(--muted); margin-bottom: 1.5rem; }
     .lightbox-close {
@@ -352,7 +351,7 @@
     }
     .cta-headline {
       font-family: var(--serif-display);
-      font-size: clamp(3.5rem, 9vw, 9rem); font-weight: 900; letter-spacing: -0.04em; text-transform: uppercase; line-height: 0.88;
+      font-size: clamp(3.5rem, 9vw, 9rem); font-weight: 900; letter-spacing: -0.04em; line-height: 0.88;
       margin-bottom: 2.5rem;
     }
     .cta-headline .grad-text {
@@ -372,7 +371,7 @@
       padding: 2.5rem 3rem;
       display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; column-gap: 2rem;
       font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em;
-      text-transform: uppercase; color: rgba(245,238,255,0.5);
+      color: rgba(245,238,255,0.5);
     }
     footer a { color: rgba(245,238,255,0.5); text-decoration: none; transition: color 0.2s; }
     footer a:hover { color: var(--accent); }
@@ -411,14 +410,14 @@
     .modal-close:hover span { background: var(--accent); }
     .modal-title {
       font-family: var(--serif-display); font-size: 2rem; font-weight: 900;
-      letter-spacing: -0.02em; text-transform: uppercase; line-height: 1;
+      letter-spacing: -0.02em; line-height: 1;
       margin-bottom: 0.75rem;
     }
     .modal-sub { font-size: 0.9rem; line-height: 1.6; color: var(--muted); margin-bottom: 2rem; }
     .form-row { margin-bottom: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; }
     .form-row label {
       font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--muted);
+      color: var(--muted);
     }
     .form-required { color: var(--muted); opacity: 0.6; text-transform: none; letter-spacing: 0; }
     .form-row-split { flex-direction: row; gap: 1.5rem; }
@@ -438,7 +437,7 @@
     .modal-fallback a:hover { text-decoration: underline; }
     .modal-success-title {
       font-family: var(--serif-display); font-size: 1.8rem; font-weight: 900;
-      text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 0.75rem;
+      letter-spacing: -0.02em; margin-bottom: 0.75rem;
       background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
     }
@@ -470,7 +469,7 @@
     .mobile-drawer a {
       font-family: 'Bricolage Grotesque', sans-serif; font-weight: 900;
       font-size: clamp(2rem, 8vw, 3rem);
-      letter-spacing: -0.03em; text-transform: uppercase; color: var(--white);
+      letter-spacing: -0.03em; color: var(--white);
       text-decoration: none; padding: 0.5rem 0; transition: color 0.2s;
       border-bottom: 1px solid var(--border); width: 80%; text-align: center;
     }
