@@ -123,15 +123,35 @@
       --mono: 'JetBrains Mono', monospace;
     }
 
-    html { scroll-behavior: smooth; overscroll-behavior-y: none; overflow-x: hidden; }
+    html { height: 100%; overflow: hidden; }
 
     body {
+      height: 100%;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
       background: var(--black);
       color: var(--white);
       font-family: var(--body);
       font-weight: 400;
-      overscroll-behavior-y: none;
       cursor: none;
+    }
+
+    /* The page's actual scroll container -- keeping nav as a static sibling
+       outside of it (rather than fixed/sticky) means nav never has to
+       "chase" the viewport, which is what caused content to render above it
+       during fast scrolling on iOS Safari (a known WebKit bug where fixed/
+       sticky elements can visually desync from the viewport while the
+       address bar animates). Scrolling here instead of on the document also
+       stops that address-bar animation from triggering in the first place. */
+    #main-page {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-y: contain;
+      scroll-behavior: smooth;
     }
 
     /* Cursor */
@@ -156,9 +176,11 @@
       pointer-events: none; z-index: 1000; opacity: 0.5;
     }
 
-    /* NAV */
+    /* NAV -- a normal in-flow, non-scrolling sibling of #main-page (see
+       above); it never needs fixed/sticky positioning since it's simply
+       outside the part of the page that scrolls. */
     nav {
-      position: sticky; top: 0; left: 0; right: 0; z-index: 100;
+      flex-shrink: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       gap: 1.5rem;
       padding: 1.2rem 3rem;
@@ -1037,13 +1059,13 @@
     hamburger.addEventListener('click', () => {
       hamburger.classList.toggle('open');
       drawer.classList.toggle('open');
-      document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+      document.getElementById('main-page').style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
     });
     document.querySelectorAll('.drawer-link').forEach(link => {
       link.addEventListener('click', () => {
         hamburger.classList.remove('open');
         drawer.classList.remove('open');
-        document.body.style.overflow = '';
+        document.getElementById('main-page').style.overflow = '';
       });
     });
 
@@ -1128,14 +1150,14 @@
       lastFocused = document.activeElement;
       modal.classList.add('open');
       modal.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
+      document.getElementById('main-page').style.overflow = 'hidden';
       setTimeout(() => document.getElementById('cf-first-name').focus(), 100);
     }
 
     function closeModal() {
       modal.classList.remove('open');
       modal.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
+      document.getElementById('main-page').style.overflow = '';
       if (lastFocused) lastFocused.focus();
     }
 
