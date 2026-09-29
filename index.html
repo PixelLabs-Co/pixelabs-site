@@ -775,7 +775,7 @@
 
   <!-- NAV -->
   <nav>
-    <a href="#" class="nav-logo"><img src="logo-lockup-v2.png" alt="Pixel Labs"></a>
+    <a href="#" class="nav-logo" id="navLogo"><img src="logo-lockup-v2.png" alt="Pixel Labs"></a>
     <ul class="nav-links">
       <li><a href="#services">Services</a></li>
       <li><a href="portfolio.html">Portfolio</a></li>
@@ -1030,6 +1030,12 @@
 
 
   <script>
+
+    // Logo click -- scroll back to top of the page
+    document.getElementById('navLogo').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('main-page').scrollTo({ top: 0, behavior: 'smooth' });
+    });
 
     // Hamburger menu
     const hamburger = document.getElementById('hamburger');
