@@ -116,6 +116,8 @@
       --muted:   rgba(245,238,255,0.55);
       --accent:  #c9a2ff;
       --accent2: #7d03d8;
+      --gold:    #ffd23f;
+      --coral:   #ff5a4e;
       --border:  rgba(201,162,255,0.12);
       --grad: linear-gradient(135deg, #7d03d8 0%, #c9a2ff 100%);
       --serif-display: 'Bricolage Grotesque', sans-serif;
@@ -562,6 +564,9 @@
     .form-row input:focus, .form-row select:focus, .form-row textarea:focus {
       outline: none; border-color: var(--accent);
     }
+    .form-row input:user-invalid, .form-row select:user-invalid, .form-row textarea:user-invalid {
+      border-color: var(--coral);
+    }
     .form-row textarea { resize: vertical; min-height: 100px; }
     .form-row select { cursor: pointer; }
     .modal-submit { width: 100%; border: none; cursor: pointer; margin-top: 0.5rem; }
@@ -575,6 +580,11 @@
       letter-spacing: -0.02em; margin-bottom: 0.75rem;
       background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
+    }
+    .modal-error-title {
+      font-family: var(--serif-display); font-size: 1.8rem; font-weight: 900;
+      letter-spacing: -0.02em; margin-bottom: 0.75rem;
+      color: var(--coral);
     }
 
     @media (max-width: 900px) {
@@ -1022,7 +1032,8 @@
           <p class="modal-sub">Thanks for reaching out—we'll get back to you soon.</p>
         </div>
         <div class="modal-error" id="modalError" hidden>
-          <p class="modal-sub">Something went wrong. Please try again, or email us directly at <a href="mailto:info@pixelabs.co">info@pixelabs.co</a>.</p>
+          <p class="modal-error-title">Something Went Wrong.</p>
+          <p class="modal-sub">Please try again, or email us directly at <a href="mailto:info@pixelabs.co">info@pixelabs.co</a>.</p>
         </div>
       </div>
     </div>

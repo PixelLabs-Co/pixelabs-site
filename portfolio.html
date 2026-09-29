@@ -82,6 +82,8 @@
       --muted:   rgba(245,238,255,0.55);
       --accent:  #c9a2ff;
       --accent2: #7d03d8;
+      --gold:    #ffd23f;
+      --coral:   #ff5a4e;
       --border:  rgba(201,162,255,0.12);
       --grad: linear-gradient(135deg, #7d03d8 0%, #c9a2ff 100%);
       --serif-display: 'Bricolage Grotesque', sans-serif;
@@ -314,6 +316,12 @@
       background: rgba(14,6,36,0.7); border: 1px solid var(--border);
       color: var(--muted); padding: 0.35rem 0.6rem;
     }
+    .portfolio-featured-tag {
+      position: absolute; top: 1rem; left: 1rem;
+      font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.1em;
+      background: var(--gold); border: 1px solid var(--gold);
+      color: var(--black); padding: 0.35rem 0.6rem; font-weight: 500;
+    }
     .portfolio-empty {
       text-align: center; padding: 4rem 0;
       color: var(--muted); font-size: 0.95rem;
@@ -445,6 +453,7 @@
       transition: border-color 0.2s;
     }
     .form-row input:focus, .form-row select:focus, .form-row textarea:focus { outline: none; border-color: var(--accent); }
+    .form-row input:user-invalid, .form-row select:user-invalid, .form-row textarea:user-invalid { border-color: var(--coral); }
     .form-row textarea { resize: vertical; min-height: 100px; }
     .form-row select { cursor: pointer; }
     .modal-submit { width: 100%; border: none; cursor: pointer; margin-top: 0.5rem; }
@@ -456,6 +465,11 @@
       letter-spacing: -0.02em; margin-bottom: 0.75rem;
       background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
+    }
+    .modal-error-title {
+      font-family: var(--serif-display); font-size: 1.8rem; font-weight: 900;
+      letter-spacing: -0.02em; margin-bottom: 0.75rem;
+      color: var(--coral);
     }
 
     /* ANIMATIONS */
@@ -635,6 +649,7 @@
       <div class="portfolio-card reveal" data-category="web-design" data-type="website" data-title="Pixel Labs" data-description="Design and development of the Pixel Labs studio site itself — brand identity, portfolio, pricing, and a Formspree-backed contact system, built and hosted as a fast, fully custom static site." data-url="https://www.pixelabs.co/">
         <div class="portfolio-card-media">
           <img src="portfolio/pixelabs-homepage.jpg" alt="Pixel Labs homepage" loading="lazy" />
+          <span class="portfolio-featured-tag">Featured</span>
           <div class="portfolio-card-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3h7v7M21 3l-9 9M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg></div>
         </div>
         <div class="portfolio-card-info">
@@ -829,7 +844,8 @@
           <p class="modal-sub">Thanks for reaching out—we'll get back to you soon.</p>
         </div>
         <div class="modal-error" id="modalError" hidden>
-          <p class="modal-sub">Something went wrong. Please try again, or email us directly at <a href="mailto:info@pixelabs.co">info@pixelabs.co</a>.</p>
+          <p class="modal-error-title">Something Went Wrong.</p>
+          <p class="modal-sub">Please try again, or email us directly at <a href="mailto:info@pixelabs.co">info@pixelabs.co</a>.</p>
         </div>
       </div>
     </div>
