@@ -281,13 +281,11 @@
     .portfolio-card:hover img { transform: scale(1.05); }
     .portfolio-card-info {
       padding: 1.4rem; border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
     }
     .portfolio-card-cat {
       font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em;
       color: var(--accent); margin-bottom: 0.5rem;
-    }
-    .portfolio-featured-tag-row {
-      display: flex; justify-content: center; margin-top: 0.85rem;
     }
     .portfolio-card-title {
       font-family: var(--serif-display); font-size: 1.15rem; font-weight: 900;
@@ -655,9 +653,11 @@
           <div class="portfolio-card-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3h7v7M21 3l-9 9M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg></div>
         </div>
         <div class="portfolio-card-info">
-          <div class="portfolio-card-cat">Web Design</div>
-          <div class="portfolio-card-title">Pixel Labs</div>
-          <div class="portfolio-featured-tag-row"><span class="portfolio-featured-tag">Featured</span></div>
+          <div>
+            <div class="portfolio-card-cat">Web Design</div>
+            <div class="portfolio-card-title">Pixel Labs</div>
+          </div>
+          <span class="portfolio-featured-tag">Featured</span>
         </div>
       </div>
 
