@@ -164,8 +164,10 @@
       gap: 1.5rem;
       padding: 1.2rem 3rem;
       border-bottom: 1px solid var(--border);
-      background: rgba(14,6,36,0.97);
-      backdrop-filter: blur(14px);
+      background: var(--black);
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+      will-change: transform;
     }
     .nav-logo { display: block; height: 34px; width: auto; flex-shrink: 0; }
     .nav-logo img { height: 100%; width: auto; display: block; }
