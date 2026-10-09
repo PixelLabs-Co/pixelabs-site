@@ -301,7 +301,7 @@
     .portfolio-card-badge svg { width: 16px; height: 16px; }
     .portfolio-card-deck {
       display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch; scrollbar-width: none;
+      -webkit-overflow-scrolling: touch; scrollbar-width: none; overflow-anchor: none;
     }
     .portfolio-card-deck::-webkit-scrollbar { display: none; }
     .portfolio-card-deck img { flex: 0 0 100%; scroll-snap-align: start; }
@@ -326,6 +326,7 @@
     .lightbox-deck {
       display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch; scrollbar-width: none; position: relative;
+      overflow-anchor: none;
     }
     .lightbox-deck::-webkit-scrollbar { display: none; }
     .lightbox-deck img { flex: 0 0 100%; scroll-snap-align: start; width: 100%; height: auto; display: block; }
@@ -977,8 +978,12 @@
 
     document.querySelectorAll('.portfolio-card-deck').forEach(setupDeckScroll);
 
-    // Always start each deck on slide 1, even if the browser tries to
-    // restore a scrolled position on reload or back/forward navigation.
+    // Always start each deck on slide 1. Chrome in particular can restore a
+    // scrolled element's position on reload *after* scripts first run (the
+    // same mechanism as its scroll restoration for the page itself, but it
+    // applies to inner scroll containers too and has no manual opt-out), so
+    // this re-asserts scrollLeft a few times across the load rather than
+    // trusting a single early reset to win the race.
     function resetDecksToStart() {
       document.querySelectorAll('.portfolio-card-deck').forEach(deck => {
         deck.scrollLeft = 0;
@@ -987,7 +992,11 @@
       });
     }
     resetDecksToStart();
+    document.addEventListener('DOMContentLoaded', resetDecksToStart);
+    window.addEventListener('load', resetDecksToStart);
     window.addEventListener('pageshow', resetDecksToStart);
+    requestAnimationFrame(() => requestAnimationFrame(resetDecksToStart));
+    [0, 50, 150, 300, 600, 1200].forEach(ms => setTimeout(resetDecksToStart, ms));
 
     document.querySelectorAll('.portfolio-card').forEach(card => {
       card.addEventListener('click', (e) => { if (!e.target.closest('.portfolio-deck-arrow')) openLightbox(card); });
