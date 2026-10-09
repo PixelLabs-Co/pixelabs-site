@@ -963,12 +963,17 @@
       next.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>';
 
       function go(dir) {
+        deckEl.dataset.userInteracted = '1';
         deckEl.scrollBy({ left: dir * deckEl.clientWidth, behavior: 'smooth' });
       }
       prev.addEventListener('click', (e) => { e.stopPropagation(); go(-1); });
       next.addEventListener('click', (e) => { e.stopPropagation(); go(1); });
       parent.appendChild(prev);
       parent.appendChild(next);
+
+      const markInteracted = () => { deckEl.dataset.userInteracted = '1'; };
+      deckEl.addEventListener('pointerdown', markInteracted, { once: true });
+      deckEl.addEventListener('wheel', markInteracted, { once: true, passive: true });
 
       deckEl.addEventListener('scroll', () => {
         const idx = Math.min(Math.round(deckEl.scrollLeft / deckEl.clientWidth) + 1, total);
@@ -983,9 +988,12 @@
     // same mechanism as its scroll restoration for the page itself, but it
     // applies to inner scroll containers too and has no manual opt-out), so
     // this re-asserts scrollLeft a few times across the load rather than
-    // trusting a single early reset to win the race.
+    // trusting a single early reset to win the race. Skips any deck the
+    // visitor has already touched, so a fast click right after load doesn't
+    // get fought by a later trailing reset.
     function resetDecksToStart() {
       document.querySelectorAll('.portfolio-card-deck').forEach(deck => {
+        if (deck.dataset.userInteracted) return;
         deck.scrollLeft = 0;
         const counter = deck.parentElement.querySelector('.portfolio-deck-counter');
         if (counter) counter.textContent = `1 / ${deck.children.length}`;
