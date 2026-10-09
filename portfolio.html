@@ -640,6 +640,10 @@
           set data-youtube-id to the video's ID (the part after youtu.be/ or v=).
         Add class "portfolio-sample" + a <span class="portfolio-sample-tag">Sample</span>
           to mark a placeholder — remove both once it's real work.
+        Only one card should carry <span class="portfolio-featured-tag">Featured</span> at
+          a time — it's the newest upload. When adding a new card, move the tag (and its
+          wrapping <div> around cat+title) from whichever card currently has it onto the
+          new one, rather than adding a second.
         Replacing an existing image's content? Give the new file a new name
           (e.g. add "-v2") instead of overwriting the old filename — browsers
           cache images by URL, so reusing the same filename can keep showing
@@ -665,11 +669,8 @@
           <div class="portfolio-card-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3h7v7M21 3l-9 9M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg></div>
         </div>
         <div class="portfolio-card-info">
-          <div>
-            <div class="portfolio-card-cat">Web Design</div>
-            <div class="portfolio-card-title">Pixel Labs</div>
-          </div>
-          <span class="portfolio-featured-tag">Featured</span>
+          <div class="portfolio-card-cat">Web Design</div>
+          <div class="portfolio-card-title">Pixel Labs</div>
         </div>
       </div>
 
