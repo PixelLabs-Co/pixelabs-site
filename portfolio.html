@@ -273,9 +273,10 @@
     .portfolio-card:hover { transform: translateY(-4px); }
     .portfolio-card-media {
       position: relative; overflow: hidden;
+      aspect-ratio: 4 / 3; background: var(--black);
     }
     .portfolio-card img {
-      width: 100%; height: auto; display: block;
+      width: 100%; height: 100%; display: block; object-fit: contain;
       transition: transform 0.4s;
     }
     .portfolio-card:hover img { transform: scale(1.05); }
@@ -302,6 +303,7 @@
     .portfolio-card-deck {
       display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch; scrollbar-width: none; overflow-anchor: none;
+      height: 100%;
     }
     .portfolio-card-deck::-webkit-scrollbar { display: none; }
     .portfolio-card-deck img { flex: 0 0 100%; scroll-snap-align: start; }
