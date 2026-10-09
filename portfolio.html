@@ -977,6 +977,18 @@
 
     document.querySelectorAll('.portfolio-card-deck').forEach(setupDeckScroll);
 
+    // Always start each deck on slide 1, even if the browser tries to
+    // restore a scrolled position on reload or back/forward navigation.
+    function resetDecksToStart() {
+      document.querySelectorAll('.portfolio-card-deck').forEach(deck => {
+        deck.scrollLeft = 0;
+        const counter = deck.parentElement.querySelector('.portfolio-deck-counter');
+        if (counter) counter.textContent = `1 / ${deck.children.length}`;
+      });
+    }
+    resetDecksToStart();
+    window.addEventListener('pageshow', resetDecksToStart);
+
     document.querySelectorAll('.portfolio-card').forEach(card => {
       card.addEventListener('click', (e) => { if (!e.target.closest('.portfolio-deck-arrow')) openLightbox(card); });
       card.addEventListener('mouseenter', () => ringHover(true));
