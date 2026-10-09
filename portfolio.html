@@ -299,6 +299,36 @@
       color: var(--white);
     }
     .portfolio-card-badge svg { width: 16px; height: 16px; }
+    .portfolio-card-deck {
+      display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    }
+    .portfolio-card-deck::-webkit-scrollbar { display: none; }
+    .portfolio-card-deck img { flex: 0 0 100%; scroll-snap-align: start; }
+    .portfolio-card:hover .portfolio-card-deck img { transform: none; }
+    .portfolio-deck-counter {
+      position: absolute; bottom: 1rem; right: 1rem;
+      font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em;
+      background: rgba(14,6,36,0.75); border: 1px solid var(--border);
+      color: var(--white); padding: 0.3rem 0.55rem; pointer-events: none;
+    }
+    .portfolio-deck-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 34px; height: 34px; border-radius: 50%;
+      background: rgba(14,6,36,0.75); border: 1px solid var(--border);
+      color: var(--white); display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity 0.2s; cursor: pointer; z-index: 2;
+    }
+    .portfolio-card-media:hover .portfolio-deck-arrow { opacity: 1; }
+    .portfolio-deck-arrow.prev { left: 0.75rem; }
+    .portfolio-deck-arrow.next { right: 0.75rem; }
+    .portfolio-deck-arrow svg { width: 16px; height: 16px; }
+    .lightbox-deck {
+      display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch; scrollbar-width: none; position: relative;
+    }
+    .lightbox-deck::-webkit-scrollbar { display: none; }
+    .lightbox-deck img { flex: 0 0 100%; scroll-snap-align: start; width: 100%; height: auto; display: block; }
     .portfolio-card-play {
       position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
       width: 76px; height: 76px; border-radius: 50%;
@@ -345,7 +375,8 @@
       transform: translateY(20px); transition: transform 0.3s ease;
     }
     .lightbox-overlay.open .lightbox-card { transform: translateY(0); }
-    .lightbox-media { width: 100%; background: var(--deep); display: block; }
+    .lightbox-media { width: 100%; background: var(--deep); display: block; position: relative; }
+    .lightbox-media .portfolio-deck-arrow { opacity: 0.85; }
     .lightbox-media img { width: 100%; height: auto; display: block; }
     .lightbox-video-frame { position: relative; width: 100%; aspect-ratio: 16/9; }
     .lightbox-video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
@@ -632,12 +663,19 @@
       To add new work: copy a .portfolio-card block below and edit it.
       Newest work goes at the TOP of this list.
         data-category: brand-design | graphic-design | web-design | video | photography
-        data-type: image (default, omit it) | website | video
+          — space-separate more than one (e.g. "brand-design graphic-design") to list a
+          card under multiple tabs; also write every matching label into .portfolio-card-cat
+          (e.g. "Brand Design · Graphic Design").
+        data-type: image (default, omit it) | website | video | deck
         data-title / data-description: shown on the card and in the lightbox
         For an image: put the file in /portfolio and reference it in the <img src>.
         For a website: same as image, plus data-url set to the live site link.
         For a video: no <img>/media div contents needed except the play button —
           set data-youtube-id to the video's ID (the part after youtu.be/ or v=).
+        For a deck (e.g. a slide deck exported to one image per slide): data-type="deck",
+          and inside .portfolio-card-media put a <div class="portfolio-card-deck"> holding
+          one <img> per slide in order — the script below adds the scroll behavior, slide
+          counter, arrows, and the matching scrollable view in the lightbox automatically.
         Add class "portfolio-sample" + a <span class="portfolio-sample-tag">Sample</span>
           to mark a placeholder — remove both once it's real work.
         Only one card should carry <span class="portfolio-featured-tag">Featured</span> at
@@ -650,6 +688,29 @@
           the old version for a while even after publishing.
     -->
     <div class="portfolio-grid" id="portfolioGrid">
+      <div class="portfolio-card reveal" data-category="brand-design graphic-design" data-type="deck" data-title="Adobe Design Trio" data-description="An 11-slide deck design system for Adobe Creative Cloud's AI features across Photoshop, Illustrator, and InDesign — color-coded app identities carried through consistent card layouts, type, and iconography.">
+        <div class="portfolio-card-media">
+          <div class="portfolio-card-deck">
+            <img src="portfolio/adobe-design-trio/slide-01.jpg" alt="Adobe Design Trio slide 1" loading="lazy" />
+            <img src="portfolio/adobe-design-trio/slide-02.jpg" alt="Adobe Design Trio slide 2" loading="lazy" />
+            <img src="portfolio/adobe-design-trio/slide-03.jpg" alt="Adobe Design Trio slide 3" loading="lazy" />
+            <img src="portfolio/adobe-design-trio/slide-04.jpg" alt="Adobe Design Trio slide 4" loading="lazy" />
+            <img src="portfolio/adobe-design-trio/slide-05.jpg" alt="Adobe Design Trio slide 5" loading="lazy" />
+            <img src="portfolio/adobe-design-trio/slide-06.jpg" alt="Adobe Design Trio slide 6" loading="lazy" />
+            <img src="portfolio/adobe-design-trio/slide-07.jpg" alt="Adobe Design Trio slide 7" loading="lazy" />
+            <img src="portfolio/adobe-design-trio/slide-08.jpg" alt="Adobe Design Trio slide 8" loading="lazy" />
+            <img src="portfolio/adobe-design-trio/slide-09.jpg" alt="Adobe Design Trio slide 9" loading="lazy" />
+            <img src="portfolio/adobe-design-trio/slide-10.jpg" alt="Adobe Design Trio slide 10" loading="lazy" />
+            <img src="portfolio/adobe-design-trio/slide-11.jpg" alt="Adobe Design Trio slide 11" loading="lazy" />
+          </div>
+          <span class="portfolio-deck-counter">1 / 11</span>
+        </div>
+        <div class="portfolio-card-info">
+          <div class="portfolio-card-cat">Brand Design · Graphic Design</div>
+          <div class="portfolio-card-title">Adobe Design Trio</div>
+        </div>
+      </div>
+
       <div class="portfolio-card reveal" data-category="graphic-design" data-title="Halcyon Catalog & Business Card" data-description="Print collateral for Halcyon, a concept tech brand — a fall product catalog laying out their six-device lineup, paired with a minimal business card.">
         <div class="portfolio-card-media">
           <img src="portfolio/halcyon-catalog.jpg" alt="Halcyon Catalog & Business Card" loading="lazy" />
@@ -881,8 +942,43 @@
       'photography': 'Photography'
     };
 
+    // Deck cards (a slide deck as a scrollable strip of images): wires up
+    // prev/next arrows and a live slide counter. Used for both the static
+    // grid cards and the lightbox's rebuilt deck view.
+    function setupDeckScroll(deckEl) {
+      const parent = deckEl.parentElement;
+      const counter = parent.querySelector('.portfolio-deck-counter');
+      const total = deckEl.children.length;
+
+      const prev = document.createElement('button');
+      prev.className = 'portfolio-deck-arrow prev';
+      prev.type = 'button';
+      prev.setAttribute('aria-label', 'Previous slide');
+      prev.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>';
+      const next = document.createElement('button');
+      next.className = 'portfolio-deck-arrow next';
+      next.type = 'button';
+      next.setAttribute('aria-label', 'Next slide');
+      next.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>';
+
+      function go(dir) {
+        deckEl.scrollBy({ left: dir * deckEl.clientWidth, behavior: 'smooth' });
+      }
+      prev.addEventListener('click', (e) => { e.stopPropagation(); go(-1); });
+      next.addEventListener('click', (e) => { e.stopPropagation(); go(1); });
+      parent.appendChild(prev);
+      parent.appendChild(next);
+
+      deckEl.addEventListener('scroll', () => {
+        const idx = Math.min(Math.round(deckEl.scrollLeft / deckEl.clientWidth) + 1, total);
+        if (counter) counter.textContent = `${idx} / ${total}`;
+      });
+    }
+
+    document.querySelectorAll('.portfolio-card-deck').forEach(setupDeckScroll);
+
     document.querySelectorAll('.portfolio-card').forEach(card => {
-      card.addEventListener('click', () => openLightbox(card));
+      card.addEventListener('click', (e) => { if (!e.target.closest('.portfolio-deck-arrow')) openLightbox(card); });
       card.addEventListener('mouseenter', () => ringHover(true));
       card.addEventListener('mouseleave', () => ringHover(false));
     });
@@ -896,7 +992,7 @@
         const filter = tab.dataset.filter;
         let visibleCount = 0;
         document.querySelectorAll('.portfolio-card').forEach(card => {
-          const match = filter === 'all' || card.dataset.category === filter;
+          const match = filter === 'all' || card.dataset.category.split(' ').includes(filter);
           card.classList.toggle('is-hidden', !match);
           if (match) visibleCount++;
         });
@@ -919,7 +1015,7 @@
       const type = d.type || 'image';
       const img = card.querySelector('img');
 
-      lightboxCat.textContent = CATEGORY_LABELS[d.category] || d.category;
+      lightboxCat.textContent = d.category.split(' ').map(c => CATEGORY_LABELS[c] || c).join(' · ');
       lightboxTitle.textContent = d.title;
       lightboxDesc.textContent = d.description || '';
 
@@ -927,6 +1023,11 @@
         lightboxMedia.innerHTML = `<div class="lightbox-video-frame"><iframe src="https://www.youtube.com/embed/${d.youtubeId}?autoplay=1" title="${d.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
       } else if (type === 'video') {
         lightboxMedia.innerHTML = `<div class="lightbox-video-frame" style="display:flex;align-items:center;justify-content:center;color:var(--muted);font-family:var(--mono);font-size:0.8rem;">Sample placeholder — add a YouTube link to play here.</div>`;
+      } else if (type === 'deck') {
+        const slides = [...card.querySelectorAll('.portfolio-card-deck img')];
+        const slideImgs = slides.map((s, i) => `<img src="${s.getAttribute('src')}" alt="${d.title} slide ${i + 1}" />`).join('');
+        lightboxMedia.innerHTML = `<div class="lightbox-deck">${slideImgs}</div><span class="portfolio-deck-counter">1 / ${slides.length}</span>`;
+        setupDeckScroll(lightboxMedia.querySelector('.lightbox-deck'));
       } else if (img) {
         lightboxMedia.innerHTML = `<img src="${img.getAttribute('src')}" alt="${d.title}" />`;
       } else {
@@ -958,7 +1059,12 @@
     lightboxClose.addEventListener('click', closeLightbox);
     lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+        const deck = lightboxMedia.querySelector('.lightbox-deck');
+        if (deck) deck.scrollBy({ left: (e.key === 'ArrowRight' ? 1 : -1) * deck.clientWidth, behavior: 'smooth' });
+      }
     });
 
     // Hamburger menu
